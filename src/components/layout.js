@@ -2,9 +2,11 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
+import styled from 'styled-components'
+import globalStyles from '../styles/global'
 
+import Image from 'gatsby-image'
 import Header from './header'
-import './layout.css'
 
 const Layout = ({ children, data }) => (
   <StaticQuery
@@ -13,6 +15,14 @@ const Layout = ({ children, data }) => (
         site {
           siteMetadata {
             title
+          }
+        }
+
+        bg: file(relativePath: { eq: "bg.jpg" }) {
+          childImageSharp {
+            fluid(maxWidth: 1280) {
+              ...GatsbyImageSharpFluid
+            }
           }
         }
       }
@@ -26,17 +36,9 @@ const Layout = ({ children, data }) => (
             { name: 'keywords', content: 'sample, something' },
           ]}
         />
+        <Background fluid={data.bg.childImageSharp.fluid} />
         <Header siteTitle={data.site.siteMetadata.title} />
-        <div
-          style={{
-            margin: '0 auto',
-            maxWidth: 960,
-            padding: '0px 1.0875rem 1.45rem',
-            paddingTop: 0,
-          }}
-        >
-          {children}
-        </div>
+        {children}
       </>
     )}
   />
@@ -47,3 +49,12 @@ Layout.propTypes = {
 }
 
 export default Layout
+
+const Background = styled(Image)`
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  z-index: -1;
+`
