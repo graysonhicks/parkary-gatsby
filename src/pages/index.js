@@ -1,5 +1,6 @@
 import React from 'react'
-import globalStyles from '../styles/global'
+import globalStyles from '../styles'
+
 import Layout from '../components/layout'
 import MainSearch from '../components/main-search'
 

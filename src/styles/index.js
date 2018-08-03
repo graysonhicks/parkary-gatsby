@@ -8,6 +8,14 @@ const globalStyles = injectGlobal`
     font-weight: 900;
     src: local('Roboto Black'), url('${fonts.RobotoBlack}') format('truetype');
   }
+
+    @font-face {
+    font-family: 'Roboto Light';
+    font-style: normal;
+    font-weight: 300;
+    src: local('Roboto Light'), url('${fonts.RobotoLight}') format('truetype');
+  }
+  
   body {
     margin: 0;
   }

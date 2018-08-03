@@ -1,4 +1,4 @@
-import { SearchInput, Pane } from 'evergreen-ui'
+import { SearchInput } from 'evergreen-ui'
 
 import React from 'react'
 import styled from '../../node_modules/styled-components'
