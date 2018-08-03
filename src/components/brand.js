@@ -4,32 +4,16 @@ import { StaticQuery, graphql } from 'gatsby'
 import Img from 'gatsby-image'
 
 import { Heavy, Light } from './typography'
+import AppContext from './context'
 
 const Brand = () => (
   <>
-    <StaticQuery
-      query={graphql`
-        query {
-          logo: allImageSharp(
-            filter: { original: { src: { ne: "treelogo" } } }
-            limit: 1
-          ) {
-            edges {
-              node {
-                fluid(maxWidth: 50) {
-                  ...GatsbyImageSharpFluid_noBase64
-                }
-              }
-            }
-          }
-        }
-      `}
-      render={({ logo }) => (
-        <StyledLogo>
-          <Img fluid={logo.edges[0].node.fluid} />
-        </StyledLogo>
-      )}
-    />
+    <StyledLogo>
+      <AppContext.Consumer>
+        {({ logo }) => <Img fluid={logo.fluid} />}
+      </AppContext.Consumer>
+    </StyledLogo>
+
     <Heavy>park</Heavy>
     <Light>ary</Light>
   </>

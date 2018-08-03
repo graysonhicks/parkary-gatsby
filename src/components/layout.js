@@ -3,6 +3,7 @@ import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
 import styled from 'styled-components'
+import AppContext from './context'
 
 import { withPrefix } from 'gatsby-link'
 import Header from './header'
@@ -16,21 +17,41 @@ const Layout = ({ children, data }) => (
             title
           }
         }
+
+        logo: allImageSharp(
+          filter: { original: { src: { ne: "treelogo" } } }
+          limit: 1
+        ) {
+          edges {
+            node {
+              fluid(maxWidth: 50) {
+                ...GatsbyImageSharpFluid
+              }
+            }
+          }
+        }
       }
     `}
     render={data => (
       <>
-        <Helmet
-          title={data.site.siteMetadata.title}
-          meta={[
-            { name: 'description', content: 'Sample' },
-            { name: 'keywords', content: 'sample, something' },
-          ]}
-        />
-        <Background>
-          <Header siteTitle={data.site.siteMetadata.title} />
-          <MainContent>{children}</MainContent>
-        </Background>
+        <AppContext.Provider
+          value={{
+            siteTitle: data.site.siteMetadata.title,
+            logo: data.logo.edges[0].node,
+          }}
+        >
+          <Helmet
+            title={data.site.siteMetadata.title}
+            meta={[
+              { name: 'description', content: 'Sample' },
+              { name: 'keywords', content: 'sample, something' },
+            ]}
+          />
+          <Background>
+            <Header />
+            <MainContent>{children}</MainContent>
+          </Background>
+        </AppContext.Provider>
       </>
     )}
   />
