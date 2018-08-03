@@ -1,33 +1,28 @@
 import React from 'react'
-import { Link } from 'gatsby'
+import styled from 'styled-components'
+
+import { Pane, Text, colors } from 'evergreen-ui'
 
 const Header = ({ siteTitle }) => (
-  <div
-    style={{
-      background: 'rebeccapurple',
-      marginBottom: '1.45rem',
-    }}
-  >
-    <div
-      style={{
-        margin: '0 auto',
-        maxWidth: 960,
-        padding: '1.45rem 1.0875rem',
-      }}
-    >
-      <h1 style={{ margin: 0 }}>
-        <Link
-          to="/"
-          style={{
-            color: 'white',
-            textDecoration: 'none',
-          }}
-        >
-          {siteTitle}
-        </Link>
-      </h1>
-    </div>
-  </div>
+  <Nav>
+    <Brand>parkary</Brand>
+  </Nav>
 )
 
 export default Header
+
+const Nav = styled(Pane)`
+  display: flex;
+  align-items: center;
+  padding-left: 15px;
+  background-color: ${colors.neutral[500]};
+  height: 50px;
+  position: absolute;
+  top: 0;
+  width: 100%;
+`
+
+const Brand = styled(Text)`
+  color: ${colors.white[500]};
+  font-family: 'Roboto Black';
+`

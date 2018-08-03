@@ -1,11 +1,11 @@
 import React from 'react'
-import { Link } from 'gatsby'
-
+import globalStyles from '../styles/global'
 import Layout from '../components/layout'
+import MainSearch from '../components/main-search'
 
 const IndexPage = () => (
   <Layout>
-    <input type="text" />
+    <MainSearch />
   </Layout>
 )
 
