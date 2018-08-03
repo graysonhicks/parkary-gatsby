@@ -7,6 +7,7 @@ module.exports = {
     `gatsby-plugin-sharp`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-netlify-cms`,
+    `gatsby-transformer-remark`,
     {
       resolve: `gatsby-plugin-styled-components`,
     },
@@ -15,6 +16,13 @@ module.exports = {
       options: {
         name: `images`,
         path: `${__dirname}/src/images/`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `parks`,
+        path: `${__dirname}/parks/`,
       },
     },
   ],

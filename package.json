@@ -13,6 +13,7 @@
     "gatsby-plugin-sharp": "next",
     "gatsby-plugin-styled-components": "next",
     "gatsby-source-filesystem": "next",
+    "gatsby-transformer-remark": "next",
     "gatsby-transformer-sharp": "next",
     "netlify-cms": "^2.0.8",
     "react": "^16.4.1",
