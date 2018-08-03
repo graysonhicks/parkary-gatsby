@@ -15,3 +15,9 @@ collections:
       - { name: date, label: Date, widget: date }
       - { name: title, label: Title }
       - { name: body, label: Body, widget: markdown }
+      - {label: Image, name: image, widget: image}
+      - label: "Gallery"
+        name: "galleryImages"
+        widget: "list"
+        field:
+          - {label: Image, name: image, widget: image}
