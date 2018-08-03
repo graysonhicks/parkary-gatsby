@@ -1,40 +1,15 @@
 import React from 'react'
 import styled from 'styled-components'
-import { StaticQuery, graphql } from 'gatsby'
-import Img from 'gatsby-image'
 
-import { Pane, Text, colors } from 'evergreen-ui'
+import { Pane, colors } from 'evergreen-ui'
 
-import logo from '../images/treelogo.png'
-import { Heavy, Light } from './typography'
+import Brand from './brand'
+import CurrentPage from './current-page'
 
 const Header = () => (
   <Nav>
-    <StaticQuery
-      query={graphql`
-        query {
-          logo: allImageSharp(
-            filter: { original: { src: { ne: "treelogo" } } }
-            limit: 1
-          ) {
-            edges {
-              node {
-                fluid(maxWidth: 50) {
-                  ...GatsbyImageSharpFluid_noBase64
-                }
-              }
-            }
-          }
-        }
-      `}
-      render={({ logo }) => (
-        <StyledLogo>
-          <Img fluid={logo.edges[0].node.fluid} />
-        </StyledLogo>
-      )}
-    />
-    <Heavy>park</Heavy>
-    <Light>ary</Light>
+    <Brand />
+    <CurrentPage />
   </Nav>
 )
 
@@ -49,10 +24,4 @@ const Nav = styled(Pane)`
   position: absolute;
   top: 0;
   width: 100%;
-`
-
-const StyledLogo = styled.div`
-  height: 35px;
-  width: 35px;
-  margin-right: 15px;
 `

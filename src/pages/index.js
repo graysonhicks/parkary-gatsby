@@ -1,4 +1,5 @@
 import React from 'react'
+// eslint-disable-next-line
 import globalStyles from '../styles'
 
 import Layout from '../components/layout'

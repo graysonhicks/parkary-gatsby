@@ -1,16 +1,15 @@
-import { SearchInput, Button } from 'evergreen-ui'
-
 import React from 'react'
+
 import styled from '../../node_modules/styled-components'
+import { SearchInput, Button } from 'evergreen-ui'
 import { fadeIn } from '../styles/utils'
 
-import { Heavy, Light } from './typography'
+import Brand from './brand'
 
 const MainSearch = () => (
   <SearchContainer>
     <SearchBrand>
-      <Heavy>park</Heavy>
-      <Light>ary</Light>
+      <Brand />
     </SearchBrand>
     <MainSearchInput height={40} placeholder="find a city park near you" />
     <SearchButton height={40} appearance="green">
@@ -23,6 +22,7 @@ export default MainSearch
 
 const SearchBrand = styled.div`
   display: flex;
+  align-items: center;
   justify-content: center;
   margin-bottom: 15px;
 `
