@@ -6,6 +6,7 @@ import Img from 'gatsby-image'
 import { Pane, Text, colors } from 'evergreen-ui'
 
 import logo from '../images/treelogo.png'
+import { Heavy, Light } from './typography'
 
 const Header = () => (
   <Nav>
@@ -43,7 +44,7 @@ const Nav = styled(Pane)`
   display: flex;
   align-items: center;
   padding-left: 15px;
-  background-color: ${colors.neutral[500]};
+  background-color: ${colors.neutral[400]};
   height: 50px;
   position: absolute;
   top: 0;
@@ -54,17 +55,4 @@ const StyledLogo = styled.div`
   height: 35px;
   width: 35px;
   margin-right: 15px;
-`
-
-const Brand = styled(Text)`
-  color: ${colors.white[500]};
-  font-size: 1.5rem;
-`
-
-const Heavy = Brand.extend`
-  font-family: 'Roboto Black';
-`
-
-const Light = Brand.extend`
-  font-family: 'Roboto Light';
 `
