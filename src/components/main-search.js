@@ -1,17 +1,17 @@
-import React from 'react'
+import React, { Component } from 'react'
 
 import styled from '../../node_modules/styled-components'
-import { SearchInput, Button } from 'evergreen-ui'
-import { fadeIn } from '../styles/utils'
+import { Button } from 'evergreen-ui'
 
 import Brand from './brand'
+import MainSearchInput from './main-search-input'
 
 const MainSearch = () => (
   <SearchContainer>
     <SearchBrand>
       <Brand />
     </SearchBrand>
-    <MainSearchInput height={40} placeholder="find a city park near you" />
+    <MainSearchInput />
     <SearchButton height={40} appearance="green">
       search
     </SearchButton>
@@ -25,11 +25,6 @@ const SearchBrand = styled.div`
   align-items: center;
   justify-content: center;
   margin-bottom: 15px;
-`
-
-const MainSearchInput = styled(SearchInput)`
-  animation: ${fadeIn} 0.7s linear;
-  width: 500px;
 `
 
 const SearchContainer = styled.div`

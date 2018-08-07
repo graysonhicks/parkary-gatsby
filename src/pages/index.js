@@ -6,8 +6,6 @@ import Layout from '../components/layout'
 import MainSearch from '../components/main-search'
 
 const IndexPage = data => {
-  console.log(data)
-
   return (
     <Layout>
       <MainSearch />
@@ -22,7 +20,9 @@ export const MainQuery = graphql`
     allContentfulPark {
       edges {
         node {
-          images
+          images {
+            title
+          }
         }
       }
     }

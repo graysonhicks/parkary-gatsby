@@ -19,7 +19,7 @@ const Nav = styled(Pane)`
   display: flex;
   align-items: center;
   padding-left: 15px;
-  background-color: ${colors.neutral[400]};
+  background-color: ${colors.turquoise['500']};
   height: 50px;
   position: absolute;
   top: 0;
