@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import AppContext from './context'
 
 import { withPrefix } from 'gatsby-link'
-import Header from './header'
+import Nav from './nav/nav'
 
 const Layout = ({ children, data }) => (
   <StaticQuery
@@ -48,7 +48,7 @@ const Layout = ({ children, data }) => (
             ]}
           />
           <Background>
-            <Header />
+            <Nav />
             <MainContent>{children}</MainContent>
           </Background>
         </AppContext.Provider>

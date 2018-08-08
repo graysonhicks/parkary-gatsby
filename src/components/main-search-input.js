@@ -62,7 +62,7 @@ class MainSearch extends Component {
               <Suggestions>
                 {loading && (
                   <LoadingPanel height={40}>
-                    <SuggestionText>Loading...</SuggestionText>
+                    <Text>Loading...</Text>
                   </LoadingPanel>
                 )}
                 {suggestions.map(suggestion => (
@@ -90,7 +90,7 @@ const StyledMainSearchInput = styled(SearchInput)`
   width: 500px;
 `
 
-const ResultsPanel = styled(Card)``
+const ResultsPanel = styled.div``
 
 const LoadingPanel = styled(Card)`
   display: flex;

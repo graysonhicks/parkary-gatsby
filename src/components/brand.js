@@ -3,19 +3,28 @@ import styled from 'styled-components'
 import { StaticQuery, graphql } from 'gatsby'
 import Img from 'gatsby-image'
 
-import { Heavy, Light } from './typography'
+import { Heavy, Light, DarkHeavy, DarkLight } from './typography'
 import AppContext from './context'
 
-const Brand = () => (
+const Brand = props => (
   <>
-    <StyledLogo>
+    {/* <StyledLogo>
       <AppContext.Consumer>
         {({ logo }) => <Img fluid={logo.fluid} />}
       </AppContext.Consumer>
-    </StyledLogo>
+    </StyledLogo> */}
 
-    <Heavy>park</Heavy>
-    <Light>ary</Light>
+    {props.dark ? (
+      <>
+        <DarkHeavy>park</DarkHeavy>
+        <DarkLight>ary</DarkLight>
+      </>
+    ) : (
+      <>
+        <Heavy>park</Heavy>
+        <Light>ary</Light>
+      </>
+    )}
   </>
 )
 
