@@ -8,7 +8,7 @@ import CurrentPage from './current-page'
 import Menu from './menu'
 
 const Nav = () => (
-  <StyledNav appearance="tint2" elevation={4}>
+  <StyledNav elevation={4}>
     <Brand dark />
     <CurrentPage />
     <RightContainer>

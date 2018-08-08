@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { Text, colors } from 'evergreen-ui'
+import { colors } from 'evergreen-ui'
 
 import { Light } from './../typography'
 

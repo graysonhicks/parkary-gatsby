@@ -6,7 +6,7 @@ import PlacesAutocomplete, {
 } from 'react-places-autocomplete'
 import styled from 'styled-components'
 
-import { SearchInput, Card, Text, colors } from 'evergreen-ui'
+import { Pane, SearchInput, Card, Text, colors } from 'evergreen-ui'
 import { fadeIn } from '../styles/utils'
 
 class MainSearch extends Component {
@@ -49,9 +49,10 @@ class MainSearch extends Component {
         onSelect={this.handleSelect}
       >
         {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-          <>
+          <InputContainer>
             <StyledMainSearchInput
               height={40}
+              width="100%"
               value={this.state.address}
               {...getInputProps({
                 placeholder: 'Search Places ...',
@@ -76,7 +77,7 @@ class MainSearch extends Component {
                 ))}
               </Suggestions>
             </ResultsPanel>
-          </>
+          </InputContainer>
         )}
       </PlacesAutocomplete>
     )
@@ -85,9 +86,12 @@ class MainSearch extends Component {
 
 export default MainSearch
 
+const InputContainer = styled(Pane)`
+  width: 500px;
+`
+
 const StyledMainSearchInput = styled(SearchInput)`
   animation: ${fadeIn} 0.7s linear;
-  width: 500px;
 `
 
 const ResultsPanel = styled.div``
