@@ -9,7 +9,7 @@ import MainSearchInput from './main-search-input'
 const MainSearch = () => (
   <SearchContainer>
     <SearchBrand>
-      <Brand />
+      <Brand size={900} />
     </SearchBrand>
     <MainSearchInput />
     <SearchButton height={40} appearance="green">

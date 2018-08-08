@@ -2,8 +2,8 @@ import React from 'react'
 import styled from 'styled-components'
 
 import Img from 'gatsby-image'
+import { Heading, Text, colors } from 'evergreen-ui'
 
-import { Heavy, Light, DarkHeavy, DarkLight } from './typography'
 import AppContext from './context'
 
 const Brand = props => (
@@ -16,13 +16,15 @@ const Brand = props => (
 
     {props.dark ? (
       <>
-        <DarkHeavy>park</DarkHeavy>
-        <DarkLight>ary</DarkLight>
+        <DarkStrong {...props}>
+          park<DarkLight {...props}>ary</DarkLight>
+        </DarkStrong>
       </>
     ) : (
       <>
-        <Heavy>park</Heavy>
-        <Light>ary</Light>
+        <StyledStrong {...props}>
+          park<StyledLight {...props}>ary</StyledLight>
+        </StyledStrong>
       </>
     )}
   </>
@@ -34,4 +36,21 @@ const StyledLogo = styled.div`
   height: 35px;
   width: 35px;
   margin-right: 15px;
+`
+
+const StyledStrong = styled(Heading)`
+  font-weight: 800;
+  color: ${colors.white['500']};
+`
+
+const StyledLight = styled(Text)`
+  color: ${colors.white['500']};
+`
+
+const DarkStrong = StyledStrong.extend`
+  color: ${colors.neutral['500']};
+`
+
+const DarkLight = StyledLight.extend`
+  color: ${colors.neutral['500']};
 `
