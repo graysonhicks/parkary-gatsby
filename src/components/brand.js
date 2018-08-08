@@ -6,24 +6,27 @@ import { Heading, Text, colors } from 'evergreen-ui'
 
 import AppContext from './context'
 
-const Brand = props => (
+const heavyWeight = {
+  fontWeight: 800,
+}
+
+const Brand = ({ dark, ...rest }) => (
   <>
     {/* <StyledLogo>
       <AppContext.Consumer>
         {({ logo }) => <Img fluid={logo.fluid} />}
       </AppContext.Consumer>
     </StyledLogo> */}
-
-    {props.dark ? (
+    {dark ? (
       <>
-        <DarkStrong {...props}>
-          park<DarkLight {...props}>ary</DarkLight>
+        <DarkStrong {...rest}>
+          park<DarkLight {...rest}>ary</DarkLight>
         </DarkStrong>
       </>
     ) : (
       <>
-        <StyledStrong {...props}>
-          park<StyledLight {...props}>ary</StyledLight>
+        <StyledStrong {...rest}>
+          park<StyledLight {...rest}>ary</StyledLight>
         </StyledStrong>
       </>
     )}
