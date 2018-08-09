@@ -1,6 +1,6 @@
 import React from 'react'
 
-import styled from '../../node_modules/styled-components'
+import styled from 'styled-components'
 import { Button } from 'evergreen-ui'
 
 import Brand from './brand'

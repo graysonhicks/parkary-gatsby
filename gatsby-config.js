@@ -24,5 +24,7 @@ module.exports = {
         accessToken: `4f4bd8a893e4775e1bbabf9046e24a785a4ca9735f0ba386eb8e004317d46e92`,
       },
     },
+    { resolve: `gatsby-plugin-single-park` },
+    { resolve: `gatsby-plugin-parks-by-city` },
   ],
 }

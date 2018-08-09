@@ -16,17 +16,3 @@ const IndexPage = data => {
 }
 
 export default IndexPage
-
-export const MainQuery = graphql`
-  query nextEventQuery {
-    allContentfulPark {
-      edges {
-        node {
-          images {
-            title
-          }
-        }
-      }
-    }
-  }
-`

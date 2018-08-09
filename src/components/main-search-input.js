@@ -28,8 +28,13 @@ class MainSearch extends Component {
   handleSelect = address => {
     this.setState({ address })
 
+    console.log('address', address)
+
     geocodeByAddress(address)
-      .then(results => getLatLng(results[0]))
+      .then(results => {
+        console.log('result', results[0])
+        return getLatLng(results[0])
+      })
       .then(latLng => console.log('Success', latLng))
       .catch(error => console.error('Error', error))
   }

@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
@@ -8,54 +8,59 @@ import AppContext from './context'
 import { withPrefix } from 'gatsby-link'
 import Nav from './nav/nav'
 
-const Layout = ({ children, data }) => (
-  <StaticQuery
-    query={graphql`
-      query SiteTitleQuery {
-        site {
-          siteMetadata {
-            title
-          }
-        }
+class Layout extends Component {
+  render() {
+    const { children, data } = this.props
+    return (
+      <StaticQuery
+        query={graphql`
+          query SiteTitleQuery {
+            site {
+              siteMetadata {
+                title
+              }
+            }
 
-        logo: allImageSharp(
-          filter: { original: { src: { ne: "treelogo" } } }
-          limit: 1
-        ) {
-          edges {
-            node {
-              fluid(maxWidth: 50) {
-                ...GatsbyImageSharpFluid
+            logo: allImageSharp(
+              filter: { original: { src: { ne: "treelogo" } } }
+              limit: 1
+            ) {
+              edges {
+                node {
+                  fluid(maxWidth: 50) {
+                    ...GatsbyImageSharpFluid
+                  }
+                }
               }
             }
           }
-        }
-      }
-    `}
-    render={data => (
-      <>
-        <AppContext.Provider
-          value={{
-            siteTitle: data.site.siteMetadata.title,
-            logo: data.logo.edges[0].node,
-          }}
-        >
-          <Helmet
-            title={data.site.siteMetadata.title}
-            meta={[
-              { name: 'description', content: 'Sample' },
-              { name: 'keywords', content: 'sample, something' },
-            ]}
-          />
-          <Background>
-            <Nav />
-            <MainContent>{children}</MainContent>
-          </Background>
-        </AppContext.Provider>
-      </>
-    )}
-  />
-)
+        `}
+        render={data => (
+          <>
+            <AppContext.Provider
+              value={{
+                siteTitle: data.site.siteMetadata.title,
+                logo: data.logo.edges[0].node,
+              }}
+            >
+              <Helmet
+                title={data.site.siteMetadata.title}
+                meta={[
+                  { name: 'description', content: 'Sample' },
+                  { name: 'keywords', content: 'sample, something' },
+                ]}
+              />
+              <Background>
+                <Nav />
+                <MainContent>{children}</MainContent>
+              </Background>
+            </AppContext.Provider>
+          </>
+        )}
+      />
+    )
+  }
+}
 
 Layout.propTypes = {
   children: PropTypes.node.isRequired,
