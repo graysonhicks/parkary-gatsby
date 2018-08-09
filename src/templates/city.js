@@ -2,19 +2,19 @@ import React from 'react'
 import { graphql } from 'gatsby'
 
 import Layout from '../components/layout'
-import MainSearch from '../components/main-search'
+import Results from '../components/results'
 
-const IndexPage = ({ data }) => {
-  console.log(data)
+const CityPage = ({ data }) => {
+  const parks = data.allContentfulPark.edges
 
   return (
     <Layout>
-      <MainSearch />
+      <Results parks={parks} />
     </Layout>
   )
 }
 
-export default IndexPage
+export default CityPage
 
 export const query = graphql`
   query($cityState: String!) {
