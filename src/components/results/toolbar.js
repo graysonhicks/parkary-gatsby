@@ -6,20 +6,26 @@ import Link from 'gatsby-link'
 import Img from 'gatsby-image'
 import { Container, Group, Button } from 'rebass'
 
-const Toolbar = ({ view, changeView }) => {
-  console.log(view)
+import { ResultsContext } from './../context'
 
+const Toolbar = () => {
   return (
-    <Item>
-      <Group>
-        <ToggleButton active={view.grid} onClick={changeView}>
-          Grid
-        </ToggleButton>
-        <ToggleButton active={view.map} onClick={changeView}>
-          Map
-        </ToggleButton>
-      </Group>
-    </Item>
+    <ResultsContext.Consumer>
+      {({ view, changeView }) => {
+        return (
+          <Item>
+            <Group>
+              <ToggleButton active={view.grid} onClick={changeView}>
+                Grid
+              </ToggleButton>
+              <ToggleButton active={view.map} onClick={changeView}>
+                Map
+              </ToggleButton>
+            </Group>
+          </Item>
+        )
+      }}
+    </ResultsContext.Consumer>
   )
 }
 

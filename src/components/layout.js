@@ -5,7 +5,7 @@ import { StaticQuery, graphql } from 'gatsby'
 import { Provider } from 'rebass'
 
 import styled, { css } from 'styled-components'
-import AppContext from './context'
+import { AppContext } from './context'
 
 import { withPrefix } from 'gatsby-link'
 import Nav from './nav'

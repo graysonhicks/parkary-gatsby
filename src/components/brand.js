@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import Img from 'gatsby-image'
 import { Heading, Box } from 'rebass'
 
-import AppContext from './context'
+import { AppContext } from './context'
 
 const Brand = ({ dark, ...rest }) => (
   <>

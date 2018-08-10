@@ -1,6 +1,6 @@
 import React from 'react'
 
 //create new context
-const AppContext = React.createContext()
-// export
-export default AppContext
+export const AppContext = React.createContext()
+
+export const ResultsContext = React.createContext()

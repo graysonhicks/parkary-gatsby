@@ -1,18 +1,52 @@
-import React from 'react'
+import React, { Component } from 'react'
 import { graphql } from 'gatsby'
 
 import Layout from '../components/layout'
 import Results from '../components/results'
 import styled from 'styled-components'
 
-const CityPage = ({ data }) => {
-  const parks = data.allContentfulPark.edges
+import { ResultsContext } from '../components/context'
 
-  return (
-    <ResultsLayout currentPage="results">
-      <Results parks={parks} />
-    </ResultsLayout>
-  )
+class CityPage extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      grid: true,
+      map: false,
+      filtering: false,
+      parks: props.data.allContentfulPark.edges,
+    }
+  }
+
+  changeView = () => {
+    this.setState({
+      grid: !this.state.grid,
+      map: !this.state.map,
+    })
+  }
+
+  filterByAmenity = amenity => {
+    const orig = this.state.parks
+  }
+
+  render() {
+    return (
+      <ResultsLayout currentPage="results">
+        <ResultsContext.Provider
+          value={{
+            view: { grid: this.state.grid, map: this.state.map },
+            parks: this.state.parks,
+            changeView: this.changeView,
+            filtering: this.filtering,
+            filterByAmenity: this.filterByAmenity,
+          }}
+        >
+          <Results />
+        </ResultsContext.Provider>
+      </ResultsLayout>
+    )
+  }
 }
 
 export default CityPage
