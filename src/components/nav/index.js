@@ -1,15 +1,17 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import Link from 'gatsby-link'
 import { Toolbar, Container } from 'rebass'
-
 import Brand from './../brand'
 import CurrentPage from './current-page'
 import Menu from './menu'
 
 const Nav = () => (
   <StyledNav>
-    <Brand dark />
+    <NavHomeLink to="/">
+      <Brand dark />
+    </NavHomeLink>
     <CurrentPage />
     <RightContainer>
       <Menu />
@@ -28,6 +30,11 @@ const StyledNav = styled(Toolbar)`
   position: absolute;
   top: 0;
   width: 100%;
+`
+
+const NavHomeLink = styled(Link)`
+  display: flex;
+  text-decoration: none;
 `
 
 const RightContainer = styled(Container)`

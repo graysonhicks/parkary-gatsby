@@ -4,11 +4,27 @@ import styled from 'styled-components'
 import { Container } from 'rebass'
 
 import ParkCard from './card'
+import Toolbar from './toolbar'
 
 class Results extends Component {
+  constructor(props) {
+    super(props)
+    this.state = { grid: true, map: false }
+
+    this.changeView = this.changeView.bind(this)
+  }
+
+  changeView = () => {
+    this.setState({
+      grid: !this.state.grid,
+      map: !this.state.map,
+    })
+  }
+
   render() {
     return (
       <ResultsContainer>
+        <Toolbar view={this.state} changeView={this.changeView} />
         {this.props.parks.map(({ node }) => {
           return <ParkCard key={node.title} park={node} />
         })}

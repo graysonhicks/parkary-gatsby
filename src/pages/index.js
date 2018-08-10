@@ -1,5 +1,4 @@
 import React from 'react'
-import { graphql } from 'gatsby'
 
 // eslint-disable-next-line
 import globalStyles from '../styles'

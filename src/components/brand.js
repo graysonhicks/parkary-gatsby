@@ -8,11 +8,11 @@ import AppContext from './context'
 
 const Brand = ({ dark, ...rest }) => (
   <>
-    {/* <StyledLogo>
+    <StyledLogo>
       <AppContext.Consumer>
         {({ logo }) => <Img fluid={logo.fluid} />}
       </AppContext.Consumer>
-    </StyledLogo> */}
+    </StyledLogo>
     {dark ? (
       <HeadingContainer>
         <DarkStrong {...rest}>park</DarkStrong>

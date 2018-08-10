@@ -79,8 +79,8 @@ const Background = styled.div`
   z-index: -1;
   background-image: url(${withPrefix('/bg.jpg')});
   background-size: cover;
-  padding-top: 60px;
-  height: 100%;
+  padding-top: 50px;
+  min-height: 100%;
 
   /* Only let page overflow on results page so can scroll */
   ${({ page }) =>

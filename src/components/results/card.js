@@ -7,8 +7,6 @@ import Img from 'gatsby-image'
 import { Card, Text, Container, Subhead } from 'rebass'
 
 const ParkCard = ({ park }) => {
-  console.log(park)
-
   return (
     <Item>
       <ParkLink to={`/${park.fields.slug}`}>
@@ -31,7 +29,7 @@ const Item = styled(Card)`
   flex-direction: column;
   justify-content: flex-start;
   background-color: white;
-  width: calc(25% - 10px);
+  width: calc(20% - 10px);
   margin-left: 10px;
   margin-bottom: 10px;
   height: 465px;
