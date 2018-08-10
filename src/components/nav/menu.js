@@ -18,13 +18,18 @@ class Menu extends Component {
   render() {
     return (
       <>
-        <MenuButton
-          onClick={this.handleLoginDropdown}
-          isOpen={this.state.isOpen}
-        >
-          menu
-          <Arrow direction="down" />
-        </MenuButton>
+        {this.state.isOpen ? (
+          <MenuButton onClick={this.handleLoginDropdown} open>
+            menu
+            <Arrow direction="down" />
+          </MenuButton>
+        ) : (
+          <MenuButton onClick={this.handleLoginDropdown}>
+            menu
+            <Arrow direction="down" />
+          </MenuButton>
+        )}
+
         {this.state.isOpen && (
           <MenuDropdown elevation={4}>
             <MenuLink href="/login">Login</MenuLink>
@@ -39,8 +44,8 @@ class Menu extends Component {
 export default Menu
 
 const MenuButton = styled(Button)`
-  ${({ isOpen }) =>
-    isOpen &&
+  ${({ open }) =>
+    open &&
     css`
       background-color: transparent;
       color: blue;

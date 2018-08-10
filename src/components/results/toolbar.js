@@ -15,10 +15,10 @@ const Toolbar = () => {
         return (
           <Item>
             <Group>
-              <ToggleButton active={view.grid} onClick={changeView}>
+              <ToggleButton active={view.grid ? 1 : 0} onClick={changeView}>
                 Grid
               </ToggleButton>
-              <ToggleButton active={view.map} onClick={changeView}>
+              <ToggleButton active={view.map ? 1 : 0} onClick={changeView}>
                 Map
               </ToggleButton>
             </Group>

@@ -1,33 +1,41 @@
 import React from 'react'
-
-import { Card, Text, Heading } from 'rebass'
-
 import styled from 'styled-components'
 
-import { ResultsContext } from './../context'
+import { Card } from 'rebass'
+
+import { GoogleMapWrapper } from './map'
+import Sidebar from './sidebar'
 
 const MainMap = () => {
   return (
-    <ResultsContext.Consumer>
-      {({ parks }) => {
-        return (
-          <StyledMapCard>
-            <Heading>Map Component!</Heading>
-            {parks &&
-              parks.map(({ node }) => {
-                return <Text>{node.title}</Text>
-              })}
-          </StyledMapCard>
-        )
-      }}
-    </ResultsContext.Consumer>
+    <StyledMapCard>
+      <GoogleMapWrapper
+        isMarkerShown
+        loadingElement={<div style={{ height: `100%` }} />}
+        containerElement={<MapContainer />}
+        mapElement={<div style={{ height: `100%` }} />}
+      />
+      <SideBarContainer>
+        <Sidebar />
+      </SideBarContainer>
+    </StyledMapCard>
   )
 }
 export default MainMap
 
 const StyledMapCard = styled(Card)`
   background-color: white;
+  display: flex;
   height: 80vh;
   width: 100%;
   margin: 0 10px;
+`
+const MapContainer = styled.div`
+  height: 100%;
+  width: 75%;
+`
+
+const SideBarContainer = styled.div`
+  width: 25%;
+  padding: 10px;
 `

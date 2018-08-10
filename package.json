@@ -16,6 +16,7 @@
     "gatsby-transformer-sharp": "next",
     "react": "^16.4.1",
     "react-dom": "^16.4.1",
+    "react-google-maps": "^9.4.5",
     "react-helmet": "^5.2.0",
     "react-places-autocomplete": "^7.2.0",
     "rebass": "^2.0.0-10",
