@@ -1,13 +1,13 @@
 import styled from 'styled-components'
-import { Text, colors } from 'evergreen-ui'
+import { Text } from 'rebass'
 
 const Brand = styled(Text)`
-  color: ${colors.white[500]};
+  color: white;
   font-size: 1.5rem;
 `
 
 const DarkBrand = Brand.extend`
-  color: ${colors.green['1000']};
+  color: teal;
 `
 
 const Heavy = Brand.extend`

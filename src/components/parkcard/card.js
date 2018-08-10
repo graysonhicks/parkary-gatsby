@@ -1,6 +1,7 @@
 import React from 'react'
 
-import { Card, Text } from 'evergreen-ui'
+import { Card, Text } from 'rebass'
+
 import styled from 'styled-components'
 
 const ParkCard = ({ park }) => {

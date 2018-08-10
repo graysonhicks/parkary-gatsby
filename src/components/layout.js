@@ -2,6 +2,8 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
+import { Provider } from 'rebass'
+
 import styled from 'styled-components'
 import AppContext from './context'
 
@@ -36,7 +38,7 @@ class Layout extends Component {
           }
         `}
         render={data => (
-          <>
+          <Provider>
             <AppContext.Provider
               value={{
                 siteTitle: data.site.siteMetadata.title,
@@ -55,7 +57,7 @@ class Layout extends Component {
                 <MainContent>{children}</MainContent>
               </Background>
             </AppContext.Provider>
-          </>
+          </Provider>
         )}
       />
     )

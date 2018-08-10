@@ -5,7 +5,6 @@
   "author": "Grayson Hicks <mathews.kyle@gmail.com>",
   "dependencies": {
     "babel-plugin-styled-components": "^1.5.1",
-    "evergreen-ui": "^3.2.4",
     "gatsby": "next",
     "gatsby-image": "next",
     "gatsby-plugin-react-helmet": "next",
@@ -19,6 +18,7 @@
     "react-dom": "^16.4.1",
     "react-helmet": "^5.2.0",
     "react-places-autocomplete": "^7.2.0",
+    "rebass": "^2.0.0-10",
     "styled-components": "^3.3.3"
   },
   "keywords": [

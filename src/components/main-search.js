@@ -1,7 +1,8 @@
 import React from 'react'
 
 import styled from 'styled-components'
-import { Button } from 'evergreen-ui'
+
+import { Container, Button } from 'rebass'
 
 import Brand from './brand'
 import MainSearchInput from './main-search-input'
@@ -9,7 +10,7 @@ import MainSearchInput from './main-search-input'
 const MainSearch = () => (
   <SearchContainer>
     <SearchBrand>
-      <Brand size={900} />
+      <Brand />
     </SearchBrand>
     <MainSearchInput />
     <SearchButton height={40} appearance="green">
@@ -20,14 +21,14 @@ const MainSearch = () => (
 
 export default MainSearch
 
-const SearchBrand = styled.div`
+const SearchBrand = styled(Container)`
   display: flex;
   align-items: center;
   justify-content: center;
   margin-bottom: 15px;
 `
 
-const SearchContainer = styled.div`
+const SearchContainer = styled(Container)`
   display: flex;
   flex-direction: column;
 `
@@ -37,4 +38,6 @@ const SearchButton = styled(Button)`
   margin-top: 10px;
   align-self: flex-end;
   justify-content: center;
+  background-color: teal;
+  padding: 10px;
 `

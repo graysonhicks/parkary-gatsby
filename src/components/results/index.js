@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 
 import styled from 'styled-components'
-import { Pane, Card, Text } from 'evergreen-ui'
+import { Card, Text } from 'rebass'
 
 class Results extends Component {
   render() {

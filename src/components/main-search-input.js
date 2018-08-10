@@ -6,7 +6,8 @@ import PlacesAutocomplete, {
 } from 'react-places-autocomplete'
 import styled from 'styled-components'
 
-import { Pane, SearchInput, Card, Text, colors } from 'evergreen-ui'
+import { Container, Card, Text, Input } from 'rebass'
+
 import { fadeIn } from '../styles/utils'
 
 class MainSearch extends Component {
@@ -65,22 +66,20 @@ class MainSearch extends Component {
               })}
             />
             <ResultsPanel>
-              <Suggestions>
-                {loading && (
-                  <LoadingPanel height={40}>
-                    <Text>Loading...</Text>
-                  </LoadingPanel>
-                )}
-                {suggestions.map(suggestion => (
+              {loading && (
+                <LoadingPanel>
+                  <Text>Loading...</Text>
+                </LoadingPanel>
+              )}
+              {suggestions &&
+                suggestions.map(suggestion => (
                   <StyledSuggestion
                     key={suggestion.id}
-                    height={40}
                     {...getSuggestionItemProps(suggestion)}
                   >
                     <SuggestionText>{suggestion.description}</SuggestionText>
                   </StyledSuggestion>
                 ))}
-              </Suggestions>
             </ResultsPanel>
           </InputContainer>
         )}
@@ -91,38 +90,41 @@ class MainSearch extends Component {
 
 export default MainSearch
 
-const InputContainer = styled(Pane)`
+const InputContainer = styled(Container)`
+  width: 500px;
+  padding: 0;
+`
+
+const StyledMainSearchInput = styled(Input)`
+  animation: ${fadeIn} 0.7s linear;
+  background-color: white;
+  padding: 10px;
+`
+
+const ResultsPanel = styled(Card)`
+  padding: 0;
+  position: absolute;
+  z-index: 1;
   width: 500px;
 `
 
-const StyledMainSearchInput = styled(SearchInput)`
-  animation: ${fadeIn} 0.7s linear;
-`
-
-const ResultsPanel = styled.div``
-
 const LoadingPanel = styled(Card)`
   display: flex;
-  background-color: ${colors.white['500']};
+  background-color: white;
   align-items: center;
   padding-left: 10px;
 `
 
-const Suggestions = styled(Card)`
-  width: 500px;
-  position: absolute;
-  z-index: 1;
-`
 const StyledSuggestion = styled(Card)`
   display: flex;
-  background-color: ${colors.white['500']};
+  background-color: white;
   align-items: center;
   padding-left: 10px;
   cursor: pointer;
   animation: ${fadeIn} 0.3s linear;
 
   &:hover {
-    background-color: ${colors.blue['50']};
+    background-color: teal;
   }
 `
 

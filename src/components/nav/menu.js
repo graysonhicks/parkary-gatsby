@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
-import { Button, Card, Text, colors } from 'evergreen-ui'
+import { NavLink, Card, BlockLink } from 'rebass'
 
 class Menu extends Component {
   constructor(props) {
@@ -25,16 +25,12 @@ class Menu extends Component {
           height={36}
           onClick={this.handleLoginDropdown}
         >
-          Menu
+          menu
         </MenuButton>
         {this.state.isOpen && (
           <MenuDropdown elevation={4}>
-            <MenuLink href="/login">
-              <Text>Login</Text>
-            </MenuLink>
-            <MenuLink href="/contact">
-              <Text>Contact</Text>
-            </MenuLink>
+            <MenuLink href="/login">Login</MenuLink>
+            <MenuLink href="/contact">Contact</MenuLink>
           </MenuDropdown>
         )}
       </>
@@ -44,22 +40,26 @@ class Menu extends Component {
 
 export default Menu
 
-const MenuButton = styled(Button)``
+const MenuButton = styled(NavLink)`
+  color: black;
+`
 
-const MenuLink = styled.a`
+const MenuLink = styled(BlockLink)`
   display: flex;
   justify-content: flex-start;
   text-decoration: none;
   padding: 10px;
+  color: black;
 
   &:hover {
-    background-color: ${colors.neutral['30A']};
+    background-color: teal;
   }
 `
 
 const MenuDropdown = styled(Card)`
   position: absolute;
+  padding: 0;
   top: 40px;
-  background-color: ${colors.white['500']};
+  background-color: white;
   width: 250px;
 `

@@ -1,14 +1,14 @@
 import React from 'react'
 import styled from 'styled-components'
 
-import { Pane, colors } from 'evergreen-ui'
+import { Toolbar, Container } from 'rebass'
 
 import Brand from './../brand'
 import CurrentPage from './current-page'
 import Menu from './menu'
 
 const Nav = () => (
-  <StyledNav elevation={4}>
+  <StyledNav>
     <Brand dark />
     <CurrentPage />
     <RightContainer>
@@ -19,21 +19,22 @@ const Nav = () => (
 
 export default Nav
 
-const StyledNav = styled(Pane)`
+const StyledNav = styled(Toolbar)`
   display: flex;
   align-items: center;
   padding-left: 15px;
-  background-color: ${colors.white['500']};
+  background-color: white;
   height: 50px;
   position: absolute;
   top: 0;
   width: 100%;
 `
 
-const RightContainer = styled.div`
+const RightContainer = styled(Container)`
   display: flex;
   width: 100%;
   justify-content: flex-end;
+  margin-right: 0;
   padding-right: 15px;
   position: relative;
 `
