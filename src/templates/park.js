@@ -1,14 +1,14 @@
 import React from 'react'
-import {graphql} from 'gatsby';
+import { graphql } from 'gatsby'
 
 import Layout from '../components/layout'
-import ParkCard from '../components/parkcard/card'
+import Park from '../components/park'
 
 export default ({ data }) => {
   const park = data.contentfulPark
   return (
     <Layout>
-      <ParkCard park={park} />
+      <Park park={park} />
     </Layout>
   )
 }

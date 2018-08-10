@@ -22,9 +22,17 @@ export const query = graphql`
       edges {
         node {
           title
+          description {
+            description
+          }
           location {
             lat
             lon
+          }
+          featuredImage {
+            fluid(maxWidth: 500, maxHeight: 500) {
+              ...GatsbyContentfulFluid
+            }
           }
         }
       }

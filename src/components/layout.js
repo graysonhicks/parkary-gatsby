@@ -8,7 +8,7 @@ import styled from 'styled-components'
 import AppContext from './context'
 
 import { withPrefix } from 'gatsby-link'
-import Nav from './nav/nav'
+import Nav from './nav'
 
 class Layout extends Component {
   render() {

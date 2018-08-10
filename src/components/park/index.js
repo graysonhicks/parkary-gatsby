@@ -4,14 +4,14 @@ import { Card, Text } from 'rebass'
 
 import styled from 'styled-components'
 
-const ParkCard = ({ park }) => {
+const MainPark = ({ park }) => {
   return (
     <StyledParkCard>
       <Text>{park.title}</Text>
     </StyledParkCard>
   )
 }
-export default ParkCard
+export default MainPark
 
 const StyledParkCard = styled(Card)`
   background-color: white;

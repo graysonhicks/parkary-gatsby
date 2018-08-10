@@ -2,7 +2,7 @@ import React from 'react'
 
 import styled from 'styled-components'
 
-import { Container, Button } from 'rebass'
+import { Container } from 'rebass'
 
 import Brand from './brand'
 import MainSearchInput from './main-search-input'
