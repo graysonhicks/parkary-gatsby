@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
-import { NavLink, Card, BlockLink } from 'rebass'
+import { Button, Card, BlockLink, Arrow } from 'rebass'
 
 class Menu extends Component {
   constructor(props) {
@@ -19,13 +19,11 @@ class Menu extends Component {
     return (
       <>
         <MenuButton
-          iconAfter="triangle"
-          iconAfterAim="down"
-          appearance="ghost"
-          height={36}
           onClick={this.handleLoginDropdown}
+          isOpen={this.state.isOpen}
         >
           menu
+          <Arrow direction="down" />
         </MenuButton>
         {this.state.isOpen && (
           <MenuDropdown elevation={4}>
@@ -40,8 +38,17 @@ class Menu extends Component {
 
 export default Menu
 
-const MenuButton = styled(NavLink)`
-  color: black;
+const MenuButton = styled(Button)`
+  ${({ isOpen }) =>
+    isOpen &&
+    css`
+      background-color: transparent;
+      color: blue;
+    `};
+
+  ${Arrow} {
+    margin-left: 10px;
+  }
 `
 
 const MenuLink = styled(BlockLink)`
@@ -62,4 +69,5 @@ const MenuDropdown = styled(Card)`
   top: 40px;
   background-color: white;
   width: 250px;
+  z-index: 2;
 `

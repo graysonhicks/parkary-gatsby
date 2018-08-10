@@ -3,18 +3,25 @@ import { graphql } from 'gatsby'
 
 import Layout from '../components/layout'
 import Results from '../components/results'
+import styled from 'styled-components'
 
 const CityPage = ({ data }) => {
   const parks = data.allContentfulPark.edges
 
   return (
-    <Layout>
+    <ResultsLayout currentPage="results">
       <Results parks={parks} />
-    </Layout>
+    </ResultsLayout>
   )
 }
 
 export default CityPage
+
+const ResultsLayout = styled(Layout)`
+  height: auto;
+  min-height: 100vh;
+  overflow: scroll;
+`
 
 export const query = graphql`
   query($cityState: String!) {
@@ -30,9 +37,12 @@ export const query = graphql`
             lon
           }
           featuredImage {
-            fluid(maxWidth: 500, maxHeight: 500) {
+            fluid(maxWidth: 500, maxHeight: 400) {
               ...GatsbyContentfulFluid
             }
+          }
+          fields {
+            slug
           }
         }
       }

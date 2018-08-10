@@ -9,7 +9,7 @@ import MainSearch from '../components/main-search'
 
 const IndexPage = data => {
   return (
-    <Layout>
+    <Layout currentPage="home">
       <MainSearch />
     </Layout>
   )

@@ -22,7 +22,7 @@ export default Results
 const ResultsContainer = styled(Container)`
   display: flex;
   flex-wrap: wrap;
-  height: 80vh;
   padding: 10px;
-  width: 90%;
+  width: 100%;
+  max-width: unset;
 `

@@ -4,7 +4,7 @@ import Helmet from 'react-helmet'
 import { StaticQuery, graphql } from 'gatsby'
 import { Provider } from 'rebass'
 
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 import AppContext from './context'
 
 import { withPrefix } from 'gatsby-link'
@@ -12,7 +12,7 @@ import Nav from './nav'
 
 class Layout extends Component {
   render() {
-    const { children, data } = this.props
+    const { children, currentPage } = this.props
     return (
       <StaticQuery
         query={graphql`
@@ -43,6 +43,7 @@ class Layout extends Component {
               value={{
                 siteTitle: data.site.siteMetadata.title,
                 logo: data.logo.edges[0].node,
+                currentPage: currentPage,
               }}
             >
               <Helmet
@@ -52,7 +53,7 @@ class Layout extends Component {
                   { name: 'keywords', content: 'sample, something' },
                 ]}
               />
-              <Background>
+              <Background page={currentPage}>
                 <Nav />
                 <MainContent>{children}</MainContent>
               </Background>
@@ -75,10 +76,18 @@ const Background = styled.div`
   left: 0;
   top: 0;
   width: 100%;
-  height: 100vh;
   z-index: -1;
   background-image: url(${withPrefix('/bg.jpg')});
   background-size: cover;
+  padding-top: 60px;
+  height: 100%;
+
+  /* Only let page overflow on results page so can scroll */
+  ${({ page }) =>
+    page === 'results' &&
+    css`
+      height: auto;
+    `};
 `
 
 const MainContent = styled.div`

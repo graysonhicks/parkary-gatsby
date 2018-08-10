@@ -2,8 +2,15 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { Text } from 'rebass'
+import AppContext from './../context'
 
-const CurrentPage = () => <CurrentPageText>home</CurrentPageText>
+const CurrentPage = () => {
+  return (
+    <AppContext.Consumer>
+      {({ currentPage }) => <CurrentPageText>{currentPage}</CurrentPageText>}
+    </AppContext.Consumer>
+  )
+}
 
 export default CurrentPage
 
