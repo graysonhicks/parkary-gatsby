@@ -27,9 +27,6 @@ exports.createPages = ({ graphql, actions }) => {
           edges {
             node {
               id
-              title
-              node_locale
-              contentful_id
               fields {
                 slug
               }

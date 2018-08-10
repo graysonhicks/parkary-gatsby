@@ -62,13 +62,14 @@ export const query = graphql`
     allContentfulPark(filter: { fields: { cityState: { eq: $cityState } } }) {
       edges {
         node {
+          id
           title
           description {
             description
           }
           location {
             lat
-            lon
+            lng: lon
           }
           featuredImage {
             fluid(maxWidth: 500, maxHeight: 400) {

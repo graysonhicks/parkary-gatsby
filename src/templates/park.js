@@ -16,6 +16,7 @@ export default ({ data }) => {
 export const query = graphql`
   query($slug: String!) {
     contentfulPark(fields: { slug: { eq: $slug } }) {
+      id
       title
     }
   }

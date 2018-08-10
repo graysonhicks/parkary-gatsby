@@ -3,7 +3,7 @@ import styled from 'styled-components'
 
 import { Card } from 'rebass'
 
-import { GoogleMapWrapper } from './map'
+import GoogleMapWrapper from './map'
 import Sidebar from './sidebar'
 
 const MainMap = () => {

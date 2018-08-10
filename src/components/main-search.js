@@ -26,4 +26,6 @@ const SearchBrand = styled(Container)`
 const SearchContainer = styled(Container)`
   display: flex;
   flex-direction: column;
+  height: 100%;
+  justify-content: center;
 `

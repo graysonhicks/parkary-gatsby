@@ -25,21 +25,6 @@ exports.createPages = ({ graphql, actions }) => {
         allContentfulPark {
           group(field: fields___cityState) {
             fieldValue
-            edges {
-              node {
-                id
-                title
-                node_locale
-                location {
-                  lat
-                  lon
-                }
-                contentful_id
-                fields {
-                  cityState
-                }
-              }
-            }
           }
         }
       }

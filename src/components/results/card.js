@@ -16,7 +16,7 @@ const ParkCard = ({ park }) => {
         <Title>{park.title}</Title>
         <Description>{park.description.description}</Description>
         <Text>lat: {park.location.lat}</Text>
-        <Text>lon: {park.location.lon}</Text>
+        <Text>lng: {park.location.lng}</Text>
       </ParkLink>
     </Item>
   )
