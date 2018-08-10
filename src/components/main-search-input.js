@@ -1,25 +1,24 @@
 import React, { Component } from 'react'
-
-import PlacesAutocomplete, {
-  geocodeByAddress,
-  getLatLng,
-} from 'react-places-autocomplete'
 import styled from 'styled-components'
+import { kebabCase } from 'lodash'
+import { push } from 'gatsby-link'
 
-import { Container, Card, Text, Input } from 'rebass'
+import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete'
+
+import { Container, Card, Text, Input, Button } from 'rebass'
 
 import { fadeIn } from '../styles/utils'
 
 class MainSearch extends Component {
   constructor(props) {
     super(props)
-    this.state = { address: '' }
+    this.state = { address: '', resultUrl: null }
 
-    this.handleEnter = this.handleEnter.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
-  handleEnter() {
-    console.log('enter')
+  handleSubmit() {
+    push(this.state.resultUrl)
   }
 
   handleChange = address => {
@@ -29,61 +28,90 @@ class MainSearch extends Component {
   handleSelect = address => {
     this.setState({ address })
 
-    console.log('address', address)
-
     geocodeByAddress(address)
       .then(results => {
-        console.log('result', results[0])
-        return getLatLng(results[0])
+        const result = results[0]
+        // Address components in Google have different types.  We need
+        // to get the state and city so we can build the url.
+        const addressComponents = result['address_components']
+
+        let state
+        let city
+
+        for (let i = 0; i < addressComponents.length; i++) {
+          const currentCity = addressComponents[i]
+          const addressTypes = currentCity['types']
+
+          // Locality is the google word for city.
+          if (addressTypes.includes('locality')) {
+            city = kebabCase(currentCity['long_name'])
+          }
+
+          // This is the google way for state or province.
+          if (addressTypes.includes('administrative_area_level_1')) {
+            state = kebabCase(currentCity['long_name'])
+          }
+        }
+
+        this.setState({
+          resultUrl: `/${state}/${city}`,
+        })
       })
-      .then(latLng => console.log('Success', latLng))
       .catch(error => console.error('Error', error))
   }
-
-  testarray = [
-    { id: '1', description: 'test' },
-    { id: '2', description: 'test' },
-    { id: '3', description: 'test' },
-    { id: '4', description: 'test' },
-  ]
+  // Limiting search results to exact cities and states in US.
+  searchOptions = {
+    types: ['(cities)'],
+    componentRestrictions: { country: 'us' },
+  }
 
   render() {
     return (
-      <PlacesAutocomplete
-        value={this.state.address}
-        onChange={this.handleChange}
-        onSelect={this.handleSelect}
-      >
-        {({ getInputProps, suggestions, getSuggestionItemProps, loading }) => (
-          <InputContainer>
-            <StyledMainSearchInput
-              height={40}
-              width="100%"
-              value={this.state.address}
-              {...getInputProps({
-                placeholder: 'Search Places ...',
-                className: 'location-search-input',
-              })}
-            />
-            <ResultsPanel>
-              {loading && (
-                <LoadingPanel>
-                  <Text>Loading...</Text>
-                </LoadingPanel>
-              )}
-              {suggestions &&
-                suggestions.map(suggestion => (
-                  <StyledSuggestion
-                    key={suggestion.id}
-                    {...getSuggestionItemProps(suggestion)}
-                  >
-                    <SuggestionText>{suggestion.description}</SuggestionText>
-                  </StyledSuggestion>
-                ))}
-            </ResultsPanel>
-          </InputContainer>
+      <>
+        <PlacesAutocomplete
+          value={this.state.address}
+          onChange={this.handleChange}
+          onSelect={this.handleSelect}
+          searchOptions={this.searchOptions}
+        >
+          {({
+            getInputProps,
+            suggestions,
+            getSuggestionItemProps,
+            loading,
+          }) => (
+            <InputContainer>
+              <StyledMainSearchInput
+                value={this.state.address}
+                {...getInputProps({
+                  placeholder: 'Search Places ...',
+                })}
+              />
+              <ResultsPanel>
+                {loading && (
+                  <LoadingPanel>
+                    <Text>Loading...</Text>
+                  </LoadingPanel>
+                )}
+                {suggestions &&
+                  suggestions.map(suggestion => (
+                    <StyledSuggestion
+                      key={suggestion.id}
+                      {...getSuggestionItemProps(suggestion)}
+                    >
+                      <SuggestionText>{suggestion.description}</SuggestionText>
+                    </StyledSuggestion>
+                  ))}
+              </ResultsPanel>
+            </InputContainer>
+          )}
+        </PlacesAutocomplete>
+        {this.state.resultUrl ? (
+          <SearchButton onClick={this.handleSubmit}>go!</SearchButton>
+        ) : (
+          <SearchButton disabled>go!</SearchButton>
         )}
-      </PlacesAutocomplete>
+      </>
     )
   }
 }
@@ -98,6 +126,7 @@ const InputContainer = styled(Container)`
 const StyledMainSearchInput = styled(Input)`
   animation: ${fadeIn} 0.7s linear;
   background-color: white;
+  width: 500px;
   padding: 10px;
 `
 
@@ -129,3 +158,12 @@ const StyledSuggestion = styled(Card)`
 `
 
 const SuggestionText = styled(Text)``
+
+const SearchButton = styled(Button)`
+  width: 75px;
+  margin-top: 10px;
+  align-self: flex-end;
+  justify-content: center;
+  background-color: teal;
+  padding: 10px;
+`

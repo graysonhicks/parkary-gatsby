@@ -13,9 +13,6 @@ const MainSearch = () => (
       <Brand />
     </SearchBrand>
     <MainSearchInput />
-    <SearchButton height={40} appearance="green">
-      search
-    </SearchButton>
   </SearchContainer>
 )
 
@@ -31,13 +28,4 @@ const SearchBrand = styled(Container)`
 const SearchContainer = styled(Container)`
   display: flex;
   flex-direction: column;
-`
-
-const SearchButton = styled(Button)`
-  width: 75px;
-  margin-top: 10px;
-  align-self: flex-end;
-  justify-content: center;
-  background-color: teal;
-  padding: 10px;
 `
