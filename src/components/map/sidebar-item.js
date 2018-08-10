@@ -4,16 +4,19 @@ import styled from 'styled-components'
 import Img from 'gatsby-image'
 
 import { Subhead, Text } from 'rebass'
+import Rating from './../rating'
 
-const SidebarItem = ({ title, description, featuredImage }) => {
+const SidebarItem = ({ id, title, featuredImage, fields, rating }) => {
   return (
-    <SidebarItemContainer>
+    <SidebarItemContainer to={fields.slug}>
       <Thumbnail>
         <Img fluid={featuredImage.fluid} />
       </Thumbnail>
       <Info>
         <SidebarHeading>{title}</SidebarHeading>
-        <RatingContainer>{description.description}</RatingContainer>
+        <RatingContainer>
+          <Rating id={id} rating={rating} />
+        </RatingContainer>
       </Info>
     </SidebarItemContainer>
   )
@@ -21,7 +24,7 @@ const SidebarItem = ({ title, description, featuredImage }) => {
 
 export default SidebarItem
 
-const SidebarItemContainer = styled.div`
+const SidebarItemContainer = styled.a`
   display: flex;
   width: 100%;
   align-items: center;

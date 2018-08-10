@@ -7,7 +7,7 @@ import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete'
 
 import { Container, Card, Text, Input, Button } from 'rebass'
 
-import { fadeIn } from '../styles/utils'
+import { fadeIn } from './../../styles/utils'
 
 class MainSearch extends Component {
   constructor(props) {

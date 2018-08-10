@@ -76,6 +76,7 @@ export const query = graphql`
               ...GatsbyContentfulFluid
             }
           }
+          rating
           fields {
             slug
           }

@@ -11,7 +11,7 @@ const Sidebar = () => {
   return (
     <ResultsContext.Consumer>
       {({ parks }) => {
-        return parks.map(({ node }) => <SidebarItem {...node} />)
+        return parks.map(({ node }) => <SidebarItem key={node.id} {...node} />)
       }}
     </ResultsContext.Consumer>
   )

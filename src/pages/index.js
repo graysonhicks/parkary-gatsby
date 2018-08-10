@@ -4,7 +4,7 @@ import React from 'react'
 import globalStyles from '../styles'
 
 import Layout from '../components/layout'
-import MainSearch from '../components/main-search'
+import MainSearch from '../components/search/main-search'
 
 const IndexPage = data => {
   return (
