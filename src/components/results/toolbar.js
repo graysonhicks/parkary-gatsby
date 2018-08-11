@@ -1,38 +1,55 @@
-import React from 'react'
+import React, { Component } from 'react'
 import styled, { css } from 'styled-components'
 
-import Link from 'gatsby-link'
+import { push } from 'gatsby-link'
 
 import Img from 'gatsby-image'
 import { Container, Group, Button } from 'rebass'
 
 import { ResultsContext } from './../context'
 
-const Toolbar = () => {
-  return (
-    <ResultsContext.Consumer>
-      {({ view, changeView }) => {
-        return (
-          <Item>
-            <Group>
-              <ToggleButton
-                to="/north-carolina/brevard/"
-                active={view.grid ? 1 : 0}
-              >
-                Grid
-              </ToggleButton>
-              <ToggleButton
-                to="/north-carolina/brevard/map"
-                active={view.map ? 1 : 0}
-              >
-                Map
-              </ToggleButton>
-            </Group>
-          </Item>
-        )
-      }}
-    </ResultsContext.Consumer>
-  )
+class Toolbar extends Component {
+  toggleToMap = () => {
+    push({
+      pathname: '/north-carolina/brevard/map',
+      testData: 'map',
+    })
+  }
+
+  toggleToGrid = () => {
+    push({
+      pathname: '/north-carolina/brevard/',
+      testData: 'grid',
+    })
+  }
+  render() {
+    return (
+      <ResultsContext.Consumer>
+        {({ view, cityState, ...rest }) => {
+          console.log(cityState)
+
+          return (
+            <Item>
+              <Group>
+                <ToggleButton
+                  onClick={this.toggleToGrid}
+                  active={view.grid ? 1 : 0}
+                >
+                  Grid
+                </ToggleButton>
+                <ToggleButton
+                  onClick={this.toggleToMap}
+                  active={view.map ? 1 : 0}
+                >
+                  Map
+                </ToggleButton>
+              </Group>
+            </Item>
+          )
+        }}
+      </ResultsContext.Consumer>
+    )
+  }
 }
 
 export default Toolbar
@@ -44,7 +61,7 @@ const Item = styled(Container)`
   max-width: unset;
 `
 
-const ToggleButton = styled(Link)`
+const ToggleButton = styled(Button)`
   background-color: green;
   border: 2px solid green;
   box-shadow: 0 0 10px 2px lightgreen;

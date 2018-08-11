@@ -10,12 +10,14 @@ import { ResultsContext } from '../components/context'
 class CityPage extends Component {
   constructor(props) {
     super(props)
+    console.log(props)
 
     this.state = {
       grid: true,
       map: false,
       filtering: false,
       parks: props.data.allContentfulPark.edges,
+      cityState: props.pageContext.cityState,
     }
   }
 
@@ -32,6 +34,7 @@ class CityPage extends Component {
             parks: this.state.parks,
             filtering: this.filtering,
             filterByAmenity: this.filterByAmenity,
+            cityState: this.state.cityState,
           }}
         >
           <Results />
