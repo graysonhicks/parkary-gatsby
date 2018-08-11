@@ -2,13 +2,14 @@ import React from 'react'
 import styled from 'styled-components'
 
 import Img from 'gatsby-image'
+import Link from 'gatsby-link'
 
 import { Subhead, Text } from 'rebass'
 import Rating from './../rating'
 
 const SidebarItem = ({ id, title, featuredImage, fields, rating }) => {
   return (
-    <SidebarItemContainer to={fields.slug}>
+    <SidebarItemContainer to={`/${fields.slug}`}>
       <Thumbnail>
         <Img fluid={featuredImage.fluid} />
       </Thumbnail>
@@ -24,7 +25,7 @@ const SidebarItem = ({ id, title, featuredImage, fields, rating }) => {
 
 export default SidebarItem
 
-const SidebarItemContainer = styled.a`
+const SidebarItemContainer = styled(Link)`
   display: flex;
   width: 100%;
   align-items: center;

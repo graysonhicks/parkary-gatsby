@@ -28,8 +28,6 @@ class ParkGoogleMap extends Component {
     return (
       <ResultsContext.Consumer>
         {({ parks }) => {
-          console.log(parks)
-
           return (
             <GoogleMap defaultZoom={17} ref={this.myMap}>
               {this.props.isMarkerShown &&

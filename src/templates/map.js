@@ -12,8 +12,8 @@ class CityPage extends Component {
     super(props)
 
     this.state = {
-      grid: true,
-      map: false,
+      grid: false,
+      map: true,
       filtering: false,
       parks: props.data.allContentfulPark.edges,
     }
@@ -64,7 +64,7 @@ export const cityQuery = graphql`
             lng: lon
           }
           featuredImage {
-            fluid(maxWidth: 500, maxHeight: 400) {
+            fluid(maxWidth: 250, maxHeight: 200) {
               ...GatsbyContentfulFluid
             }
           }

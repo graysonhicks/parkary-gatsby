@@ -39,6 +39,16 @@ exports.createPages = ({ graphql, actions }) => {
             cityState: node.fieldValue,
           },
         })
+
+        createPage({
+          path: `${node.fieldValue}/map/`,
+          component: path.resolve(`./src/templates/map.js`),
+          context: {
+            // Data passed to context is available
+            // in page queries as GraphQL variables.
+            cityState: node.fieldValue,
+          },
+        })
       })
       resolve()
     })

@@ -15,10 +15,16 @@ const Toolbar = () => {
         return (
           <Item>
             <Group>
-              <ToggleButton active={view.grid ? 1 : 0} onClick={changeView}>
+              <ToggleButton
+                to="/north-carolina/brevard/"
+                active={view.grid ? 1 : 0}
+              >
                 Grid
               </ToggleButton>
-              <ToggleButton active={view.map ? 1 : 0} onClick={changeView}>
+              <ToggleButton
+                to="/north-carolina/brevard/map"
+                active={view.map ? 1 : 0}
+              >
                 Map
               </ToggleButton>
             </Group>
@@ -38,7 +44,7 @@ const Item = styled(Container)`
   max-width: unset;
 `
 
-const ToggleButton = styled(Button)`
+const ToggleButton = styled(Link)`
   background-color: green;
   border: 2px solid green;
   box-shadow: 0 0 10px 2px lightgreen;
