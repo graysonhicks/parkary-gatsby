@@ -10,18 +10,6 @@ import { ResultsContext } from '../components/context'
 class CityPage extends Component {
   constructor(props) {
     super(props)
-
-    this.state = {
-      grid: false,
-      map: true,
-      filtering: false,
-      parks: props.data.allContentfulPark.edges,
-      cityState: props.pageContext.cityState,
-    }
-  }
-
-  filterByAmenity = amenity => {
-    const orig = this.state.parks
   }
 
   render() {
@@ -29,11 +17,9 @@ class CityPage extends Component {
       <ResultsLayout currentPage="results">
         <ResultsContext.Provider
           value={{
-            view: { grid: this.state.grid, map: this.state.map },
-            parks: this.state.parks,
-            filtering: this.filtering,
-            filterByAmenity: this.filterByAmenity,
-            cityState: this.state.cityState,
+            view: 'map',
+            parks: this.props.data.allContentfulPark.edges,
+            cityState: this.props.pageContext.cityState,
           }}
         >
           <Results />

@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import { Container } from 'rebass'
 
 import ParkCard from './card'
-import Toolbar from './toolbar'
+import Toolbar from './../toolbar'
 import MainMap from '../map'
 
 import { ResultsContext } from './../context'
@@ -16,11 +16,14 @@ class Results extends Component {
           return (
             <ResultsContainer>
               <Toolbar />
-              {view.grid &&
-                parks.map(({ node }) => {
-                  return <ParkCard key={node.title} park={node} />
-                })}
-              {view.map && <MainMap />}
+              {view === 'grid' && (
+                <CardContainer>
+                  {parks.map(({ node }) => {
+                    return <ParkCard key={node.title} park={node} />
+                  })}
+                </CardContainer>
+              )}
+              {view === 'map' && <MainMap />}
             </ResultsContainer>
           )
         }}
@@ -32,6 +35,14 @@ class Results extends Component {
 export default Results
 
 const ResultsContainer = styled(Container)`
+  padding: 0;
+  width: 100%;
+  max-width: unset;
+  display: flex;
+  flex-wrap: wrap;
+`
+
+const CardContainer = styled(Container)`
   display: flex;
   flex-wrap: wrap;
   padding: 10px;

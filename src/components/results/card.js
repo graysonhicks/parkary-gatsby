@@ -33,6 +33,10 @@ const Item = styled(Card)`
   margin-left: 10px;
   margin-bottom: 10px;
   height: 465px;
+
+  &:first-of-type {
+    margin-left: 5px;
+  }
 `
 
 const ParkLink = styled(Link)`

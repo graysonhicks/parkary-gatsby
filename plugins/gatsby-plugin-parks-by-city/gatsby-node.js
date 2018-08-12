@@ -37,6 +37,7 @@ exports.createPages = ({ graphql, actions }) => {
             // Data passed to context is available
             // in page queries as GraphQL variables.
             cityState: node.fieldValue,
+            view: 'grid',
           },
         })
 
@@ -47,6 +48,7 @@ exports.createPages = ({ graphql, actions }) => {
             // Data passed to context is available
             // in page queries as GraphQL variables.
             cityState: node.fieldValue,
+            view: 'map',
           },
         })
       })

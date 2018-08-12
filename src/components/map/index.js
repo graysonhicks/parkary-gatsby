@@ -28,7 +28,7 @@ const StyledMapCard = styled(Card)`
   display: flex;
   height: 80vh;
   width: 100%;
-  margin: 0 10px;
+  margin: 10px 10px;
 `
 const MapContainer = styled.div`
   height: 100%;
