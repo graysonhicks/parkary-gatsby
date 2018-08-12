@@ -3,12 +3,20 @@ import styled from 'styled-components'
 
 import { Label, Checkbox } from 'rebass'
 
+import { ResultsContext } from './../context'
+
 const FilterCheckbox = () => {
   return (
-    <Label>
-      <StyledCheckbox />
-      Water
-    </Label>
+    <ResultsContext.Consumer>
+      {({ view, cityState, ...rest }) => {
+        return (
+          <Label>
+            <StyledCheckbox />
+            Water
+          </Label>
+        )
+      }}
+    </ResultsContext.Consumer>
   )
 }
 
