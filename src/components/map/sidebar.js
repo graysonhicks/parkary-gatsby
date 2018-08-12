@@ -1,7 +1,4 @@
 import React from 'react'
-import styled from 'styled-components'
-
-import { Heading } from 'rebass'
 
 import { ResultsContext } from './../context'
 

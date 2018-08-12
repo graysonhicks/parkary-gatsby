@@ -4,7 +4,7 @@ import styled from 'styled-components'
 import Img from 'gatsby-image'
 import Link from 'gatsby-link'
 
-import { Subhead, Text } from 'rebass'
+import { Subhead } from 'rebass'
 import Rating from './../rating'
 
 const SidebarItem = ({ id, title, featuredImage, fields, rating }) => {

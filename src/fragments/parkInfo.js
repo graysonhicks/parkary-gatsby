@@ -4,6 +4,7 @@ export const parksInfoFragment = graphql`
   fragment ParkInfo on ContentfulPark {
     id
     title
+    ...Amenities
     description {
       description
     }

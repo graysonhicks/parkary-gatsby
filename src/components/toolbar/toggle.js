@@ -12,12 +12,14 @@ class Toggle extends Component {
   toggleToMap = () => {
     push({
       pathname: '/north-carolina/brevard/map',
+      amenities: 'amenities',
     })
   }
 
   toggleToGrid = () => {
     push({
       pathname: '/north-carolina/brevard/',
+      amenities: 'amenities2',
     })
   }
 

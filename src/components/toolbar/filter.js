@@ -6,6 +6,9 @@ import { Button, Arrow, Card, Container } from 'rebass'
 
 import FilterCheckbox from './filtercheckbox'
 
+import { StaticQuery, graphql } from 'gatsby'
+import { ResultsContext } from './../context'
+
 class FilterMenu extends Component {
   constructor(props) {
     super(props)
@@ -20,19 +23,58 @@ class FilterMenu extends Component {
 
   render() {
     return (
-      <>
-        <FilterButton onClick={this.handleFilterDropdown}>
-          <StyledFilterIcon />
-          Filter <StyledArrow direction="down" />
-        </FilterButton>
-        {this.state.isOpen && (
-          <FilterDropdownContainer>
-            <FilterDropdown>
-              <FilterCheckbox />
-            </FilterDropdown>
-          </FilterDropdownContainer>
-        )}
-      </>
+      <ResultsContext.Consumer>
+        {context => {
+          console.log(context)
+
+          return (
+            <StaticQuery
+              query={graphql`
+                query {
+                  allContentfulPark(limit: 1) {
+                    edges {
+                      node {
+                        ...Amenities
+                      }
+                    }
+                  }
+                }
+              `}
+              render={({
+                allContentfulPark: {
+                  edges: [
+                    {
+                      node: { amenities },
+                    },
+                  ],
+                },
+              }) => {
+                return (
+                  <>
+                    <FilterButton onClick={this.handleFilterDropdown}>
+                      <StyledFilterIcon />
+                      Filter <StyledArrow direction="down" />
+                    </FilterButton>
+                    {this.state.isOpen && (
+                      <FilterDropdownContainer>
+                        <FilterDropdown>
+                          {console.log(Object.keys(amenities))}
+                          {Object.keys(amenities).map(amenity => (
+                            <FilterCheckbox
+                              name={amenity}
+                              value={amenities[amenity]}
+                            />
+                          ))}
+                        </FilterDropdown>
+                      </FilterDropdownContainer>
+                    )}
+                  </>
+                )
+              }}
+            />
+          )
+        }}
+      </ResultsContext.Consumer>
     )
   }
 }

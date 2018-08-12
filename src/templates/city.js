@@ -8,10 +8,6 @@ import styled from 'styled-components'
 import { ResultsContext } from '../components/context'
 
 class CityPage extends Component {
-  constructor(props) {
-    super(props)
-  }
-
   render() {
     return (
       <ResultsLayout currentPage="results">
@@ -20,6 +16,7 @@ class CityPage extends Component {
             view: 'grid',
             parks: this.props.data.allContentfulPark.edges,
             cityState: this.props.pageContext.cityState,
+            amenities: this.props.location.amenities,
           }}
         >
           <Results />

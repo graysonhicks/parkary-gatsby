@@ -8,6 +8,15 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
     const city = kebabCase(node.city)
     const state = kebabCase(node.state)
     const cityState = `${state}/${city}`
+    const { water, dogPark, playground } = node
+
+    const amenities = {
+      water,
+      dogPark,
+      playground,
+    }
+
+    node.amenities = amenities
 
     createNodeField({
       node,

@@ -1,7 +1,5 @@
 import React, { Component } from 'react'
 import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps'
-import { geocodeByAddress } from 'react-places-autocomplete'
-import styled from 'styled-components'
 
 import { ResultsContext } from './../context'
 
@@ -20,6 +18,7 @@ class ParkGoogleMap extends Component {
           marker.props.position.lng
         )
       )
+      return true
     })
 
     this.myMap.current.fitBounds(bounds)
