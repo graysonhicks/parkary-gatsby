@@ -1,13 +1,16 @@
 import React from 'react'
 import styled from 'styled-components'
 
+import { MdKeyboardBackspace } from 'react-icons/md'
 import { Button } from 'rebass'
 import Link from 'gatsby-link'
 
 const BackButton = () => {
   return (
     <Back>
-      <StyledLink to="/">Search</StyledLink>
+      <StyledLink to="/">
+        <StyledIcon />Search
+      </StyledLink>
     </Back>
   )
 }
@@ -15,13 +18,16 @@ const BackButton = () => {
 export default BackButton
 
 const Back = styled(Button)`
-  background-color: blue;
-  border: 2px solid blue;
-  box-shadow: 0 0 10px 2px lightgreen;
   margin-right: 10px;
 `
 
 const StyledLink = styled(Link)`
+  display: flex;
+  align-items: center;
   color: white;
   text-decoration: none;
+`
+
+const StyledIcon = styled(MdKeyboardBackspace)`
+  margin-right: 10px;
 `

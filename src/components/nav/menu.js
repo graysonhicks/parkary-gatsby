@@ -31,7 +31,7 @@ class Menu extends Component {
         )}
 
         {this.state.isOpen && (
-          <MenuDropdown elevation={4}>
+          <MenuDropdown>
             <MenuLink href="/login">Login</MenuLink>
             <MenuLink href="/contact">Contact</MenuLink>
           </MenuDropdown>
