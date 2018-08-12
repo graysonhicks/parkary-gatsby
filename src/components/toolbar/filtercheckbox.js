@@ -8,7 +8,7 @@ import { ResultsContext } from './../context'
 const FilterCheckbox = () => {
   return (
     <ResultsContext.Consumer>
-      {({ view, cityState, ...rest }) => {
+      {context => {
         return (
           <Label>
             <StyledCheckbox />

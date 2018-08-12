@@ -13,6 +13,8 @@ class Results extends Component {
     return (
       <ResultsContext.Consumer>
         {({ view, parks }) => {
+          console.log(parks)
+
           return (
             <ResultsContainer>
               <Toolbar />
