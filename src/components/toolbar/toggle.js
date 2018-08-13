@@ -1,8 +1,6 @@
 import React, { Component } from 'react'
 import styled, { css } from 'styled-components'
 
-import { push } from 'gatsby-link'
-
 import { MdGridOn, MdMap } from 'react-icons/md'
 import { Button } from 'rebass'
 

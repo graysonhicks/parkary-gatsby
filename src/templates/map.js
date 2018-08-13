@@ -12,7 +12,6 @@ class MapPage extends Component {
     super(props)
 
     const { location, data } = props
-    console.log(props)
 
     this.state = {
       parks: data.allContentfulPark.edges,

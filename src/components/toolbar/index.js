@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 
-import { push } from 'gatsby-link'
+import { navigate } from 'gatsby'
 
 import { StaticQuery, graphql } from 'gatsby'
 
@@ -10,7 +10,6 @@ import { Container, Group } from 'rebass'
 import Toggle from './toggle'
 import BackButton from './backbutton'
 import FilterMenu from './filter'
-import { ResultsContext } from './../context'
 
 class Toolbar extends Component {
   constructor(props) {
@@ -22,8 +21,7 @@ class Toolbar extends Component {
   }
 
   toggleToMap = () => {
-    push({
-      pathname: '/north-carolina/brevard/map',
+    navigate(`/${this.props.cityState}/map/`, {
       state: {
         selectedAmenities: this.props.selectedAmenities,
       },
@@ -31,8 +29,7 @@ class Toolbar extends Component {
   }
 
   toggleToGrid = () => {
-    push({
-      pathname: '/north-carolina/brevard/',
+    navigate(`/${this.props.cityState}/`, {
       state: {
         selectedAmenities: this.props.selectedAmenities,
       },

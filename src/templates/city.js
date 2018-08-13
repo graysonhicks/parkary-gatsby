@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { graphql } from 'gatsby'
+import { navigate } from 'gatsby'
 
 import Layout from '../components/layout'
 import Results from '../components/results'
@@ -12,6 +13,7 @@ class CityPage extends Component {
     super(props)
 
     const { location, data } = props
+    console.log(props)
 
     this.state = {
       parks: data.allContentfulPark.edges,
@@ -20,6 +22,14 @@ class CityPage extends Component {
           ? location.state.selectedAmenities
           : [],
     }
+  }
+
+  handleParkClick = (slug, selectedAmenities) => {
+    navigate(`/${slug}`, {
+      state: {
+        selectedAmenities: selectedAmenities,
+      },
+    })
   }
 
   handleClickFilter = name => {
@@ -54,6 +64,7 @@ class CityPage extends Component {
             selectedAmenities: this.state.selectedAmenities,
             filterParks: this.filterParks,
             handleClickFilter: this.handleClickFilter,
+            handleParkClick: this.handleParkClick,
           }}
         >
           <Results />

@@ -13,24 +13,23 @@ class Results extends Component {
     super(props)
   }
 
-  handleParkClick = (slug, selectedAmenities) => {
-    push({
-      pathname: `/${slug}`,
-      state: {
-        selectedAmenities: selectedAmenities,
-      },
-    })
-  }
-
   render() {
     return (
       <ResultsContext.Consumer>
-        {({ view, parks, selectedAmenities, handleClickFilter }) => {
+        {({
+          view,
+          parks,
+          selectedAmenities,
+          handleClickFilter,
+          handleParkClick,
+          cityState,
+        }) => {
           return (
             <ResultsContainer>
               <Toolbar
                 selectedAmenities={selectedAmenities}
                 handleClickFilter={handleClickFilter}
+                cityState={cityState}
               />
               {view === 'grid' && (
                 <CardContainer>
@@ -48,7 +47,7 @@ class Results extends Component {
                           key={node.title}
                           park={node}
                           selectedAmenities={selectedAmenities}
-                          handleParkClick={this.handleParkClick}
+                          handleParkClick={handleParkClick}
                         />
                       )
                     }

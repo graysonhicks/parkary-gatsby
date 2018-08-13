@@ -4,8 +4,10 @@ import { graphql } from 'gatsby'
 import Layout from '../components/layout'
 import Park from '../components/park'
 
-export default ({ data }) => {
-  const park = data.contentfulPark
+export default props => {
+  console.log(props)
+
+  const park = props.data.contentfulPark
   return (
     <Layout>
       <Park park={park} />
