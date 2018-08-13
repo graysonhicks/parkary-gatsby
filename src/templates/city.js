@@ -9,7 +9,7 @@ import { ResultsContext } from '../components/context'
 
 class CityPage extends Component {
   render() {
-    console.log(this.props.location)
+    console.log(this.props)
 
     return (
       <ResultsLayout currentPage="results">
@@ -18,7 +18,7 @@ class CityPage extends Component {
             view: 'grid',
             parks: this.props.data.allContentfulPark.edges,
             cityState: this.props.pageContext.cityState,
-            amenities: this.props.location.amenities,
+            selectedAmenities: this.props.location.state.selectedAmenities,
           }}
         >
           <Results />

@@ -15,6 +15,7 @@ import { ResultsContext } from './../context'
 class Toolbar extends Component {
   constructor(props) {
     super(props)
+
     this.state = {
       selectedAmenities: props.selectedAmenities ? props.selectedAmenities : [],
     }
@@ -42,64 +43,62 @@ class Toolbar extends Component {
   toggleToMap = () => {
     push({
       pathname: '/north-carolina/brevard/map',
-      selectedAmenities: this.state.selectedAmenities,
+      state: {
+        selectedAmenities: this.state.selectedAmenities,
+      },
     })
   }
 
   toggleToGrid = () => {
     push({
       pathname: '/north-carolina/brevard/',
-      selectedAmenities: this.state.selectedAmenities,
+      state: {
+        selectedAmenities: this.state.selectedAmenities,
+      },
     })
   }
 
   render() {
     return (
-      <ResultsContext.Consumer>
-        {context => {
-          return (
-            <StaticQuery
-              query={graphql`
-                query {
-                  allContentfulPark(limit: 1) {
-                    edges {
-                      node {
-                        ...Amenities
-                      }
-                    }
-                  }
+      <StaticQuery
+        query={graphql`
+          query {
+            allContentfulPark(limit: 1) {
+              edges {
+                node {
+                  ...Amenities
                 }
-              `}
-              render={({
-                allContentfulPark: {
-                  edges: [
-                    {
-                      node: { amenities },
-                    },
-                  ],
-                },
-              }) => {
-                return (
-                  <ToolbarContainer>
-                    <BackButton />
-                    <Group>
-                      <Toggle
-                        toggleToGrid={this.toggleToGrid}
-                        toggleToMap={this.toggleToMap}
-                      />
-                    </Group>
-                    <FilterMenu
-                      amenities={amenities}
-                      selectedAmenities={this.state.selectedAmenities}
-                      handleClickFilter={this.handleClickFilter}
-                    />
-                  </ToolbarContainer>
-                )
-              }}
-            />
+              }
+            }
+          }
+        `}
+        render={({
+          allContentfulPark: {
+            edges: [
+              {
+                node: { amenities },
+              },
+            ],
+          },
+        }) => {
+          return (
+            <ToolbarContainer>
+              <BackButton />
+              <Group>
+                <Toggle
+                  toggleToGrid={this.toggleToGrid}
+                  toggleToMap={this.toggleToMap}
+                />
+              </Group>
+              <FilterMenu
+                amenities={amenities}
+                selectedAmenities={this.state.selectedAmenities}
+                handleClickFilter={this.handleClickFilter}
+              />
+            </ToolbarContainer>
           )
         }}
-      </ResultsContext.Consumer>
+      />
     )
   }
 }

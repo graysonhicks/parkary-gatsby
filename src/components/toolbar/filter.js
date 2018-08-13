@@ -32,6 +32,7 @@ class FilterMenu extends Component {
                 <FilterCheckbox
                   key={amenity}
                   name={amenity}
+                  selectedAmenities={this.props.selectedAmenities}
                   value={this.props.amenities[amenity]}
                   handleClickFilter={this.props.handleClickFilter}
                 />

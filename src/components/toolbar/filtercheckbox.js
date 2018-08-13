@@ -6,24 +6,22 @@ import { Label, Checkbox } from 'rebass'
 
 import { ResultsContext } from './../context'
 
-const FilterCheckbox = ({ name, handleClickFilter }) => {
+const FilterCheckbox = ({ name, handleClickFilter, selectedAmenities }) => {
+  // Format name for display.
   const formattedName = startCase(name)
+  // See if filter is in selectedAmenities
+  const checked = selectedAmenities.includes(name)
 
   return (
-    <ResultsContext.Consumer>
-      {context => {
-        return (
-          <Label>
-            <StyledCheckbox
-              onClick={() => {
-                handleClickFilter(name)
-              }}
-            />
-            {formattedName}
-          </Label>
-        )
-      }}
-    </ResultsContext.Consumer>
+    <Label>
+      <StyledCheckbox
+        onChange={() => {
+          handleClickFilter(name)
+        }}
+        checked={checked}
+      />
+      {formattedName}
+    </Label>
   )
 }
 

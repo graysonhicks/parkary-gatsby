@@ -12,10 +12,10 @@ class Results extends Component {
   render() {
     return (
       <ResultsContext.Consumer>
-        {({ view, parks }) => {
+        {({ view, parks, selectedAmenities }) => {
           return (
             <ResultsContainer>
-              <Toolbar />
+              <Toolbar selectedAmenities={selectedAmenities} />
               {view === 'grid' && (
                 <CardContainer>
                   {parks.map(({ node }) => {
