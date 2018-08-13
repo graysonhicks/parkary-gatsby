@@ -7,8 +7,19 @@ import SidebarItem from './sidebar-item'
 const Sidebar = () => {
   return (
     <ResultsContext.Consumer>
-      {({ parks }) => {
-        return parks.map(({ node }) => <SidebarItem key={node.id} {...node} />)
+      {({ parks, selectedAmenities }) => {
+        return parks.map(({ node }) => {
+          let hasAllFilteredAmenities = true
+          selectedAmenities.map(amenity => {
+            if (!node.amenities[amenity]) {
+              hasAllFilteredAmenities = false
+            }
+          })
+
+          if (hasAllFilteredAmenities) {
+            return <SidebarItem key={node.id} {...node} />
+          }
+        })
       }}
     </ResultsContext.Consumer>
   )

@@ -7,16 +7,54 @@ import styled from 'styled-components'
 
 import { ResultsContext } from '../components/context'
 
-class CityPage extends Component {
+class MapPage extends Component {
+  constructor(props) {
+    super(props)
+
+    const { location, data } = props
+    console.log(props)
+
+    this.state = {
+      parks: data.allContentfulPark.edges,
+      selectedAmenities:
+        location.state && location.state.selectedAmenities
+          ? location.state.selectedAmenities
+          : [],
+    }
+  }
+
+  handleClickFilter = name => {
+    // If filter already on, turn it off.  Otherwise, add to.
+    if (this.state.selectedAmenities.includes(name)) {
+      this.setState(prevState => {
+        let selectedAmenitiesMinusClicked = [...prevState.selectedAmenities]
+        const index = selectedAmenitiesMinusClicked.indexOf(name)
+        selectedAmenitiesMinusClicked.splice(index, 1)
+
+        return {
+          selectedAmenities: selectedAmenitiesMinusClicked,
+        }
+      })
+    } else {
+      this.setState(prevState => ({
+        selectedAmenities: [...prevState.selectedAmenities, name],
+      }))
+    }
+  }
+
   render() {
+    const { pageContext } = this.props
+
     return (
       <ResultsLayout currentPage="results">
         <ResultsContext.Provider
           value={{
             view: 'map',
-            parks: this.props.data.allContentfulPark.edges,
-            cityState: this.props.pageContext.cityState,
-            selectedAmenities: this.props.location.state.selectedAmenities,
+            parks: this.state.parks,
+            cityState: pageContext.cityState,
+            selectedAmenities: this.state.selectedAmenities,
+            filterParks: this.filterParks,
+            handleClickFilter: this.handleClickFilter,
           }}
         >
           <Results />
@@ -26,7 +64,7 @@ class CityPage extends Component {
   }
 }
 
-export default CityPage
+export default MapPage
 
 const ResultsLayout = styled(Layout)`
   height: auto;

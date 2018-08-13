@@ -12,7 +12,7 @@ class Toggle extends Component {
   render() {
     return (
       <ResultsContext.Consumer>
-        {({ view, cityState }) => {
+        {({ view }) => {
           return (
             <>
               <ToggleButton

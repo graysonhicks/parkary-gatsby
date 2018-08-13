@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import { push } from 'gatsby-link'
 import styled from 'styled-components'
 import { Container } from 'rebass'
 
@@ -9,17 +9,49 @@ import MainMap from '../map'
 
 import { ResultsContext } from './../context'
 class Results extends Component {
+  constructor(props) {
+    super(props)
+  }
+
+  handleParkClick = (slug, selectedAmenities) => {
+    push({
+      pathname: `/${slug}`,
+      state: {
+        selectedAmenities: selectedAmenities,
+      },
+    })
+  }
+
   render() {
     return (
       <ResultsContext.Consumer>
-        {({ view, parks, selectedAmenities }) => {
+        {({ view, parks, selectedAmenities, handleClickFilter }) => {
           return (
             <ResultsContainer>
-              <Toolbar selectedAmenities={selectedAmenities} />
+              <Toolbar
+                selectedAmenities={selectedAmenities}
+                handleClickFilter={handleClickFilter}
+              />
               {view === 'grid' && (
                 <CardContainer>
                   {parks.map(({ node }) => {
-                    return <ParkCard key={node.title} park={node} />
+                    let hasAllFilteredAmenities = true
+                    selectedAmenities.map(amenity => {
+                      if (!node.amenities[amenity]) {
+                        hasAllFilteredAmenities = false
+                      }
+                    })
+
+                    if (hasAllFilteredAmenities) {
+                      return (
+                        <ParkCard
+                          key={node.title}
+                          park={node}
+                          selectedAmenities={selectedAmenities}
+                          handleParkClick={this.handleParkClick}
+                        />
+                      )
+                    }
                   })}
                 </CardContainer>
               )}

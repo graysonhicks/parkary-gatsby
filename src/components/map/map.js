@@ -12,13 +12,15 @@ class ParkGoogleMap extends Component {
     const bounds = new window.google.maps.LatLngBounds()
 
     this.myMap.current.props.children.map((marker, i) => {
-      bounds.extend(
-        new window.google.maps.LatLng(
-          marker.props.position.lat,
-          marker.props.position.lng
+      if (marker) {
+        bounds.extend(
+          new window.google.maps.LatLng(
+            marker.props.position.lat,
+            marker.props.position.lng
+          )
         )
-      )
-      return true
+        return true
+      }
     })
 
     this.myMap.current.fitBounds(bounds)
@@ -26,17 +28,28 @@ class ParkGoogleMap extends Component {
   render() {
     return (
       <ResultsContext.Consumer>
-        {({ parks }) => {
+        {({ parks, selectedAmenities }) => {
           return (
             <GoogleMap defaultZoom={17} ref={this.myMap}>
               {this.props.isMarkerShown &&
-                parks.map(({ node }, index) => (
-                  <Marker
-                    key={node.id}
-                    position={node.location}
-                    parkID={node.id}
-                  />
-                ))}
+                parks.map(({ node }) => {
+                  let hasAllFilteredAmenities = true
+                  selectedAmenities.map(amenity => {
+                    if (!node.amenities[amenity]) {
+                      hasAllFilteredAmenities = false
+                    }
+                  })
+
+                  if (hasAllFilteredAmenities) {
+                    return (
+                      <Marker
+                        key={node.id}
+                        position={node.location}
+                        parkID={node.id}
+                      />
+                    )
+                  }
+                })}
             </GoogleMap>
           )
         }}

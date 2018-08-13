@@ -6,10 +6,14 @@ import Link from 'gatsby-link'
 import Img from 'gatsby-image'
 import { Card, Text, Container, Subhead } from 'rebass'
 
-const ParkCard = ({ park }) => {
+const ParkCard = ({ park, handleParkClick, selectedAmenities }) => {
   return (
     <Item>
-      <ParkLink to={`/${park.fields.slug}`}>
+      <ParkLink
+        onClick={() => {
+          handleParkClick(park.fields.slug, selectedAmenities)
+        }}
+      >
         <Thumbnail>
           <Img fluid={park.featuredImage.fluid} />
         </Thumbnail>
@@ -39,7 +43,7 @@ const Item = styled(Card)`
   }
 `
 
-const ParkLink = styled(Link)`
+const ParkLink = styled.div`
   text-decoration: none;
 `
 

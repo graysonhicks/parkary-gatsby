@@ -21,30 +21,11 @@ class Toolbar extends Component {
     }
   }
 
-  handleClickFilter = name => {
-    // If filter already on, turn it off.  Otherwise, add to.
-    if (this.state.selectedAmenities.includes(name)) {
-      this.setState(prevState => {
-        let selectedAmenitiesMinusClicked = [...prevState.selectedAmenities]
-        const index = selectedAmenitiesMinusClicked.indexOf(name)
-        selectedAmenitiesMinusClicked.splice(index, 1)
-
-        return {
-          selectedAmenities: selectedAmenitiesMinusClicked,
-        }
-      })
-    } else {
-      this.setState(prevState => ({
-        selectedAmenities: [...prevState.selectedAmenities, name],
-      }))
-    }
-  }
-
   toggleToMap = () => {
     push({
       pathname: '/north-carolina/brevard/map',
       state: {
-        selectedAmenities: this.state.selectedAmenities,
+        selectedAmenities: this.props.selectedAmenities,
       },
     })
   }
@@ -53,7 +34,7 @@ class Toolbar extends Component {
     push({
       pathname: '/north-carolina/brevard/',
       state: {
-        selectedAmenities: this.state.selectedAmenities,
+        selectedAmenities: this.props.selectedAmenities,
       },
     })
   }
@@ -92,8 +73,8 @@ class Toolbar extends Component {
               </Group>
               <FilterMenu
                 amenities={amenities}
-                selectedAmenities={this.state.selectedAmenities}
-                handleClickFilter={this.handleClickFilter}
+                selectedAmenities={this.props.selectedAmenities}
+                handleClickFilter={this.props.handleClickFilter}
               />
             </ToolbarContainer>
           )
