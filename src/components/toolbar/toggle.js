@@ -9,35 +9,21 @@ import { Button } from 'rebass'
 import { ResultsContext } from './../context'
 
 class Toggle extends Component {
-  toggleToMap = () => {
-    push({
-      pathname: '/north-carolina/brevard/map',
-      amenities: 'amenities',
-    })
-  }
-
-  toggleToGrid = () => {
-    push({
-      pathname: '/north-carolina/brevard/',
-      amenities: 'amenities2',
-    })
-  }
-
   render() {
     return (
       <ResultsContext.Consumer>
-        {({ view, cityState, ...rest }) => {
+        {({ view, cityState }) => {
           return (
             <>
               <ToggleButton
-                onClick={this.toggleToGrid}
+                onClick={this.props.toggleToGrid}
                 active={view === 'grid' ? 1 : 0}
               >
                 <StyledGridIcon />
                 Grid
               </ToggleButton>
               <ToggleButton
-                onClick={this.toggleToMap}
+                onClick={this.props.toggleToMap}
                 active={view === 'map' ? 1 : 0}
               >
                 <StyledMapIcon />

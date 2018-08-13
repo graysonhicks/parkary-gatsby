@@ -6,7 +6,7 @@ import { Label, Checkbox } from 'rebass'
 
 import { ResultsContext } from './../context'
 
-const FilterCheckbox = ({ name, value }) => {
+const FilterCheckbox = ({ name, handleClickFilter }) => {
   const formattedName = startCase(name)
 
   return (
@@ -14,7 +14,11 @@ const FilterCheckbox = ({ name, value }) => {
       {context => {
         return (
           <Label>
-            <StyledCheckbox />
+            <StyledCheckbox
+              onClick={() => {
+                handleClickFilter(name)
+              }}
+            />
             {formattedName}
           </Label>
         )

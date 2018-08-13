@@ -9,6 +9,8 @@ import { ResultsContext } from '../components/context'
 
 class CityPage extends Component {
   render() {
+    console.log(this.props.location)
+
     return (
       <ResultsLayout currentPage="results">
         <ResultsContext.Provider
