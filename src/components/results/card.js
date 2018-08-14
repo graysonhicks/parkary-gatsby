@@ -8,7 +8,7 @@ import { Card, Text, Container, Subhead } from 'rebass'
 
 import Rating from './../rating'
 
-const ParkCard = ({ park, handleParkClick, selectedAmenities }) => {
+const ParkCard = ({ park }) => {
   return (
     <Item>
       <ParkLink to={park.fields.slug}>

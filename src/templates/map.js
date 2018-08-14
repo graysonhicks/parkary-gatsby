@@ -15,7 +15,7 @@ class MapPage extends Component {
       <ResultsLayout currentPage="results">
         <ResultsContext.Provider
           value={{
-            view: 'map',
+            view: pageContext.view,
             parks: data.allContentfulPark.edges,
             cityState: pageContext.cityState,
           }}
