@@ -28,13 +28,13 @@ class ParkGoogleMap extends Component {
   render() {
     return (
       <ResultsContext.Consumer>
-        {({ parks, selectedAmenities }) => {
+        {({ parks }) => {
           return (
             <GoogleMap defaultZoom={17} ref={this.myMap}>
               {this.props.isMarkerShown &&
                 parks.map(({ node }) => {
                   let hasAllFilteredAmenities = true
-                  selectedAmenities.map(amenity => {
+                  this.props.selectedAmenities.map(amenity => {
                     if (!node.amenities[amenity]) {
                       hasAllFilteredAmenities = false
                     }

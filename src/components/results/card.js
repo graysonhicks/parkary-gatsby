@@ -9,11 +9,7 @@ import { Card, Text, Container, Subhead } from 'rebass'
 const ParkCard = ({ park, handleParkClick, selectedAmenities }) => {
   return (
     <Item>
-      <ParkLink
-        onClick={() => {
-          handleParkClick(park.fields.slug, selectedAmenities)
-        }}
-      >
+      <ParkLink to={park.fields.slug}>
         <Thumbnail>
           <Img fluid={park.featuredImage.fluid} />
         </Thumbnail>
@@ -43,7 +39,7 @@ const Item = styled(Card)`
   }
 `
 
-const ParkLink = styled.div`
+const ParkLink = styled(Link)`
   text-decoration: none;
 `
 

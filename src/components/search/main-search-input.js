@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import { kebabCase } from 'lodash'
-import { push } from 'gatsby-link'
+import { navigate } from 'gatsby'
 
 import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete'
 
@@ -18,7 +18,8 @@ class MainSearch extends Component {
   }
 
   handleSubmit() {
-    push(this.state.resultUrl)
+    sessionStorage.setItem('selectedAmenities', JSON.stringify([]))
+    navigate(this.state.resultUrl)
   }
 
   handleChange = address => {

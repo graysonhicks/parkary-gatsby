@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import styled from 'styled-components'
+import styled, { css } from 'styled-components'
 
 import { MdFilterList } from 'react-icons/md'
 import { Button, Arrow, Card, Container } from 'rebass'
@@ -19,9 +19,18 @@ class FilterMenu extends Component {
   }
 
   render() {
+    const isActive = {}
+    if (this.props.selectedAmenities.length) {
+      isActive.active = 1
+    } else {
+      isActive.active = 0
+    }
+
+    console.log(isActive)
+
     return (
       <>
-        <FilterButton onClick={this.handleFilterDropdown}>
+        <FilterButton onClick={this.handleFilterDropdown} {...isActive}>
           <StyledFilterIcon />
           Filter <StyledArrow direction="down" />
         </FilterButton>
@@ -52,11 +61,19 @@ const FilterButton = styled(Button)`
   align-items: center;
   color: white;
   margin-left: 10px;
+  background-color: gray;
 
   &:focus,
   &:active {
-    box-shadow: 0 0 10px 2px #0067ee;
+    box-shadow: none;
   }
+
+  ${({ active }) =>
+    active === 1 &&
+    css`
+      background-color: blue;
+      box-shadow: 0 0 10px 2px #0067ee;
+    `};
 `
 
 const StyledFilterIcon = styled(MdFilterList)`

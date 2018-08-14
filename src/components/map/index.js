@@ -6,7 +6,7 @@ import { Card } from 'rebass'
 import GoogleMapWrapper from './map'
 import Sidebar from './sidebar'
 
-const MainMap = () => {
+const MainMap = ({ selectedAmenities }) => {
   return (
     <StyledMapCard>
       <GoogleMapWrapper
@@ -14,9 +14,10 @@ const MainMap = () => {
         loadingElement={<div style={{ height: `100%` }} />}
         containerElement={<MapContainer />}
         mapElement={<div style={{ height: `100%` }} />}
+        selectedAmenities={selectedAmenities}
       />
       <SideBarContainer>
-        <Sidebar />
+        <Sidebar selectedAmenities={selectedAmenities} />
       </SideBarContainer>
     </StyledMapCard>
   )

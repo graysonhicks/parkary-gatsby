@@ -4,10 +4,10 @@ import { ResultsContext } from './../context'
 
 import SidebarItem from './sidebar-item'
 
-const Sidebar = () => {
+const Sidebar = ({ selectedAmenities }) => {
   return (
     <ResultsContext.Consumer>
-      {({ parks, selectedAmenities }) => {
+      {({ parks }) => {
         return parks.map(({ node }) => {
           let hasAllFilteredAmenities = true
           selectedAmenities.map(amenity => {
