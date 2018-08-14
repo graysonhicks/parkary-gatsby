@@ -7,11 +7,11 @@ import Link from 'gatsby-link'
 import { Subhead } from 'rebass'
 import Rating from './../rating'
 
-const SidebarItem = ({ id, title, featuredImage, fields, rating }) => {
+const SidebarItem = ({ id, title, thumbnail, fields, rating }) => {
   return (
     <SidebarItemContainer to={`/${fields.slug}`}>
       <Thumbnail>
-        <Img fluid={featuredImage.fluid} />
+        <Img fluid={thumbnail.fluid} />
       </Thumbnail>
       <Info>
         <SidebarHeading>{title}</SidebarHeading>
@@ -30,6 +30,7 @@ const SidebarItemContainer = styled(Link)`
   width: 100%;
   align-items: center;
   margin-bottom: 10px;
+  text-decoration: none;
 `
 
 const Thumbnail = styled.div`
@@ -43,7 +44,7 @@ const Info = styled.div`
   justify-content: space-between;
 `
 const SidebarHeading = styled(Subhead)`
-  font-size: 16px;
+  font-size: 1rem;
   padding-left: 10px;
 `
 

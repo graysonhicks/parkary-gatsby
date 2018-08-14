@@ -8,16 +8,18 @@ import { Card, Text, Container, Subhead } from 'rebass'
 
 import Rating from './../rating'
 
-const ParkCard = ({ park }) => {
+const ParkCard = ({
+  park: { id, fields, thumbnail, title, description, rating },
+}) => {
   return (
     <Item>
-      <ParkLink to={park.fields.slug}>
+      <ParkLink to={fields.slug}>
         <Thumbnail>
-          <Img fluid={park.featuredImage.fluid} />
+          <Img fluid={thumbnail.fluid} />
         </Thumbnail>
-        <Title>{park.title}</Title>
-        <Description>{park.description.description}</Description>
-        <Rating id={park.id} rating={park.rating} />
+        <Title>{title}</Title>
+        <Description>{description.description}</Description>
+        <Rating id={id} rating={rating} />
       </ParkLink>
     </Item>
   )
@@ -30,14 +32,10 @@ const Item = styled(Card)`
   flex-direction: column;
   justify-content: flex-start;
   background-color: white;
-  width: calc(20% - 10px);
-  margin-left: 10px;
+  min-width: calc(25% - 10px);
   margin-bottom: 10px;
+  margin-left: 10px;
   padding: 0;
-
-  &:first-of-type {
-    margin-left: 5px;
-  }
 `
 
 const ParkLink = styled(Link)`

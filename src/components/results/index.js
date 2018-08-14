@@ -90,7 +90,9 @@ class Results extends Component {
                 </CardContainer>
               )}
               {view === 'map' && (
-                <MainMap selectedAmenities={this.state.selectedAmenities} />
+                <MapContainer>
+                  <MainMap selectedAmenities={this.state.selectedAmenities} />
+                </MapContainer>
               )}
             </ResultsContainer>
           )
@@ -115,5 +117,7 @@ const CardContainer = styled(Container)`
   flex-wrap: wrap;
   padding: 10px;
   width: 100%;
-  max-width: unset;
+  max-width: 1280px;
 `
+
+const MapContainer = CardContainer.extend``

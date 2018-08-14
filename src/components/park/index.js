@@ -1,20 +1,47 @@
 import React from 'react'
-
-import { Card, Text } from 'rebass'
-
 import styled from 'styled-components'
+import Img from 'gatsby-image'
+import { Card, Heading } from 'rebass'
 
-const MainPark = ({ park }) => {
+import Rating from './../rating'
+
+const MainPark = ({ park: { title, rating, featuredImage } }) => {
   return (
     <StyledParkCard>
-      <Text>{park.title}</Text>
+      <HeaderContainer>
+        <Heading>{title}</Heading>
+        <Rating rating={rating} />
+      </HeaderContainer>
+      <ImagesContainer>
+        <FeaturedImage>
+          <Img fluid={featuredImage.fluid} />
+        </FeaturedImage>
+      </ImagesContainer>
     </StyledParkCard>
   )
 }
+
 export default MainPark
 
 const StyledParkCard = styled(Card)`
   background-color: white;
-  height: 80vh;
   width: 80%;
+  margin-top: 10px;
+`
+
+const HeaderContainer = styled.div`
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+`
+
+const ImagesContainer = styled.div`
+  display: flex;
+  justify-content: center;
+`
+
+const FeaturedImage = styled.div`
+  width: 600px;
+  height: auto;
 `

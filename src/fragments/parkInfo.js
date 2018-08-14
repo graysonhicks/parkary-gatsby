@@ -12,8 +12,18 @@ export const parksInfoFragment = graphql`
       lat
       lng: lon
     }
+    thumbnail: featuredImage {
+      fluid(maxWidth: 500, maxHeight: 400) {
+        ...GatsbyContentfulFluid
+      }
+    }
     featuredImage {
-      fluid(maxWidth: 250, maxHeight: 200) {
+      fluid(maxWidth: 900, maxHeight: 600) {
+        ...GatsbyContentfulFluid
+      }
+    }
+    parkImages {
+      fluid(maxWidth: 900, maxHeight: 600) {
         ...GatsbyContentfulFluid
       }
     }

@@ -1,12 +1,11 @@
 import React from 'react'
 import { graphql } from 'gatsby'
+import styled from 'styled-components'
 
 import Layout from '../components/layout'
 import Park from '../components/park'
 
 export default props => {
-  console.log(props)
-
   const park = props.data.contentfulPark
   return (
     <Layout>
@@ -18,8 +17,7 @@ export default props => {
 export const query = graphql`
   query($slug: String!) {
     contentfulPark(fields: { slug: { eq: $slug } }) {
-      id
-      title
+      ...ParkInfo
     }
   }
 `

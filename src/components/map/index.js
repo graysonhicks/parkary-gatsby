@@ -33,10 +33,10 @@ const StyledMapCard = styled(Card)`
 `
 const MapContainer = styled.div`
   height: 100%;
-  width: 75%;
+  width: 70%;
 `
 
 const SideBarContainer = styled.div`
-  width: 25%;
+  width: 30%;
   padding: 10px;
 `
