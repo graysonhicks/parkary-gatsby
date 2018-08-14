@@ -6,6 +6,8 @@ import Link from 'gatsby-link'
 import Img from 'gatsby-image'
 import { Card, Text, Container, Subhead } from 'rebass'
 
+import Rating from './../rating'
+
 const ParkCard = ({ park, handleParkClick, selectedAmenities }) => {
   return (
     <Item>
@@ -15,8 +17,7 @@ const ParkCard = ({ park, handleParkClick, selectedAmenities }) => {
         </Thumbnail>
         <Title>{park.title}</Title>
         <Description>{park.description.description}</Description>
-        <Text>lat: {park.location.lat}</Text>
-        <Text>lng: {park.location.lng}</Text>
+        <Rating id={park.id} rating={park.rating} />
       </ParkLink>
     </Item>
   )
@@ -32,7 +33,7 @@ const Item = styled(Card)`
   width: calc(20% - 10px);
   margin-left: 10px;
   margin-bottom: 10px;
-  height: 465px;
+  padding: 0;
 
   &:first-of-type {
     margin-left: 5px;
@@ -41,6 +42,7 @@ const Item = styled(Card)`
 
 const ParkLink = styled(Link)`
   text-decoration: none;
+  padding: 10px;
 `
 
 const Thumbnail = styled(Container)`
