@@ -13,12 +13,15 @@ const Sidebar = ({ selectedAmenities }) => {
           selectedAmenities.map(amenity => {
             if (!node.amenities[amenity]) {
               hasAllFilteredAmenities = false
+              return false
+            } else {
+              return true
             }
           })
 
-          if (hasAllFilteredAmenities) {
-            return <SidebarItem key={node.id} {...node} />
-          }
+          return (
+            hasAllFilteredAmenities && <SidebarItem key={node.id} {...node} />
+          )
         })
       }}
     </ResultsContext.Consumer>

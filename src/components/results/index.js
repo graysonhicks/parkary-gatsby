@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import { Container } from 'rebass'
-import { navigate } from 'gatsby'
 import ParkCard from './card'
 import Toolbar from './../toolbar'
 import MainMap from '../map'
@@ -27,10 +26,16 @@ class Results extends Component {
 
     // Check if any filters are stored in sessionStorage.
     this.state = {
+      selectedAmenities: [],
+    }
+  }
+
+  componentDidMount() {
+    this.setState({
       selectedAmenities: sessionStorage.getItem('selectedAmenities')
         ? JSON.parse(sessionStorage.getItem('selectedAmenities'))
         : [],
-    }
+    })
   }
 
   handleClickFilter = name => {
@@ -80,12 +85,17 @@ class Results extends Component {
                     this.state.selectedAmenities.map(amenity => {
                       if (!node.amenities[amenity]) {
                         hasAllFilteredAmenities = false
+                        return false
+                      } else {
+                        return true
                       }
                     })
 
-                    if (hasAllFilteredAmenities) {
-                      return <ParkCard key={node.title} park={node} />
-                    }
+                    return (
+                      hasAllFilteredAmenities && (
+                        <ParkCard key={node.title} park={node} />
+                      )
+                    )
                   })}
                 </CardContainer>
               )}

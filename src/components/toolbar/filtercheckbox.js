@@ -4,8 +4,6 @@ import { startCase } from 'lodash'
 
 import { Label, Checkbox } from 'rebass'
 
-import { ResultsContext } from './../context'
-
 const FilterCheckbox = ({ name, handleClickFilter, selectedAmenities }) => {
   // Format name for display.
   const formattedName = startCase(name)
