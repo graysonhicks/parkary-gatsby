@@ -32,10 +32,15 @@ const Item = styled(Card)`
   flex-direction: column;
   justify-content: flex-start;
   background-color: white;
-  min-width: calc(25% - 10px);
+  width: calc(25% - 10px);
   margin-bottom: 10px;
   margin-left: 10px;
   padding: 0;
+  transition: transform 0.3s;
+
+  &:hover {
+    transform: scale(1.05);
+  }
 `
 
 const ParkLink = styled(Link)`
@@ -60,4 +65,5 @@ const Title = styled(Subhead)`
 const Description = styled(Text)`
   width: 100%;
   color: black;
+  margin-bottom: 5px;
 `

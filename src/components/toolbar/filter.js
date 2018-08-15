@@ -98,8 +98,9 @@ const FilterDropdownContainer = styled(Container)`
 const FilterDropdown = styled(Card)`
   display: flex;
   flex-wrap: wrap;
+  justify-content: center;
   width: 500px;
-  padding: 20px;
+  padding: 10px;
   background-color: white;
   z-index: 2;
 `

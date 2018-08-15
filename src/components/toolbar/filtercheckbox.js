@@ -11,7 +11,7 @@ const FilterCheckbox = ({ name, handleClickFilter, selectedAmenities }) => {
   const checked = selectedAmenities.includes(name)
 
   return (
-    <Label>
+    <StyledLabel>
       <StyledCheckbox
         onChange={() => {
           handleClickFilter(name)
@@ -19,10 +19,17 @@ const FilterCheckbox = ({ name, handleClickFilter, selectedAmenities }) => {
         checked={checked}
       />
       {formattedName}
-    </Label>
+    </StyledLabel>
   )
 }
 
 export default FilterCheckbox
 
-const StyledCheckbox = styled(Checkbox)``
+const StyledLabel = styled(Label)`
+  width: 25%;
+  margin-bottom: 10px;
+`
+
+const StyledCheckbox = styled(Checkbox)`
+  margin-left: 10px;
+`
