@@ -10,15 +10,53 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
     const state = kebabCase(node.state)
     const cityState = `${state}/${city}`
     // Grab the amenities and set into own object and property.
-    const { water, dogPark, playground } = node
-
-    const amenities = {
+    // Would like cleaner solution but: // https://stackoverflow.com/questions/35531775/javascript-object-destructuring-and-aliasing/
+    const {
       water,
       dogPark,
       playground,
+      shelter,
+      pondLake,
+      scenic,
+      discGolf,
+      golfCourse,
+      soccerField,
+      picnicTables,
+      baseballField,
+      creekRiver,
+      restrooms,
+      toddlerPlayArea,
+      tennisCourt,
+      walkingPath,
+      waterFountain,
+      amphitheater,
+      basketballCourt,
+      bbqGrill,
+    } = node
+
+    node.amenities = {
+      water,
+      dogPark,
+      playground,
+      shelter,
+      pondLake,
+      scenic,
+      discGolf,
+      golfCourse,
+      soccerField,
+      picnicTables,
+      baseballField,
+      creekRiver,
+      restrooms,
+      toddlerPlayArea,
+      tennisCourt,
+      walkingPath,
+      waterFountain,
+      amphitheater,
+      basketballCourt,
+      bbqGrill,
     }
 
-    node.amenities = amenities
     // Create node field on node that is the slug URL (which should be unique for all city/states).
     createNodeField({
       node,
