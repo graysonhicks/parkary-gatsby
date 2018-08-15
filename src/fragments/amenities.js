@@ -6,6 +6,23 @@ export const amenitiesFragment = graphql`
       water
       dogPark
       playground
+      shelter
+      pondLake
+      scenic
+      discGolf
+      golfCourse
+      soccerField
+      picnicTables
+      baseballField
+      creekRiver
+      restrooms
+      toddlerPlayArea
+      tennisCourt
+      walkingPath
+      waterFountain
+      amphitheater
+      basketballCourt
+      bbqGrill
     }
   }
 `
