@@ -6,7 +6,13 @@ import Park from '../components/park'
 
 export default props => {
   const park = props.data.contentfulPark
-  const referrer = props.location.state.referrer
+  let referrer
+
+  if (props.location.state && props.location.state.referrer) {
+    referrer = props.location.state.referrer
+  } else {
+    referrer = 'grid'
+  }
 
   return (
     <Layout>
