@@ -9,7 +9,7 @@ import Rating from './../rating'
 
 const SidebarItem = ({ id, title, thumbnail, fields, rating }) => {
   return (
-    <SidebarItemContainer to={`/${fields.slug}`}>
+    <SidebarItemContainer to={`/${fields.slug}`} state={{ referrer: 'map' }}>
       <Thumbnail>
         <Img fluid={thumbnail.fluid} />
       </Thumbnail>

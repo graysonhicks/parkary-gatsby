@@ -5,11 +5,12 @@ import { MdKeyboardBackspace } from 'react-icons/md'
 import { Button } from 'rebass'
 import Link from 'gatsby-link'
 
-const BackButton = () => {
+const BackButton = ({ slug, text }) => {
   return (
     <Back>
-      <StyledLink to="/">
-        <StyledIcon />Search
+      <StyledLink to={`${slug ? slug : '/'}`}>
+        <StyledIcon />
+        {text}
       </StyledLink>
     </Back>
   )

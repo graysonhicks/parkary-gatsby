@@ -6,9 +6,11 @@ import Park from '../components/park'
 
 export default props => {
   const park = props.data.contentfulPark
+  const referrer = props.location.state.referrer
+
   return (
     <Layout>
-      <Park park={park} />
+      <Park park={park} referrer={referrer} />
     </Layout>
   )
 }

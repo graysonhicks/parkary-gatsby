@@ -61,7 +61,7 @@ class Toolbar extends Component {
         }) => {
           return (
             <ToolbarContainer>
-              <BackButton />
+              <BackButton text="Search" />
               <Group>
                 <Toggle
                   toggleToGrid={this.toggleToGrid}
@@ -82,6 +82,14 @@ class Toolbar extends Component {
 }
 
 export default Toolbar
+
+export const ParkCardToolbar = ({ slug }) => {
+  return (
+    <ToolbarContainer>
+      <BackButton text="City" slug={slug} />
+    </ToolbarContainer>
+  )
+}
 
 const ToolbarContainer = styled(Container)`
   display: flex;
