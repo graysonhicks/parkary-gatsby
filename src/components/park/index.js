@@ -1,47 +1,43 @@
-import React from 'react'
+import React, { Component } from 'react'
 import styled from 'styled-components'
-import Img from 'gatsby-image'
-import { Card, Heading } from 'rebass'
+import { Card, Heading, Text, Row, Column } from 'rebass'
 
-import Rating from './../rating'
+import FeaturedImage from './featured-image'
 
-const MainPark = ({ park: { title, rating, featuredImage } }) => {
-  return (
-    <StyledParkCard>
-      <HeaderContainer>
-        <Heading>{title}</Heading>
-        <Rating rating={rating} />
-      </HeaderContainer>
-      <ImagesContainer>
-        <FeaturedImage>
-          <Img fluid={featuredImage.fluid} />
-        </FeaturedImage>
-      </ImagesContainer>
-    </StyledParkCard>
-  )
+class MainPark extends Component {
+  render() {
+    const { description } = this.props.park
+    return (
+      <StyledParkCard>
+        <FeaturedImage park={this.props.park} />
+
+        <ParkInfo>
+          <ParkDescription>{description.description}</ParkDescription>
+          <StaticParkMap>
+            <Text>Static Park Map</Text>
+          </StaticParkMap>
+        </ParkInfo>
+      </StyledParkCard>
+    )
+  }
 }
 
 export default MainPark
 
 const StyledParkCard = styled(Card)`
   background-color: white;
-  width: 80%;
-  margin-top: 10px;
-`
-
-const HeaderContainer = styled.div`
-  display: flex;
   width: 100%;
-  align-items: center;
-  justify-content: space-between;
+  margin-top: 10px;
+  max-width: 1024px;
+  padding: 0;
 `
 
-const ImagesContainer = styled.div`
-  display: flex;
-  justify-content: center;
+const ParkInfo = styled(Row)`
+  padding: 20px;
 `
 
-const FeaturedImage = styled.div`
-  width: 600px;
-  height: auto;
+const ParkDescription = styled(Column)`
+  width: 50%;
 `
+
+const StaticParkMap = styled(Column)``

@@ -18,7 +18,7 @@ export const parksInfoFragment = graphql`
       }
     }
     featuredImage {
-      fluid(maxWidth: 900, maxHeight: 600) {
+      fluid(maxWidth: 1024, maxHeight: 512) {
         ...GatsbyContentfulFluid
       }
     }

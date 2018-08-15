@@ -127,7 +127,7 @@ const CardContainer = styled(Container)`
   flex-wrap: wrap;
   padding: 10px;
   width: 100%;
-  max-width: 1280px;
+  max-width: 1024px;
 `
 
 const MapContainer = CardContainer.extend``
