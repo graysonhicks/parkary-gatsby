@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import { find } from 'lodash'
 
 import { Card } from 'rebass'
 

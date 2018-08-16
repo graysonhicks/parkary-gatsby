@@ -14,14 +14,15 @@ class ParkGoogleMap extends Component {
     const bounds = new window.google.maps.LatLngBounds()
 
     this.myMap.current.props.children.map((marker, i) => {
-      if (marker) {
-        return bounds.extend(
+      return (
+        marker &&
+        bounds.extend(
           new window.google.maps.LatLng(
             marker.props.position.lat,
             marker.props.position.lng
           )
         )
-      }
+      )
     })
 
     this.myMap.current.fitBounds(bounds)
@@ -33,7 +34,6 @@ class ParkGoogleMap extends Component {
       setHoverPark,
       clearHoverPark,
       isMarkerShown,
-      hoverPark,
     } = this.props
 
     return (
@@ -58,8 +58,6 @@ class ParkGoogleMap extends Component {
                       return true
                     }
                   })
-
-                  const isHover = node.id === hoverPark ? true : false
 
                   return (
                     hasAllFilteredAmenities && (
