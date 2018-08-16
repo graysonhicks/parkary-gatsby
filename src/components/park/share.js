@@ -18,7 +18,7 @@ class ShareIcons extends Component {
           <StyledShareButton
             compact
             socialMedia={platform}
-            url={window.location.href}
+            url={`http://parkary.com/${slug}`}
             media={'https://imgs.xkcd.com/comics/error_code.png'}
             text={shareText}
           />
