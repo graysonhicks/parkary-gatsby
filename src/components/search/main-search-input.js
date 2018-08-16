@@ -156,7 +156,7 @@ const StyledSuggestion = styled(Card)`
   animation: ${fadeIn} 0.3s linear;
 
   &:hover {
-    background-color: teal;
+    background-color: rgba(0, 128, 128, 0.5);
   }
 `
 

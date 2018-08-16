@@ -55,6 +55,7 @@ class ParkGoogleMap extends Component {
                         key={node.id}
                         position={node.location}
                         parkID={node.id}
+                        onClick={() => this.props.setActivePark(node.id)}
                       />
                     )
                   )

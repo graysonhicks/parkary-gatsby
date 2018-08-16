@@ -64,7 +64,7 @@ const MenuLink = styled(BlockLink)`
   color: black;
 
   &:hover {
-    background-color: teal;
+    background-color: rgba(0, 128, 128, 0.5);
   }
 `
 
