@@ -26,9 +26,11 @@ class FilterMenu extends Component {
       isActive.active = 0
     }
 
-    console.log(isActive)
-
     return (
+      // What to do about search with no results:
+      // (preferred) Can use StaticQuery to have all page routes here to determine if result
+      // address is in that array.
+      // Or pass location state to the 404 page and tell if coming from search.
       <>
         <FilterButton onClick={this.handleFilterDropdown} {...isActive}>
           <StyledFilterIcon />

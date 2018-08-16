@@ -85,7 +85,7 @@ const Background = styled.div`
 
   /* Only let page overflow on results page so can scroll */
   ${({ page }) =>
-    page === 'results' &&
+    (page === 'results' || 'park') &&
     css`
       height: auto;
     `};

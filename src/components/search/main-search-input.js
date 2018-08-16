@@ -19,6 +19,8 @@ class MainSearch extends Component {
 
   handleSubmit() {
     sessionStorage.setItem('selectedAmenities', JSON.stringify([]))
+    console.log(navigate(this.state.resultUrl))
+
     navigate(this.state.resultUrl)
   }
 
