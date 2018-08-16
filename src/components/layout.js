@@ -53,7 +53,7 @@ class Layout extends Component {
                   { name: 'keywords', content: 'sample, something' },
                 ]}
               />
-              <Background page={currentPage}>
+              <Background currentPage={currentPage}>
                 <Nav />
                 <MainContent>{children}</MainContent>
               </Background>
@@ -84,8 +84,8 @@ const Background = styled.div`
   min-height: 100%;
 
   /* Only let page overflow on results page so can scroll */
-  ${({ page }) =>
-    (page === 'results' || 'park') &&
+  ${({ currentPage }) =>
+    (currentPage === 'results' || currentPage === 'park') &&
     css`
       height: auto;
     `};

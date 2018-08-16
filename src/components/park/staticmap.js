@@ -3,7 +3,7 @@ import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps'
 
 class StaticMap extends Component {
   render() {
-    const { id, location } = this.props
+    const { location } = this.props
 
     return (
       <GoogleMap

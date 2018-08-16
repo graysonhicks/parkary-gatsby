@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import { Card, Text, Row, Column } from 'rebass'
+import { Card, Text, Row } from 'rebass'
 
 import FeaturedImage from './featured-image'
 
@@ -39,8 +39,6 @@ class MainPark extends Component {
     return slug
   }
   render() {
-    console.log(this.props)
-
     const { description, location, amenities } = this.props.park
 
     return (
