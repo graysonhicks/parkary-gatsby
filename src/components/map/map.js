@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import styled, { css } from 'styled-components'
+
 import { withGoogleMap, GoogleMap, Marker } from 'react-google-maps'
 
 import { ResultsContext } from './../context'
@@ -12,20 +14,28 @@ class ParkGoogleMap extends Component {
     const bounds = new window.google.maps.LatLngBounds()
 
     this.myMap.current.props.children.map((marker, i) => {
-      return (
-        marker &&
-        bounds.extend(
+      if (marker) {
+        return bounds.extend(
           new window.google.maps.LatLng(
             marker.props.position.lat,
             marker.props.position.lng
           )
         )
-      )
+      }
     })
 
     this.myMap.current.fitBounds(bounds)
   }
   render() {
+    const {
+      selectedAmenities,
+      setActivePark,
+      setHoverPark,
+      clearHoverPark,
+      isMarkerShown,
+      hoverPark,
+    } = this.props
+
     return (
       <ResultsContext.Consumer>
         {({ parks }) => {
@@ -37,10 +47,10 @@ class ParkGoogleMap extends Component {
                 mapTypeControl: false,
               }}
             >
-              {this.props.isMarkerShown &&
+              {isMarkerShown &&
                 parks.map(({ node }) => {
                   let hasAllFilteredAmenities = true
-                  this.props.selectedAmenities.map(amenity => {
+                  selectedAmenities.map(amenity => {
                     if (!node.amenities[amenity]) {
                       hasAllFilteredAmenities = false
                       return false
@@ -49,13 +59,17 @@ class ParkGoogleMap extends Component {
                     }
                   })
 
+                  const isHover = node.id === hoverPark ? true : false
+
                   return (
                     hasAllFilteredAmenities && (
-                      <Marker
+                      <StyledMarker
                         key={node.id}
                         position={node.location}
                         parkID={node.id}
-                        onClick={() => this.props.setActivePark(node.id)}
+                        onClick={() => setActivePark(node.id)}
+                        onMouseOver={() => setHoverPark(node.id)}
+                        onMouseOut={() => clearHoverPark()}
                       />
                     )
                   )
@@ -70,3 +84,11 @@ class ParkGoogleMap extends Component {
 
 const GoogleMapWrapper = withGoogleMap(ParkGoogleMap)
 export default GoogleMapWrapper
+
+const StyledMarker = styled(Marker)`
+  ${({ isHover }) =>
+    isHover &&
+    css`
+      width: 100px;
+    `};
+`

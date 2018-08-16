@@ -13,15 +13,18 @@ const SidebarItem = ({
   thumbnail,
   fields,
   rating,
-  activePark,
   description,
+  hoverPark,
+  activePark,
 }) => {
   const isActive = id === activePark ? true : false
+  const isHover = id === hoverPark ? true : false
   return (
     <SidebarItemContainer
       to={`/${fields.slug}`}
       state={{ referrer: 'map' }}
       isActive={isActive}
+      isHover={isHover}
     >
       <Thumbnail>
         <Img fluid={thumbnail.fluid} />
@@ -33,7 +36,7 @@ const SidebarItem = ({
         </RatingContainer>
       </Info>
 
-      <DescriptionContainer isActive={isActive}>
+      <DescriptionContainer isActive={isActive} is>
         {isActive && <Description>{description.description}</Description>}
       </DescriptionContainer>
     </SidebarItemContainer>
@@ -55,6 +58,12 @@ const SidebarItemContainer = styled(Link)`
   &:hover {
     background-color: rgba(0, 128, 128, 0.1);
   }
+
+  ${({ isHover }) =>
+    isHover &&
+    css`
+      background-color: rgba(0, 128, 128, 0.1);
+    `};
 
   ${({ isActive }) =>
     isActive &&

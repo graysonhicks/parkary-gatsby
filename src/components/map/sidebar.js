@@ -4,7 +4,7 @@ import { ResultsContext } from './../context'
 
 import SidebarItem from './sidebar-item'
 
-const Sidebar = ({ selectedAmenities, activePark }) => {
+const Sidebar = ({ selectedAmenities, ...rest }) => {
   return (
     <ResultsContext.Consumer>
       {({ parks }) => {
@@ -25,7 +25,7 @@ const Sidebar = ({ selectedAmenities, activePark }) => {
 
           return (
             hasAllFilteredAmenities && (
-              <SidebarItem key={node.id} activePark={activePark} {...node} />
+              <SidebarItem key={node.id} {...rest} {...node} />
             )
           )
         })
