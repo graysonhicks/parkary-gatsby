@@ -9,13 +9,14 @@ import Rating from './../rating'
 class FeaturedImage extends Component {
   render() {
     const { title, rating, featuredImage } = this.props.park
+    const { toggleCarousel } = this.props
     return (
       <FeaturedImageContainer>
         <ImageContainer>
           <Img fluid={featuredImage.fluid} />
           <ImageOverlay />
           <NonHoverGalleryIcon />
-          <CarouselLink>
+          <CarouselLink onClick={toggleCarousel}>
             <GalleryIcon /> See all images...
           </CarouselLink>
         </ImageContainer>
