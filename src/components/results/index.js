@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
 import { Container } from 'rebass'
+import { orderBy } from 'lodash'
+
 import ParkCard from './card'
 import Toolbar from './../toolbar'
 import MainMap from '../map'
@@ -24,17 +26,22 @@ class Results extends Component {
   constructor(props) {
     super(props)
 
-    // Check if any filters are stored in sessionStorage.
     this.state = {
       selectedAmenities: [],
+      parks: [],
+      sort: 'rating-desc',
     }
   }
 
   componentDidMount() {
+    // Check if any filters are stored in sessionStorage. This is only way to
+    // preserve the selected amenities filter when clicking to a park page
+    // since React Router wont update location state if url is changing.
     this.setState({
       selectedAmenities: sessionStorage.getItem('selectedAmenities')
         ? JSON.parse(sessionStorage.getItem('selectedAmenities'))
         : [],
+      parks: this.props.parks,
     })
   }
 
@@ -67,20 +74,60 @@ class Results extends Component {
       })
     }
   }
+
+  handleClickSort = type => {
+    const preSortedParks = [...this.state.parks]
+
+    let sortedArray
+    console.log(type)
+
+    switch (type) {
+      case 'rating-asc':
+        sortedArray = this.sortByRating(preSortedParks, 'asc')
+        break
+      case 'rating-desc':
+        sortedArray = this.sortByRating(preSortedParks, 'desc')
+        break
+      case 'distance':
+        sortedArray = this.sortByDistance(preSortedParks)
+        break
+
+      default:
+        sortedArray = preSortedParks
+        break
+    }
+
+    this.setState({
+      sort: type !== this.state.sort ? type : null,
+      parks: sortedArray,
+    })
+  }
+
+  sortByRating = (parks, order) => {
+    return orderBy(parks, ({ node }) => node.rating, order)
+  }
+
+  sortByDistance = parks => {
+    // Use contentful js api to determine distance from search center
+    return parks
+  }
+
   render() {
     return (
       <ResultsContext.Consumer>
-        {({ view, parks, cityState }) => {
+        {({ view, cityState }) => {
           return (
             <ResultsContainer>
               <Toolbar
                 selectedAmenities={this.state.selectedAmenities}
                 handleClickFilter={this.handleClickFilter}
+                handleClickSort={this.handleClickSort}
                 cityState={cityState}
+                sort={this.state.sort}
               />
               {view === 'grid' && (
                 <CardContainer>
-                  {parks.map(({ node }) => {
+                  {this.state.parks.map(({ node }) => {
                     let hasAllFilteredAmenities = true
                     this.state.selectedAmenities.map(amenity => {
                       if (!node.amenities[amenity]) {
@@ -101,7 +148,10 @@ class Results extends Component {
               )}
               {view === 'map' && (
                 <MapContainer>
-                  <MainMap selectedAmenities={this.state.selectedAmenities} />
+                  <MainMap
+                    selectedAmenities={this.state.selectedAmenities}
+                    parks={this.state.parks}
+                  />
                 </MapContainer>
               )}
             </ResultsContainer>

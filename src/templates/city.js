@@ -16,11 +16,10 @@ class CityPage extends Component {
         <ResultsContext.Provider
           value={{
             view: 'grid',
-            parks: data.allContentfulPark.edges,
             cityState: pageContext.cityState,
           }}
         >
-          <Results />
+          <Results parks={data.allContentfulPark.edges} />
         </ResultsContext.Provider>
       </ResultsLayout>
     )

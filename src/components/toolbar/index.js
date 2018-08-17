@@ -18,10 +18,14 @@ class Toolbar extends Component {
 
     this.state = {
       selectedAmenities: props.selectedAmenities ? props.selectedAmenities : [],
+      filterOpen: false,
+      sortOpen: false,
     }
   }
 
   toggleToMap = () => {
+    // Passing selected filters back and forth between toggles.
+    // Otherwise new Gatsby page would have fresh start.
     navigate(`/${this.props.cityState}/map/`, {
       state: {
         selectedAmenities: this.props.selectedAmenities,
@@ -30,6 +34,8 @@ class Toolbar extends Component {
   }
 
   toggleToGrid = () => {
+    // Passing selected filters back and forth between toggles.
+    // Otherwise new Gatsby page would have fresh start.
     navigate(`/${this.props.cityState}/`, {
       state: {
         selectedAmenities: this.props.selectedAmenities,
@@ -37,7 +43,27 @@ class Toolbar extends Component {
     })
   }
 
+  handleFilterDropdown = () => {
+    this.setState({
+      filterOpen: !this.state.filterOpen,
+      sortOpen: false,
+    })
+  }
+
+  handleSortDropdown = () => {
+    this.setState({
+      sortOpen: !this.state.sortOpen,
+      filterOpen: false,
+    })
+  }
+
   render() {
+    const {
+      sort,
+      selectedAmenities,
+      handleClickFilter,
+      handleClickSort,
+    } = this.props
     return (
       <StaticQuery
         query={graphql`
@@ -71,10 +97,17 @@ class Toolbar extends Component {
               </Group>
               <FilterMenu
                 amenities={amenities}
-                selectedAmenities={this.props.selectedAmenities}
-                handleClickFilter={this.props.handleClickFilter}
+                selectedAmenities={selectedAmenities}
+                handleClickFilter={handleClickFilter}
+                handleFilterDropdown={this.handleFilterDropdown}
+                filterOpen={this.state.filterOpen}
               />
-              <SortMenu />
+              <SortMenu
+                sort={sort}
+                handleClickSort={handleClickSort}
+                handleSortDropdown={this.handleSortDropdown}
+                sortOpen={this.state.sortOpen}
+              />
             </ToolbarContainer>
           )
         }}

@@ -16,11 +16,10 @@ class MapPage extends Component {
         <ResultsContext.Provider
           value={{
             view: pageContext.view,
-            parks: data.allContentfulPark.edges,
             cityState: pageContext.cityState,
           }}
         >
-          <Results />
+          <Results parks={data.allContentfulPark.edges} />
         </ResultsContext.Provider>
       </ResultsLayout>
     )

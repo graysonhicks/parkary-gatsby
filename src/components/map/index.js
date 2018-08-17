@@ -39,7 +39,7 @@ class MainMap extends Component {
     })
   }
   render() {
-    const { selectedAmenities } = this.props
+    const { selectedAmenities, parks } = this.props
     return (
       <StyledMapCard>
         <GoogleMapWrapper
@@ -51,6 +51,7 @@ class MainMap extends Component {
           setActivePark={this.setActivePark}
           setHoverPark={this.setHoverPark}
           clearHoverPark={this.clearHoverPark}
+          parks={parks}
         />
         <SideBarContainer>
           <Sidebar
@@ -58,6 +59,7 @@ class MainMap extends Component {
             activePark={this.state.activePark}
             setHoverPark={this.setHoverPark}
             hoverPark={this.state.hoverPark}
+            parks={parks}
           />
         </SideBarContainer>
       </StyledMapCard>

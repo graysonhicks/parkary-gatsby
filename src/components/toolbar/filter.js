@@ -7,20 +7,17 @@ import { Button, Arrow, Card, Container } from 'rebass'
 import FilterCheckbox from './filtercheckbox'
 
 class FilterMenu extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { isOpen: false }
-  }
-
-  handleFilterDropdown = () => {
-    this.setState({
-      isOpen: !this.state.isOpen,
-    })
-  }
-
   render() {
+    const {
+      filterOpen,
+      amenities,
+      selectedAmenities,
+      handleClickFilter,
+      handleFilterDropdown,
+    } = this.props
+
     const isActive = {}
-    if (this.props.selectedAmenities.length) {
+    if (selectedAmenities.length) {
       isActive.active = 1
     } else {
       isActive.active = 0
@@ -32,20 +29,20 @@ class FilterMenu extends Component {
       // address is in that array.
       // Or pass location state to the 404 page and tell if coming from search.
       <>
-        <FilterButton onClick={this.handleFilterDropdown} {...isActive}>
+        <FilterButton onClick={handleFilterDropdown} {...isActive}>
           <StyledFilterIcon />
           Filter <StyledArrow direction="down" />
         </FilterButton>
-        {this.state.isOpen && (
+        {filterOpen && (
           <FilterDropdownContainer>
             <FilterDropdown>
-              {Object.keys(this.props.amenities).map(amenity => (
+              {Object.keys(amenities).map(amenity => (
                 <FilterCheckbox
                   key={amenity}
                   name={amenity}
-                  selectedAmenities={this.props.selectedAmenities}
-                  value={this.props.amenities[amenity]}
-                  handleClickFilter={this.props.handleClickFilter}
+                  selectedAmenities={selectedAmenities}
+                  value={amenities[amenity]}
+                  handleClickFilter={handleClickFilter}
                 />
               ))}
             </FilterDropdown>
@@ -67,7 +64,7 @@ const FilterButton = styled(Button)`
 
   &:focus,
   &:active {
-    box-shadow: none;
+    box-shadow: 0 0 10px 2px #0067ee;
   }
 
   ${({ active }) =>

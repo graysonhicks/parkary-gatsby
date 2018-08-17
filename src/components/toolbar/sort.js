@@ -1,42 +1,57 @@
 import React, { Component } from 'react'
 import styled, { css } from 'styled-components'
 
-import { MdFilterList } from 'react-icons/md'
+import { MdSort } from 'react-icons/md'
 import { Button, Arrow, Card, Container, BlockLink } from 'rebass'
 
-import SortCheckbox from './filtercheckbox'
-
 class SortMenu extends Component {
-  constructor(props) {
-    super(props)
-    this.state = { isOpen: false }
-  }
-
-  handleSortDropdown = () => {
-    this.setState({
-      isOpen: !this.state.isOpen,
-    })
-  }
-
   render() {
-    const isActive = {}
-    // if (this.props.selectedAmenities.length) {
-    //   isActive.active = 1
-    // } else {
-    //   isActive.active = 0
-    // }
+    const { sort, handleClickSort, sortOpen, handleSortDropdown } = this.props
+    const sortActive = {}
+    if (sort) {
+      sortActive.active = 1
+    } else {
+      sortActive.active = 0
+    }
 
     return (
       <>
-        <SortButton onClick={this.handleSortDropdown} {...isActive}>
+        <SortButton onClick={handleSortDropdown} {...sortActive}>
           <StyledSortIcon />
           Sort <StyledArrow direction="down" />
         </SortButton>
-        {this.state.isOpen && (
+        {sortOpen && (
           <SortDropdownContainer>
             <SortDropdown>
-              <FilterLink>Distance</FilterLink>
-              <FilterLink>Rating</FilterLink>
+              <FilterLink
+                onClick={() => {
+                  handleClickSort('distance')
+                }}
+                type="distance"
+                sort={sort}
+              >
+                Distance
+              </FilterLink>
+              <FilterLink
+                onClick={() => {
+                  handleClickSort('rating-desc')
+                }}
+                type="rating-desc"
+                sort={sort}
+              >
+                Rating (desc)
+                <Arrow direction="down" />
+              </FilterLink>
+              <FilterLink
+                onClick={() => {
+                  handleClickSort('rating-asc')
+                }}
+                type="rating-asc"
+                sort={sort}
+              >
+                Rating (asc)
+                <Arrow direction="up" />
+              </FilterLink>
             </SortDropdown>
           </SortDropdownContainer>
         )}
@@ -56,7 +71,7 @@ const SortButton = styled(Button)`
 
   &:focus,
   &:active {
-    box-shadow: none;
+    box-shadow: 0 0 10px 2px #0067ee;
   }
 
   ${({ active }) =>
@@ -67,7 +82,7 @@ const SortButton = styled(Button)`
     `};
 `
 
-const StyledSortIcon = styled(MdFilterList)`
+const StyledSortIcon = styled(MdSort)`
   margin-right: 10px;
 `
 
@@ -98,7 +113,8 @@ const SortDropdown = styled(Card)`
 
 const FilterLink = styled(BlockLink)`
   display: flex;
-  justify-content: flex-start;
+  justify-content: space-between;
+  align-items: center;
   text-decoration: none;
   padding: 10px;
   color: black;
@@ -108,4 +124,13 @@ const FilterLink = styled(BlockLink)`
   &:hover {
     background-color: rgba(0, 128, 128, 0.5);
   }
+
+  ${({ sort, type }) => {
+    return (
+      sort === type &&
+      css`
+        background-color: rgba(0, 128, 128, 0.3);
+      `
+    )
+  }};
 `
