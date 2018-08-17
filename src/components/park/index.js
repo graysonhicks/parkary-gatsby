@@ -53,7 +53,7 @@ class MainPark extends Component {
 
     return (
       <>
-        {!this.state.carouselIsOpen && (
+        {this.state.carouselIsOpen && (
           <ImageCarousel
             parkImages={parkImages}
             toggleCarousel={this.toggleCarousel}

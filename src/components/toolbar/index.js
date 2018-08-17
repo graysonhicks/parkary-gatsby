@@ -10,6 +10,7 @@ import { Container, Group } from 'rebass'
 import Toggle from './toggle'
 import BackButton from './backbutton'
 import FilterMenu from './filter'
+import SortMenu from './sort'
 
 class Toolbar extends Component {
   constructor(props) {
@@ -73,6 +74,7 @@ class Toolbar extends Component {
                 selectedAmenities={this.props.selectedAmenities}
                 handleClickFilter={this.props.handleClickFilter}
               />
+              <SortMenu />
             </ToolbarContainer>
           )
         }}
