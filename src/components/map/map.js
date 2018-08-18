@@ -25,6 +25,7 @@ class ParkGoogleMap extends Component {
 
     this.myMap.current.fitBounds(bounds)
   }
+
   render() {
     const {
       selectedAmenities,
@@ -32,6 +33,7 @@ class ParkGoogleMap extends Component {
       setHoverPark,
       clearHoverPark,
       isMarkerShown,
+      boundsHandler,
       parks,
     } = this.props
 
@@ -39,6 +41,7 @@ class ParkGoogleMap extends Component {
       <GoogleMap
         defaultZoom={17}
         ref={this.myMap}
+        onBoundsChanged={() => boundsHandler(this.myMap.current)}
         defaultOptions={{
           mapTypeControl: false,
         }}

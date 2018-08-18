@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import styled from 'styled-components'
 import { Container } from 'rebass'
 import { orderBy } from 'lodash'
-
+import { createClient } from 'contentful'
 import ParkCard from './card'
 import Toolbar from './../toolbar'
 import MainMap from '../map'
@@ -133,6 +133,28 @@ class Results extends Component {
     return parks
   }
 
+  boundsHandler = map => {
+    const bounds = map.getBounds()
+    const sw = bounds.getSouthWest()
+    const ne = bounds.getNorthEast()
+    const boundsString = `${sw.lat()},${sw.lng()},${ne.lat()},${ne.lng()}`
+
+    const client = createClient({
+      space: '00xgplm2tq8k',
+      accessToken:
+        '4f4bd8a893e4775e1bbabf9046e24a785a4ca9735f0ba386eb8e004317d46e92',
+    })
+    client
+      .getEntries({
+        content_type: 'park',
+        'fields.location[within]': boundsString,
+      })
+      .then(function(entries) {
+        console.log(entries)
+      })
+      .catch(console.error)
+  }
+
   render() {
     return (
       <ResultsContext.Consumer>
@@ -171,6 +193,7 @@ class Results extends Component {
                 <MapContainer>
                   <MainMap
                     selectedAmenities={this.state.selectedAmenities}
+                    boundsHandler={this.boundsHandler}
                     parks={this.state.parks}
                   />
                 </MapContainer>

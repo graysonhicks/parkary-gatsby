@@ -14,6 +14,7 @@ class MainMap extends Component {
       hoverPark: null,
     }
   }
+
   setActivePark = parkId => {
     if (parkId !== this.state.activePark) {
       this.setState({
@@ -39,7 +40,7 @@ class MainMap extends Component {
     })
   }
   render() {
-    const { selectedAmenities, parks } = this.props
+    const { selectedAmenities, parks, boundsHandler } = this.props
     return (
       <StyledMapCard>
         <GoogleMapWrapper
@@ -51,6 +52,7 @@ class MainMap extends Component {
           setActivePark={this.setActivePark}
           setHoverPark={this.setHoverPark}
           clearHoverPark={this.clearHoverPark}
+          boundsHandler={boundsHandler}
           parks={parks}
         />
         <SideBarContainer>
