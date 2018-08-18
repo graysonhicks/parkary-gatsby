@@ -29,7 +29,7 @@ class Results extends Component {
     this.state = {
       selectedAmenities: [],
       parks: [],
-      sort: 'rating-desc',
+      sort: '',
     }
   }
 
@@ -37,12 +37,24 @@ class Results extends Component {
     // Check if any filters are stored in sessionStorage. This is only way to
     // preserve the selected amenities filter when clicking to a park page
     // since React Router wont update location state if url is changing.
-    this.setState({
-      selectedAmenities: sessionStorage.getItem('selectedAmenities')
-        ? JSON.parse(sessionStorage.getItem('selectedAmenities'))
-        : [],
-      parks: this.props.parks,
-    })
+    //
+    // Also checking if sort is set in storage.
+    this.setState(
+      {
+        selectedAmenities: sessionStorage.getItem('selectedAmenities')
+          ? JSON.parse(sessionStorage.getItem('selectedAmenities'))
+          : [],
+        sort: sessionStorage.getItem('sort').length
+          ? sessionStorage.getItem('sort')
+          : '',
+        parks: this.props.parks,
+      },
+      () => {
+        // The filtering is handled in the actual render, but sort is handled
+        // by setting state and mutating the parks array
+        this.handleSort(this.state.sort)
+      }
+    )
   }
 
   handleClickFilter = name => {
@@ -75,11 +87,12 @@ class Results extends Component {
     }
   }
 
-  handleClickSort = type => {
+  handleSort = type => {
+    // Going to need to handle sort settings similar to filter settings
+    // in regards to maintaining between page switches with location obj.
     const preSortedParks = [...this.state.parks]
 
     let sortedArray
-    console.log(type)
 
     switch (type) {
       case 'rating-asc':
@@ -91,16 +104,24 @@ class Results extends Component {
       case 'distance':
         sortedArray = this.sortByDistance(preSortedParks)
         break
-
       default:
         sortedArray = preSortedParks
         break
     }
 
+    sessionStorage.setItem('sort', type)
+
     this.setState({
-      sort: type !== this.state.sort ? type : null,
+      sort: type,
       parks: sortedArray,
     })
+  }
+
+  handleClickSort = type => {
+    // When sort is clicked, have to do a special check to see if turning sort
+    // on or off.  But don't want this done on page navigation if set in storage.
+    const sortType = type !== this.state.sort ? type : ''
+    this.handleSort(sortType)
   }
 
   sortByRating = (parks, order) => {

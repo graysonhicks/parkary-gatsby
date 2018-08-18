@@ -55,7 +55,7 @@ exports.onCreateNode = ({ node, getNode, actions }) => {
       amphitheater,
       basketballCourt,
       bbqGrill,
-    }
+    } 
 
     // Create node field on node that is the slug URL (which should be unique for all city/states).
     createNodeField({
