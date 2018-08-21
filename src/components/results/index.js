@@ -8,6 +8,8 @@ import Toolbar from './../toolbar'
 import MainMap from '../map'
 
 import { ResultsContext } from './../context'
+import parseParks from './parseParks'
+import parseParksFromContentfulJS from './parseParks'
 
 // Templating each cities parks as a grid and map page in Gatsby
 // means I cannot have a top level component storing a shared state.
@@ -44,7 +46,7 @@ class Results extends Component {
         selectedAmenities: sessionStorage.getItem('selectedAmenities')
           ? JSON.parse(sessionStorage.getItem('selectedAmenities'))
           : [],
-        sort: sessionStorage.getItem('sort').length
+        sort: sessionStorage.getItem('sort')
           ? sessionStorage.getItem('sort')
           : '',
         parks: this.props.parks,
@@ -134,6 +136,7 @@ class Results extends Component {
   }
 
   boundsHandler = map => {
+    const self = this
     const bounds = map.getBounds()
     const sw = bounds.getSouthWest()
     const ne = bounds.getNorthEast()
@@ -150,12 +153,19 @@ class Results extends Component {
         'fields.location[within]': boundsString,
       })
       .then(function(entries) {
-        console.log(entries)
+        const parsedParks = parseParksFromContentfulJS(
+          entries,
+          self.state.parks
+        )
+        return parsedParks
       })
+      .then(parsedParks => this.setState({ parks: parsedParks }))
       .catch(console.error)
   }
 
   render() {
+    console.log(this.state.parks)
+
     return (
       <ResultsContext.Consumer>
         {({ view, cityState }) => {
@@ -183,7 +193,7 @@ class Results extends Component {
 
                     return (
                       hasAllFilteredAmenities && (
-                        <ParkCard key={node.title} park={node} />
+                        <ParkCard key={node.id} park={node} />
                       )
                     )
                   })}

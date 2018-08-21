@@ -41,7 +41,7 @@ class ParkGoogleMap extends Component {
       <GoogleMap
         defaultZoom={17}
         ref={this.myMap}
-        onBoundsChanged={() => boundsHandler(this.myMap.current)}
+        onDragEnd={() => boundsHandler(this.myMap.current)}
         defaultOptions={{
           mapTypeControl: false,
         }}
@@ -57,6 +57,7 @@ class ParkGoogleMap extends Component {
                 return true
               }
             })
+            console.log(hasAllFilteredAmenities)
 
             return (
               hasAllFilteredAmenities && (

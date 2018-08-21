@@ -37,8 +37,7 @@ const ResultsLayout = styled(Layout)`
 export const cityQuery = graphql`
   query($cityState: String!) {
     allContentfulPark(
-      filter: { fields: { cityState: { eq: $cityState } } }
-      limit: 12
+      filter: { fields: { cityState: { eq: $cityState } } } 
     ) {
       edges {
         node {
