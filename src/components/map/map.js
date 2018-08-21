@@ -42,6 +42,7 @@ class ParkGoogleMap extends Component {
         defaultZoom={17}
         ref={this.myMap}
         onDragEnd={() => boundsHandler(this.myMap.current)}
+        onZoomChanged={() => boundsHandler(this.myMap.current)}
         defaultOptions={{
           mapTypeControl: false,
           fullscreenControl: false,

@@ -32,6 +32,7 @@ class Results extends Component {
       selectedAmenities: [],
       parks: [],
       sort: '',
+      searchOnChange: false,
     }
   }
 
@@ -136,6 +137,7 @@ class Results extends Component {
   }
 
   boundsHandler = map => {
+    if (!this.state.searchOnChange) return
     const bounds = map.getBounds()
     const sw = bounds.getSouthWest()
     const ne = bounds.getNorthEast()

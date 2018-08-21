@@ -3,6 +3,7 @@ import { find, kebabCase } from 'lodash'
 const parseParksFromContentfulJS = ({ items }) => {
   let parsedParks = []
   const unParsedParks = items
+  console.log('moved')
 
   for (let i = 0; i < unParsedParks.length; i++) {
     let newPark = {}
