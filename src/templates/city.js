@@ -9,7 +9,7 @@ import { ResultsContext } from '../components/context'
 
 class CityPage extends Component {
   render() {
-    const { pageContext, data } = this.props
+    const { pageContext, data, location } = this.props
 
     return (
       <ResultsLayout currentPage="results">
@@ -19,7 +19,13 @@ class CityPage extends Component {
             cityState: pageContext.cityState,
           }}
         >
-          <Results parks={data.allContentfulPark.edges} />
+          <Results
+            parks={
+              location.state.parks
+                ? location.state.parks
+                : data.allContentfulPark.edges
+            }
+          />
         </ResultsContext.Provider>
       </ResultsLayout>
     )

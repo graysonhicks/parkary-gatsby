@@ -44,6 +44,7 @@ class ParkGoogleMap extends Component {
         onDragEnd={() => boundsHandler(this.myMap.current)}
         defaultOptions={{
           mapTypeControl: false,
+          fullscreenControl: false,
         }}
       >
         {isMarkerShown &&

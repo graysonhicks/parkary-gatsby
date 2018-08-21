@@ -29,6 +29,7 @@ class Toolbar extends Component {
     navigate(`/${this.props.cityState}/map/`, {
       state: {
         selectedAmenities: this.props.selectedAmenities,
+        parks: this.props.parks,
       },
     })
   }
@@ -39,6 +40,7 @@ class Toolbar extends Component {
     navigate(`/${this.props.cityState}/`, {
       state: {
         selectedAmenities: this.props.selectedAmenities,
+        parks: this.props.parks,
       },
     })
   }

@@ -9,7 +9,7 @@ import { ResultsContext } from '../components/context'
 
 class MapPage extends Component {
   render() {
-    const { pageContext, data } = this.props
+    const { pageContext, data, location } = this.props
 
     return (
       <ResultsLayout currentPage="results">
@@ -19,7 +19,13 @@ class MapPage extends Component {
             cityState: pageContext.cityState,
           }}
         >
-          <Results parks={data.allContentfulPark.edges} />
+          <Results
+            parks={
+              location.state.parks
+                ? location.state.parks
+                : data.allContentfulPark.edges
+            }
+          />
         </ResultsContext.Provider>
       </ResultsLayout>
     )
@@ -36,9 +42,7 @@ const ResultsLayout = styled(Layout)`
 
 export const cityQuery = graphql`
   query($cityState: String!) {
-    allContentfulPark(
-      filter: { fields: { cityState: { eq: $cityState } } } 
-    ) {
+    allContentfulPark(filter: { fields: { cityState: { eq: $cityState } } }) {
       edges {
         node {
           ...ParkInfo

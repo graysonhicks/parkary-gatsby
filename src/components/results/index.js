@@ -136,7 +136,6 @@ class Results extends Component {
   }
 
   boundsHandler = map => {
-    const self = this
     const bounds = map.getBounds()
     const sw = bounds.getSouthWest()
     const ne = bounds.getNorthEast()
@@ -153,10 +152,7 @@ class Results extends Component {
         'fields.location[within]': boundsString,
       })
       .then(function(entries) {
-        const parsedParks = parseParksFromContentfulJS(
-          entries,
-          self.state.parks
-        )
+        const parsedParks = parseParksFromContentfulJS(entries)
         return parsedParks
       })
       .then(parsedParks => this.setState({ parks: parsedParks }))
@@ -164,8 +160,6 @@ class Results extends Component {
   }
 
   render() {
-    console.log(this.state.parks)
-
     return (
       <ResultsContext.Consumer>
         {({ view, cityState }) => {
@@ -177,6 +171,7 @@ class Results extends Component {
                 handleClickSort={this.handleClickSort}
                 cityState={cityState}
                 sort={this.state.sort}
+                parks={this.state.parks}
               />
               {view === 'grid' && (
                 <CardContainer>
