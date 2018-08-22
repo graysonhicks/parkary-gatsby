@@ -35,7 +35,8 @@ class ParkGoogleMap extends Component {
       isMarkerShown,
       boundsHandler,
       parks,
-      hoverPark
+      hoverPark,
+      activePark
     } = this.props
 
     return (
@@ -72,7 +73,7 @@ class ParkGoogleMap extends Component {
                   onMouseOut={() => clearHoverPark()}
                   icon={{
                     url: 'https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi2_hdpi.png',
-                    scaledSize:  node.id === hoverPark ? new window.google.maps.Size(22,35) : new window.google.maps.Size(20,32)
+                    scaledSize:  node.id === (hoverPark || activePark) ? new window.google.maps.Size(22,35) : new window.google.maps.Size(20,32)
                   }}
                 />
               )

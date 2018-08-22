@@ -69,6 +69,7 @@ class MainMap extends Component {
           clearHoverPark={this.clearHoverPark}
           boundsHandler={boundsHandler}
           hoverPark={this.state.hoverPark}
+          activePark={this.state.activePark}
           parks={parks}
         />
         <StyledSearchOnDragCheckbox
