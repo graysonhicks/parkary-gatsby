@@ -34,16 +34,26 @@ class Results extends Component {
     // since React Router wont update location state if url is changing.
     //
     // Also checking if sort is set in storage.
-    this.state = {
-      selectedAmenities: sessionStorage.getItem('selectedAmenities')
-        ? JSON.parse(sessionStorage.getItem('selectedAmenities'))
-        : [],
-      filteredParks: props.parks,
-      parks: props.parks,
-      sort: sessionStorage.getItem('sort')
-        ? sessionStorage.getItem('sort')
-        : '',
-      searchOnChange: false,
+    if (sessionStorage) {
+      this.state = {
+        selectedAmenities: sessionStorage.getItem('selectedAmenities')
+          ? JSON.parse(sessionStorage.getItem('selectedAmenities'))
+          : [],
+        filteredParks: props.parks,
+        parks: props.parks,
+        sort: sessionStorage.getItem('sort')
+          ? sessionStorage.getItem('sort')
+          : '',
+        searchOnChange: false,
+      }
+    } else {
+      this.state = {
+        selectedAmenities: [],
+        filteredParks: props.parks,
+        parks: props.parks,
+        sort: '',
+        searchOnChange: false,
+      }
     }
   }
 
