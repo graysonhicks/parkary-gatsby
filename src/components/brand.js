@@ -1,30 +1,46 @@
 import React from 'react'
 import styled from 'styled-components'
-
+import { StaticQuery, graphql } from 'gatsby'
 import Img from 'gatsby-image'
 import { Heading, Box } from 'rebass'
 
-import { AppContext } from './context'
-
-const Brand = ({ dark, ...rest }) => (
-  <>
-    <StyledLogo>
-      <AppContext.Consumer>
-        {({ logo }) => <Img fluid={logo.fluid} />}
-      </AppContext.Consumer>
-    </StyledLogo>
-    {dark ? (
-      <HeadingContainer>
-        <DarkStrong {...rest}>park</DarkStrong>
-        <DarkLight {...rest}>ary</DarkLight>
-      </HeadingContainer>
-    ) : (
-      <HeadingContainer>
-        <StyledStrong {...rest}>park</StyledStrong>
-        <StyledLight {...rest}>ary</StyledLight>
-      </HeadingContainer>
+const Brand = ({ logo, dark, ...rest }) => (
+  <StaticQuery
+    query={graphql`
+      query logoQuery {
+        logo: allImageSharp(
+          filter: { original: { src: { ne: "treelogo" } } }
+          limit: 1
+        ) {
+          edges {
+            node {
+              fluid(maxWidth: 50) {
+                ...GatsbyImageSharpFluid
+              }
+            }
+          }
+        }
+      }
+    `}
+    render={({ logo }) => (
+      <>
+        <StyledLogo>
+          <Img fluid={logo.edges[0].node.fluid} />
+        </StyledLogo>
+        {dark ? (
+          <HeadingContainer>
+            <DarkStrong {...rest}>park</DarkStrong>
+            <DarkLight {...rest}>ary</DarkLight>
+          </HeadingContainer>
+        ) : (
+          <HeadingContainer>
+            <StyledStrong {...rest}>park</StyledStrong>
+            <StyledLight {...rest}>ary</StyledLight>
+          </HeadingContainer>
+        )}
+      </>
     )}
-  </>
+  />
 )
 
 export default Brand

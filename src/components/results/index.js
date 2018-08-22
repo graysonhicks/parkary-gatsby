@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import { Container, Card } from 'rebass'
+import { Container } from 'rebass'
 import { orderBy } from 'lodash'
 import { createClient } from 'contentful'
 import ParkCard from './card'
@@ -205,12 +205,11 @@ class Results extends Component {
                 handleClickSort={this.handleClickSort}
                 cityState={cityState}
                 sort={this.state.sort}
-                parks={this.state.parks}
               />
-              {!this.state.filteredParks.length ? (
+              {!this.state.filteredParks.length && view === 'results' ? (
                 <NoResultsCard />
               ) : (
-                (view === 'grid' && (
+                (view === 'results' && (
                   <CardContainer>
                     {this.state.filteredParks.map(({ node }) => {
                       return <ParkCard key={node.id} park={node} />
@@ -223,7 +222,6 @@ class Results extends Component {
                       selectedAmenities={this.state.selectedAmenities}
                       boundsHandler={this.boundsHandler}
                       toggleSearchOnChange={this.toggleSearchOnChange}
-                      parks={this.state.parks}
                       filteredParks={this.state.filteredParks}
                       searchOnChange={this.state.searchOnChange}
                     />

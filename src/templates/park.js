@@ -21,5 +21,8 @@ export const query = graphql`
     contentfulPark(fields: { slug: { eq: $slug } }) {
       ...ParkInfo
     }
+    site {
+      ...SiteInfo
+    }
   }
 `

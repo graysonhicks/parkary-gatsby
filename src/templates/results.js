@@ -1,11 +1,11 @@
 import React, { Component } from 'react'
 import { graphql } from 'gatsby'
-
+import PageContextWrapper from '../components/pagewrapper'
 import Results from '../components/results'
 
 import { ResultsContext } from '../components/context'
 
-class CityPage extends Component {
+class ResultsPage extends Component {
   render() {
     const { pageContext, data } = this.props
 
@@ -13,18 +13,20 @@ class CityPage extends Component {
       <>
         <ResultsContext.Provider
           value={{
-            view: 'grid',
+            view: pageContext.view,
             cityState: pageContext.cityState,
           }}
         >
-          <Results parks={data.allContentfulPark.edges} />
+          <PageContextWrapper page={pageContext.view}>
+            <Results parks={data.allContentfulPark.edges} />
+          </PageContextWrapper>
         </ResultsContext.Provider>
       </>
     )
   }
 }
 
-export default CityPage
+export default ResultsPage
 
 export const cityQuery = graphql`
   query($cityState: String!) {
@@ -34,6 +36,9 @@ export const cityQuery = graphql`
           ...ParkInfo
         }
       }
+    }
+    site {
+      ...SiteInfo
     }
   }
 `

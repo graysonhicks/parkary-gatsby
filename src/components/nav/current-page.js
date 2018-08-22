@@ -2,13 +2,13 @@ import React from 'react'
 import styled from 'styled-components'
 
 import { Text } from 'rebass'
-import { AppContext } from './../context'
+import AppContextConsumer from './../context'
 
 const CurrentPage = () => {
   return (
-    <AppContext.Consumer>
-      {({ currentPage }) => <CurrentPageText>{currentPage}</CurrentPageText>}
-    </AppContext.Consumer>
+    <AppContextConsumer>
+      {({ data }) => <CurrentPageText>{data.currentPage}</CurrentPageText>}
+    </AppContextConsumer>
   )
 }
 

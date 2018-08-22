@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+import { graphql } from 'gatsby'
 import styled from 'styled-components'
 import Link from 'gatsby-link'
 import { Container, Card, Heading, Text } from 'rebass'
@@ -24,6 +25,14 @@ class NoResultsPage extends Component {
 }
 
 export default NoResultsPage
+
+export const pagesQuery = graphql`
+  query {
+    site {
+      ...SiteInfo
+    }
+  }
+`
 
 const NoResultsCardContainer = styled(Container)`
   display: flex;

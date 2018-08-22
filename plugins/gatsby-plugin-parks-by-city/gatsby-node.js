@@ -90,7 +90,7 @@ exports.createPages = ({ graphql, actions }) => {
         // Either way, not ideal.
         createPage({
           path: node.fieldValue,
-          component: path.resolve(`./src/templates/city.js`),
+          component: path.resolve(`./src/templates/results.js`),
           context: {
             // Data passed to context is available
             // in page queries as GraphQL variables.
@@ -101,7 +101,7 @@ exports.createPages = ({ graphql, actions }) => {
 
         createPage({
           path: `${node.fieldValue}/map/`,
-          component: path.resolve(`./src/templates/map.js`),
+          component: path.resolve(`./src/templates/results.js`),
           context: {
             cityState: node.fieldValue,
             view: 'map',

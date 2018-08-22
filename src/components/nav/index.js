@@ -7,17 +7,19 @@ import Brand from './../brand'
 import CurrentPage from './current-page'
 import Menu from './menu'
 
-const Nav = () => (
-  <StyledNav>
-    <NavHomeLink to="/">
-      <Brand dark />
-    </NavHomeLink>
-    <CurrentPage />
-    <RightContainer>
-      <Menu />
-    </RightContainer>
-  </StyledNav>
-)
+const Nav = ({ logo }) => {
+  return (
+    <StyledNav>
+      <NavHomeLink to="/">
+        <Brand logo={logo} dark />
+      </NavHomeLink>
+      <CurrentPage />
+      <RightContainer>
+        <Menu />
+      </RightContainer>
+    </StyledNav>
+  )
+}
 
 export default Nav
 

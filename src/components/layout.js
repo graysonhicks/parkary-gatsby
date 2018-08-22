@@ -1,66 +1,40 @@
 import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
-import { StaticQuery, graphql } from 'gatsby'
 import { Provider } from 'rebass'
 
 import styled, { css } from 'styled-components'
 import { AppContext } from './context'
+import AppContextConsumer from './context'
 
 import { withPrefix } from 'gatsby-link'
 import Nav from './nav'
 
 class Layout extends Component {
   render() {
-    const { children, pageContext } = this.props
+    const { children } = this.props
     return (
-      <StaticQuery
-        query={graphql`
-          query SiteTitleQuery {
-            site {
-              siteMetadata {
-                title
-              }
-            }
-
-            logo: allImageSharp(
-              filter: { original: { src: { ne: "treelogo" } } }
-              limit: 1
-            ) {
-              edges {
-                node {
-                  fluid(maxWidth: 50) {
-                    ...GatsbyImageSharpFluid
-                  }
-                }
-              }
-            }
-          }
-        `}
-        render={data => (
-          <Provider>
-            <AppContext.Provider
-              value={{
-                siteTitle: data.site.siteMetadata.title,
-                logo: data.logo.edges[0].node,
-                currentPage: pageContext.view,
-              }}
-            >
-              <Helmet
-                title={data.site.siteMetadata.title}
-                meta={[
-                  { name: 'description', content: 'Sample' },
-                  { name: 'keywords', content: 'sample, something' },
-                ]}
-              />
-              <Background currentPage={pageContext.view}>
-                <Nav />
-                <MainContent>{children}</MainContent>
-              </Background>
-            </AppContext.Provider>
-          </Provider>
-        )}
-      />
+      <Provider>
+        <AppContext>
+          <AppContextConsumer>
+            {({ data }) => (
+              <>
+                <Helmet
+                  title={data.siteTitle}
+                  meta={[
+                    { name: 'description', content: 'Sample' },
+                    { name: 'keywords', content: 'sample, something' },
+                  ]}
+                />
+                <Background currentPage={data.currentPage}>
+                  <Nav />
+                  <MainContent>{children}</MainContent>
+                </Background>
+              </>
+            )}
+          </AppContextConsumer>
+        </AppContext>
+      </Provider>
     )
   }
 }

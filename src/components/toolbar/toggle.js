@@ -15,7 +15,7 @@ class Toggle extends Component {
             <>
               <ToggleButton
                 onClick={this.props.toggleToGrid}
-                active={view === 'grid' ? 1 : 0}
+                active={view === 'results' ? 1 : 0}
               >
                 <StyledGridIcon />
                 Grid
