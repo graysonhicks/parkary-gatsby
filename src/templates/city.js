@@ -12,22 +12,16 @@ class CityPage extends Component {
     const { pageContext, data, location } = this.props
 
     return (
-      <ResultsLayout currentPage="results">
-        <ResultsContext.Provider
-          value={{
-            view: 'grid',
-            cityState: pageContext.cityState,
-          }}
-        >
-          <Results
-            parks={
-              location.state && location.state.parks
-                ? location.state.parks
-                : data.allContentfulPark.edges
-            }
-          />
-        </ResultsContext.Provider>
-      </ResultsLayout>
+   <>
+    <ResultsContext.Provider
+      value={{
+        view: 'grid',
+        cityState: pageContext.cityState,
+      }}
+    >
+      <Results parks={data.allContentfulPark.edges}/>
+    </ResultsContext.Provider>
+   </>
     )
   }
 }

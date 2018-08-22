@@ -26,23 +26,13 @@ class Toolbar extends Component {
   toggleToMap = () => {
     // Passing selected filters back and forth between toggles.
     // Otherwise new Gatsby page would have fresh start.
-    navigate(`/${this.props.cityState}/map/`, {
-      state: {
-        selectedAmenities: this.props.selectedAmenities,
-        parks: this.props.parks,
-      },
-    })
+    navigate(`/${this.props.cityState}/map/`)
   }
 
   toggleToGrid = () => {
     // Passing selected filters back and forth between toggles.
     // Otherwise new Gatsby page would have fresh start.
-    navigate(`/${this.props.cityState}/`, {
-      state: {
-        selectedAmenities: this.props.selectedAmenities,
-        parks: this.props.parks,
-      },
-    })
+    navigate(`/${this.props.cityState}/`)
   }
 
   handleFilterDropdown = () => {

@@ -30,7 +30,7 @@ class Results extends Component {
 
     this.state = {
       selectedAmenities: [],
-      parks: [],
+      parks: props.parks,
       sort: '',
       searchOnChange: false,
     }
@@ -50,7 +50,6 @@ class Results extends Component {
         sort: sessionStorage.getItem('sort')
           ? sessionStorage.getItem('sort')
           : '',
-        parks: this.props.parks,
       },
       () => {
         // The filtering is handled in the actual render, but sort is handled

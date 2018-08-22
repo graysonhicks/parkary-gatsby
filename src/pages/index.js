@@ -9,9 +9,9 @@ import MainSearch from '../components/search/main-search'
 class IndexPage extends Component {
   render() {
     return (
-      <Layout currentPage="home">
-        <MainSearch />
-      </Layout>
+     <>
+       <MainSearch />
+     </>
     )
   }
 }

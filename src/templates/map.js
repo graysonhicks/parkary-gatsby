@@ -12,7 +12,7 @@ class MapPage extends Component {
     const { pageContext, data, location } = this.props
 
     return (
-      <ResultsLayout currentPage="results">
+      <>
         <ResultsContext.Provider
           value={{
             view: pageContext.view,
@@ -20,14 +20,10 @@ class MapPage extends Component {
           }}
         >
           <Results
-            parks={
-              location.state && location.state.parks
-                ? location.state.parks
-                : data.allContentfulPark.edges
-            }
+            parks={data.allContentfulPark.edges}
           />
         </ResultsContext.Provider>
-      </ResultsLayout>
+      </>
     )
   }
 }
