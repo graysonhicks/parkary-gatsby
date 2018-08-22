@@ -21,7 +21,7 @@ class CityPage extends Component {
         >
           <Results
             parks={
-              location.state.parks
+              location.state && location.state.parks
                 ? location.state.parks
                 : data.allContentfulPark.edges
             }
