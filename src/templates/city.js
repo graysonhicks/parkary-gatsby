@@ -9,7 +9,7 @@ import { ResultsContext } from '../components/context'
 
 class CityPage extends Component {
   render() {
-    const { pageContext, data, location } = this.props
+    const { pageContext, data } = this.props
 
     return (
    <>

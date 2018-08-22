@@ -30,6 +30,7 @@ class Results extends Component {
 
     this.state = {
       selectedAmenities: [],
+      filteredParks: props.parks,
       parks: props.parks,
       sort: '',
       searchOnChange: false,
@@ -54,7 +55,9 @@ class Results extends Component {
       () => {
         // The filtering is handled in the actual render, but sort is handled
         // by setting state and mutating the parks array
+
         this.handleSort(this.state.sort)
+        this.filterParks()
       }
     )
   }
@@ -75,7 +78,7 @@ class Results extends Component {
         return {
           selectedAmenities: selectedAmenitiesMinusClicked,
         }
-      })
+      }, this.filterParks)
     } else {
       this.setState(prevState => {
         sessionStorage.setItem(
@@ -85,8 +88,28 @@ class Results extends Component {
         return {
           selectedAmenities: [...prevState.selectedAmenities, name],
         }
-      })
+      }, this.filterParks)
     }
+  }
+
+  filterParks = () => {
+    const filteredParks = this.state.parks.filter(park => {
+      const { node } = park
+      let hasAllFilteredAmenities = true
+      this.state.selectedAmenities.map(amenity => {
+        if (!node.amenities[amenity]) {
+          hasAllFilteredAmenities = false
+          return false
+        } else {
+          return true
+        }
+      })
+      return hasAllFilteredAmenities && park
+    })
+
+    this.setState({
+      filteredParks: filteredParks,
+    })
   }
 
   handleSort = type => {
@@ -115,7 +138,7 @@ class Results extends Component {
 
     this.setState({
       sort: type,
-      parks: sortedArray,
+      filteredParks: sortedArray,
     })
   }
 
@@ -162,7 +185,9 @@ class Results extends Component {
         const parsedParks = parseParksFromContentfulJS(entries)
         return parsedParks
       })
-      .then(parsedParks => this.setState({ parks: parsedParks }))
+      .then(parsedParks =>
+        this.setState({ parks: parsedParks }, () => this.filterParks())
+      )
       .catch(console.error)
   }
 
@@ -182,22 +207,8 @@ class Results extends Component {
               />
               {view === 'grid' && (
                 <CardContainer>
-                  {this.state.parks.map(({ node }) => {
-                    let hasAllFilteredAmenities = true
-                    this.state.selectedAmenities.map(amenity => {
-                      if (!node.amenities[amenity]) {
-                        hasAllFilteredAmenities = false
-                        return false
-                      } else {
-                        return true
-                      }
-                    })
-
-                    return (
-                      hasAllFilteredAmenities && (
-                        <ParkCard key={node.id} park={node} />
-                      )
-                    )
+                  {this.state.filteredParks.map(({ node }) => {
+                    return <ParkCard key={node.id} park={node} />
                   })}
                 </CardContainer>
               )}
@@ -208,6 +219,7 @@ class Results extends Component {
                     boundsHandler={this.boundsHandler}
                     toggleSearchOnChange={this.toggleSearchOnChange}
                     parks={this.state.parks}
+                    filteredParks={this.state.filteredParks}
                   />
                 </MapContainer>
               )}

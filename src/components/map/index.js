@@ -55,6 +55,7 @@ class MainMap extends Component {
       parks,
       boundsHandler,
       toggleSearchOnChange,
+      filteredParks,
     } = this.props
     return (
       <StyledMapCard>
@@ -71,6 +72,7 @@ class MainMap extends Component {
           hoverPark={this.state.hoverPark}
           activePark={this.state.activePark}
           parks={parks}
+          filteredParks={filteredParks}
         />
         <StyledSearchOnDragCheckbox
           toggleSearchOnChange={toggleSearchOnChange}
@@ -83,6 +85,7 @@ class MainMap extends Component {
             setHoverPark={this.setHoverPark}
             hoverPark={this.state.hoverPark}
             parks={parks}
+            filteredParks={filteredParks}
           />
         </SideBarContainer>
       </StyledMapCard>
