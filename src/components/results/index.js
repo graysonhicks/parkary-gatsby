@@ -28,36 +28,28 @@ class Results extends Component {
   constructor(props) {
     super(props)
 
-    this.state = {
-      selectedAmenities: [],
-      filteredParks: props.parks,
-      parks: props.parks,
-      sort: '',
-      searchOnChange: false,
-    }
-  }
-
-  componentDidMount() {
     // Check if any filters are stored in sessionStorage. This is only way to
     // preserve the selected amenities filter when clicking to a park page
     // since React Router wont update location state if url is changing.
     //
     // Also checking if sort is set in storage.
-    this.setState(
-      {
-        selectedAmenities: sessionStorage.getItem('selectedAmenities')
-          ? JSON.parse(sessionStorage.getItem('selectedAmenities'))
-          : [],
-        sort: sessionStorage.getItem('sort')
-          ? sessionStorage.getItem('sort')
-          : '',
-      },
-      () => {
-        // The filtering is handled in the actual render, but sort is handled
-        // by setting state and mutating the parks array
-        this.handleSort(this.state.sort)
-      }
-    )
+    this.state = {
+      selectedAmenities: sessionStorage.getItem('selectedAmenities')
+        ? JSON.parse(sessionStorage.getItem('selectedAmenities'))
+        : [],
+      filteredParks: props.parks,
+      parks: props.parks,
+      sort: sessionStorage.getItem('sort')
+        ? sessionStorage.getItem('sort')
+        : '',
+      searchOnChange: false,
+    }
+  }
+
+  componentDidMount() {
+    // The filtering is handled in the actual render, but sort is handled
+    // by setting state and mutating the parks array
+    this.handleSort(this.state.sort)
   }
 
   handleClickFilter = name => {

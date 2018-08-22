@@ -5,12 +5,12 @@ import { Container } from 'rebass'
 import Brand from './../brand'
 import MainSearchInput from './main-search-input'
 
-const MainSearch = () => (
+const MainSearch = ({ pages }) => (
   <SearchContainer>
     <SearchBrand>
       <Brand />
     </SearchBrand>
-    <MainSearchInput />
+    <MainSearchInput pages={pages} />
   </SearchContainer>
 )
 

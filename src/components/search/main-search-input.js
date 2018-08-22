@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import { kebabCase } from 'lodash'
+import { kebabCase, find } from 'lodash'
 import { navigate } from 'gatsby'
 
 import PlacesAutocomplete, { geocodeByAddress } from 'react-places-autocomplete'
@@ -18,10 +18,15 @@ class MainSearch extends Component {
   }
 
   handleSubmit() {
-    sessionStorage.setItem('selectedAmenities', JSON.stringify([]))
-    sessionStorage.setItem('sort', '')
-
-    navigate(this.state.resultUrl)
+    if (
+      find(this.props.pages, ({ node }) => node.path === this.state.resultUrl)
+    ) {
+      sessionStorage.setItem('selectedAmenities', JSON.stringify([]))
+      sessionStorage.setItem('sort', '')
+      navigate(this.state.resultUrl)
+    } else {
+      navigate('/no-results')
+    }
   }
 
   handleChange = address => {

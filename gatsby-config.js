@@ -1,6 +1,6 @@
 module.exports = {
   siteMetadata: {
-    title: 'Gatsby Default Starter',
+    title: 'Parkary',
   },
   plugins: [
     'gatsby-plugin-react-helmet',
@@ -8,10 +8,10 @@ module.exports = {
     `gatsby-transformer-sharp`,
     `gatsby-transformer-remark`,
     {
-    resolve: `gatsby-plugin-layout`,
-    options: {
-        component: require.resolve(`./src/components/layout.js`)
-    }
+      resolve: `gatsby-plugin-layout`,
+      options: {
+        component: require.resolve(`./src/components/layout.js`),
+      },
     },
     {
       resolve: `gatsby-plugin-styled-components`,
