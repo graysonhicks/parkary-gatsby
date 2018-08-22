@@ -46,6 +46,7 @@ class ParkGoogleMap extends Component {
         defaultOptions={{
           mapTypeControl: false,
           fullscreenControl: false,
+          minZoom: 12,
         }}
       >
         {isMarkerShown &&
@@ -59,7 +60,6 @@ class ParkGoogleMap extends Component {
                 return true
               }
             })
-            console.log(hasAllFilteredAmenities)
 
             return (
               hasAllFilteredAmenities && (

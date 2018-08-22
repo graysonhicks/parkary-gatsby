@@ -136,6 +136,12 @@ class Results extends Component {
     return parks
   }
 
+  toggleSearchOnChange = () => {
+    this.setState({
+      searchOnChange: !this.state.searchOnChange,
+    })
+  }
+
   boundsHandler = map => {
     if (!this.state.searchOnChange) return
     const bounds = map.getBounds()
@@ -201,6 +207,7 @@ class Results extends Component {
                   <MainMap
                     selectedAmenities={this.state.selectedAmenities}
                     boundsHandler={this.boundsHandler}
+                    toggleSearchOnChange={this.toggleSearchOnChange}
                     parks={this.state.parks}
                   />
                 </MapContainer>
