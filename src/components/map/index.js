@@ -6,12 +6,18 @@ import { Card, Checkbox, Label } from 'rebass'
 import GoogleMapWrapper from './map'
 import Sidebar from './sidebar'
 
-const StyledSearchOnDragCheckbox = ({ toggleSearchOnChange }) => {
+const StyledSearchOnDragCheckbox = ({
+  toggleSearchOnChange,
+  searchOnChange,
+}) => {
   return (
     <SearchOnDragContainer>
       <SearchOnDragLabel>
         Move/zoom map?
-        <SearchOnDragCheckbox onChange={toggleSearchOnChange} />
+        <SearchOnDragCheckbox
+          onChange={toggleSearchOnChange}
+          checked={searchOnChange}
+        />
       </SearchOnDragLabel>
     </SearchOnDragContainer>
   )
@@ -74,6 +80,7 @@ class MainMap extends Component {
         />
         <StyledSearchOnDragCheckbox
           toggleSearchOnChange={toggleSearchOnChange}
+          searchOnChange={searchOnChange}
         />
         <SideBarContainer>
           <Sidebar

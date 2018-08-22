@@ -10,6 +10,7 @@ class ResultsPage extends Component {
     const { pageContext, data } = this.props
 
     return (
+      // Can probably simplify by removing this context provider and just using props.
       <>
         <ResultsContext.Provider
           value={{

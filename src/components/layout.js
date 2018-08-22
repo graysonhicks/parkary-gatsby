@@ -13,8 +13,11 @@ import Nav from './nav'
 class Layout extends Component {
   render() {
     const { children } = this.props
+
     return (
+      // Rebass provider.
       <Provider>
+        {/* App context provider, followed immediately by consumer */}
         <AppContext>
           <AppContextConsumer>
             {({ data }) => (

@@ -1,6 +1,6 @@
 import React from 'react'
 import { graphql } from 'gatsby'
-
+import PageContextWrapper from '../components/pagewrapper'
 import Park from '../components/park'
 
 export default props => {
@@ -13,7 +13,11 @@ export default props => {
     referrer = 'grid'
   }
 
-  return <Park park={park} referrer={referrer} />
+  return (
+    <PageContextWrapper page="park">
+      <Park park={park} referrer={referrer} />
+    </PageContextWrapper>
+  )
 }
 
 export const query = graphql`

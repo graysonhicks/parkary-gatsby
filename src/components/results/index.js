@@ -12,19 +12,6 @@ import MainMap from '../map'
 import { ResultsContext } from './../context'
 import parseParksFromContentfulJS from './parseParks'
 
-// Templating each cities parks as a grid and map page in Gatsby
-// means I cannot have a top level component storing a shared state.
-// In order to have filters persist across Gatsby pages,
-// we must use some kind of data storage.
-// The Router offers a state {} object on its location property,
-// which seems to work between the grid and map pages,
-// but when they are clicked away from (like to an individual park)
-// the location state object is lost.  I think this may be a bug with
-// the Gatsby/React router based on some issues I found https://github.com/gatsbyjs/gatsby/issues/7174
-// but for now using sessionStorage.
-// The sessionStorage is updated everytime a filter is added or removed.
-// It is cleared when a new search is inputted, and follows normal
-// sessionStorage behaviors.
 class Results extends Component {
   constructor(props) {
     super(props)
@@ -183,19 +170,17 @@ class Results extends Component {
       })
       .then(function(entries) {
         const parsedParks = parseParksFromContentfulJS(entries)
-        return parsedParks
-      })
-      .then(parsedParks =>
         this.setState({ parks: parsedParks }, () =>
           this.handleSort(this.state.sort)
         )
-      )
+      })
       .catch(console.error)
   }
 
   render() {
     return (
       <ResultsContext.Consumer>
+        {/* This view prop determines whether map or grid view. It comes from pageContext in plugin */}
         {({ view, cityState }) => {
           return (
             <ResultsContainer>
@@ -206,6 +191,7 @@ class Results extends Component {
                 cityState={cityState}
                 sort={this.state.sort}
               />
+              {/* If no results and on results view, show big no results card (map no results is shown in sidebar) */}
               {!this.state.filteredParks.length && view === 'results' ? (
                 <NoResultsCard />
               ) : (

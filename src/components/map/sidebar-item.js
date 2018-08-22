@@ -19,14 +19,25 @@ const SidebarItem = ({
   setHoverPark,
   clearHoverPark,
 }) => {
-  const isActive = id === activePark ? true : false
-  const isHover = id === hoverPark ? true : false
+  const isActive = {}
+  if (id === activePark) {
+    isActive.active = 1
+  } else {
+    isActive.active = 0
+  }
+  const isHover = {}
+  if (id === hoverPark) {
+    isHover.hover = 1
+  } else {
+    isHover.hover = 0
+  }
+
   return (
     <SidebarItemContainer
       to={`/${fields.slug}`}
       state={{ referrer: 'map' }}
-      isActive={isActive}
-      isHover={isHover}
+      {...isActive}
+      {...isHover}
       onMouseEnter={() => setHoverPark(id)}
       onMouseLeave={() => clearHoverPark(id)}
     >
@@ -40,8 +51,10 @@ const SidebarItem = ({
         </RatingContainer>
       </Info>
 
-      <DescriptionContainer isActive={isActive} is>
-        {isActive && <Description>{description.description}</Description>}
+      <DescriptionContainer {...isActive}>
+        {isActive.active === 1 && (
+          <Description>{description.description}</Description>
+        )}
       </DescriptionContainer>
     </SidebarItemContainer>
   )
@@ -63,14 +76,14 @@ const SidebarItemContainer = styled(Link)`
     background-color: rgba(0, 128, 128, 0.1);
   }
 
-  ${({ isHover }) =>
-    isHover &&
+  ${({ hover }) =>
+    hover === 1 &&
     css`
       background-color: rgba(0, 128, 128, 0.1);
     `};
 
-  ${({ isActive }) =>
-    isActive &&
+  ${({ active }) =>
+    active === 1 &&
     css`
       background-color: rgba(0, 128, 128, 0.3);
       transition: background-color 0.5s;
@@ -104,8 +117,8 @@ const DescriptionContainer = styled.div`
   transition: max-height 0.5s ease-in-out;
   overflow: hidden;
 
-  ${({ isActive }) =>
-    isActive &&
+  ${({ active }) =>
+    active === 1 &&
     css`
       max-height: 200px;
       transition: max-height 0.5s ease-in-out;
