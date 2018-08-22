@@ -1,14 +1,15 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import { Container } from 'rebass'
+import { Container, Card } from 'rebass'
 import { orderBy } from 'lodash'
 import { createClient } from 'contentful'
 import ParkCard from './card'
+import NoResultsCard from './noresultscard'
+
 import Toolbar from './../toolbar'
 import MainMap from '../map'
 
 import { ResultsContext } from './../context'
-import parseParks from './parseParks'
 import parseParksFromContentfulJS from './parseParks'
 
 // Templating each cities parks as a grid and map page in Gatsby
@@ -198,23 +199,27 @@ class Results extends Component {
                 sort={this.state.sort}
                 parks={this.state.parks}
               />
-              {view === 'grid' && (
-                <CardContainer>
-                  {this.state.filteredParks.map(({ node }) => {
-                    return <ParkCard key={node.id} park={node} />
-                  })}
-                </CardContainer>
-              )}
-              {view === 'map' && (
-                <MapContainer>
-                  <MainMap
-                    selectedAmenities={this.state.selectedAmenities}
-                    boundsHandler={this.boundsHandler}
-                    toggleSearchOnChange={this.toggleSearchOnChange}
-                    parks={this.state.parks}
-                    filteredParks={this.state.filteredParks}
-                  />
-                </MapContainer>
+              {!this.state.filteredParks.length ? (
+                <NoResultsCard />
+              ) : (
+                (view === 'grid' && (
+                  <CardContainer>
+                    {this.state.filteredParks.map(({ node }) => {
+                      return <ParkCard key={node.id} park={node} />
+                    })}
+                  </CardContainer>
+                )) ||
+                (view === 'map' && (
+                  <MapContainer>
+                    <MainMap
+                      selectedAmenities={this.state.selectedAmenities}
+                      boundsHandler={this.boundsHandler}
+                      toggleSearchOnChange={this.toggleSearchOnChange}
+                      parks={this.state.parks}
+                      filteredParks={this.state.filteredParks}
+                    />
+                  </MapContainer>
+                ))
               )}
             </ResultsContainer>
           )

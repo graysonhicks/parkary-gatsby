@@ -1,6 +1,5 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
-import Link from 'gatsby-link'
 import {
   Container,
   Card,

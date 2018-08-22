@@ -28,13 +28,11 @@ class ParkGoogleMap extends Component {
 
   render() {
     const {
-      selectedAmenities,
       setActivePark,
       setHoverPark,
       clearHoverPark,
       isMarkerShown,
       boundsHandler,
-      parks,
       filteredParks,
       hoverPark,
       activePark,

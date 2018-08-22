@@ -1,5 +1,6 @@
-import { find, kebabCase } from 'lodash'
+import { kebabCase } from 'lodash'
 
+// Have to build new park objects from ContentfulJS that match the GraphQL parks.
 const parseParksFromContentfulJS = ({ items }) => {
   let parsedParks = []
   const unParsedParks = items

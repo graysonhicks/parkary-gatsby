@@ -50,13 +50,7 @@ class MainMap extends Component {
     })
   }
   render() {
-    const {
-      selectedAmenities,
-      parks,
-      boundsHandler,
-      toggleSearchOnChange,
-      filteredParks,
-    } = this.props
+    const { boundsHandler, toggleSearchOnChange, filteredParks } = this.props
     return (
       <StyledMapCard>
         <GoogleMapWrapper
@@ -64,14 +58,12 @@ class MainMap extends Component {
           loadingElement={<div style={{ height: `100%` }} />}
           containerElement={<MapContainer />}
           mapElement={<div style={{ height: `100%` }} />}
-          selectedAmenities={selectedAmenities}
           setActivePark={this.setActivePark}
           setHoverPark={this.setHoverPark}
           clearHoverPark={this.clearHoverPark}
-          boundsHandler={boundsHandler}
           hoverPark={this.state.hoverPark}
           activePark={this.state.activePark}
-          parks={parks}
+          boundsHandler={boundsHandler}
           filteredParks={filteredParks}
         />
         <StyledSearchOnDragCheckbox
@@ -79,12 +71,10 @@ class MainMap extends Component {
         />
         <SideBarContainer>
           <Sidebar
-            selectedAmenities={selectedAmenities}
             activePark={this.state.activePark}
             clearHoverPark={this.clearHoverPark}
             setHoverPark={this.setHoverPark}
             hoverPark={this.state.hoverPark}
-            parks={parks}
             filteredParks={filteredParks}
           />
         </SideBarContainer>

@@ -1,9 +1,7 @@
 import React, { Component } from 'react'
 import { graphql } from 'gatsby'
 
-import Layout from '../components/layout'
 import Results from '../components/results'
-import styled from 'styled-components'
 
 import { ResultsContext } from '../components/context'
 

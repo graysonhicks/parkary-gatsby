@@ -1,7 +1,7 @@
 import React, { Component } from 'react'
 import styled, { css } from 'styled-components'
 import Img from 'gatsby-image'
-import { Box, Modal, Carousel, Heading, Close } from 'rebass'
+import { Box, Modal, Carousel, Close } from 'rebass'
 
 class ImageCarousel extends Component {
   constructor(props) {
@@ -61,10 +61,6 @@ const CarouselContainer = styled.div`
 const CarouselModal = styled(Modal)`
   width: 70%;
   padding: 0;
-`
-
-const StyledCarousel = styled(Carousel)`
-  height: 7%;
 `
 
 const StyledClose = styled(Close)`
