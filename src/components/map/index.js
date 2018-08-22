@@ -10,7 +10,7 @@ const StyledSearchOnDragCheckbox = ({ toggleSearchOnChange }) => {
   return (
     <SearchOnDragContainer>
       <SearchOnDragLabel>
-        Search on change?
+        Move/zoom map?
         <SearchOnDragCheckbox onChange={toggleSearchOnChange} />
       </SearchOnDragLabel>
     </SearchOnDragContainer>
@@ -50,7 +50,12 @@ class MainMap extends Component {
     })
   }
   render() {
-    const { boundsHandler, toggleSearchOnChange, filteredParks } = this.props
+    const {
+      boundsHandler,
+      toggleSearchOnChange,
+      filteredParks,
+      searchOnChange,
+    } = this.props
     return (
       <StyledMapCard>
         <GoogleMapWrapper
@@ -65,6 +70,7 @@ class MainMap extends Component {
           activePark={this.state.activePark}
           boundsHandler={boundsHandler}
           filteredParks={filteredParks}
+          searchOnChange={searchOnChange}
         />
         <StyledSearchOnDragCheckbox
           toggleSearchOnChange={toggleSearchOnChange}

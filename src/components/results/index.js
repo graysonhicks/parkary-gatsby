@@ -180,7 +180,9 @@ class Results extends Component {
         return parsedParks
       })
       .then(parsedParks =>
-        this.setState({ parks: parsedParks }, () => this.filterParks())
+        this.setState({ parks: parsedParks }, () =>
+          this.handleSort(this.state.sort)
+        )
       )
       .catch(console.error)
   }
@@ -217,6 +219,7 @@ class Results extends Component {
                       toggleSearchOnChange={this.toggleSearchOnChange}
                       parks={this.state.parks}
                       filteredParks={this.state.filteredParks}
+                      searchOnChange={this.state.searchOnChange}
                     />
                   </MapContainer>
                 ))

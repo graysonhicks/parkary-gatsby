@@ -36,6 +36,7 @@ class ParkGoogleMap extends Component {
       filteredParks,
       hoverPark,
       activePark,
+      searchOnChange,
     } = this.props
 
     return (
@@ -44,9 +45,13 @@ class ParkGoogleMap extends Component {
         ref={this.myMap}
         onDragEnd={() => boundsHandler(this.myMap.current)}
         onZoomChanged={() => boundsHandler(this.myMap.current)}
-        defaultOptions={{
+        options={{
           mapTypeControl: false,
           fullscreenControl: false,
+          draggable: searchOnChange,
+          zoomControl: searchOnChange,
+          scrollwheel: searchOnChange,
+          disableDoubleClickZoom: !searchOnChange,
         }}
       >
         {isMarkerShown &&
