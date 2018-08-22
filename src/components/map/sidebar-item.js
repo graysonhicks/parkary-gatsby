@@ -16,6 +16,8 @@ const SidebarItem = ({
   description,
   hoverPark,
   activePark,
+  setHoverPark,
+  clearHoverPark,
 }) => {
   const isActive = id === activePark ? true : false
   const isHover = id === hoverPark ? true : false
@@ -25,6 +27,8 @@ const SidebarItem = ({
       state={{ referrer: 'map' }}
       isActive={isActive}
       isHover={isHover}
+      onMouseEnter={() => setHoverPark(id)}
+      onMouseLeave={() => clearHoverPark(id)}
     >
       <Thumbnail>
         <Img fluid={thumbnail.fluid} />

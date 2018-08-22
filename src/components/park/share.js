@@ -16,6 +16,7 @@ class ShareIcons extends Component {
       <ShareIconsContainer>
         {platforms.map(platform => (
           <StyledShareButton
+            key={platform}
             compact
             socialMedia={platform}
             url={`http://parkary.com/${slug}`}

@@ -10,7 +10,7 @@ const StyledSearchOnDragCheckbox = ({ toggleSearchOnChange }) => {
   return (
     <SearchOnDragContainer>
       <SearchOnDragLabel>
-        Search on drag?
+        Search on change?
         <SearchOnDragCheckbox onChange={toggleSearchOnChange} />
       </SearchOnDragLabel>
     </SearchOnDragContainer>
@@ -68,6 +68,7 @@ class MainMap extends Component {
           setHoverPark={this.setHoverPark}
           clearHoverPark={this.clearHoverPark}
           boundsHandler={boundsHandler}
+          hoverPark={this.state.hoverPark}
           parks={parks}
         />
         <StyledSearchOnDragCheckbox
@@ -77,6 +78,7 @@ class MainMap extends Component {
           <Sidebar
             selectedAmenities={selectedAmenities}
             activePark={this.state.activePark}
+            clearHoverPark={this.clearHoverPark}
             setHoverPark={this.setHoverPark}
             hoverPark={this.state.hoverPark}
             parks={parks}
@@ -104,7 +106,7 @@ const MapContainer = styled.div`
 const SearchOnDragContainer = styled(Card)`
   height: 40px;
   position: absolute;
-  width: 130px;
+  width: 150px;
   display: flex;
   align-items: center;
   background-color: rgba(0, 0, 0, 0.7);

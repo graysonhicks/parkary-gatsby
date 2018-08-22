@@ -3,8 +3,6 @@ import React from 'react'
 import SidebarItem from './sidebar-item'
 
 const Sidebar = ({ selectedAmenities, parks, ...rest }) => {
-  console.log(parks)
-
   return (
     // Map over all of the parks.
     parks.map(({ node }) => {

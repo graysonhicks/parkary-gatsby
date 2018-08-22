@@ -35,6 +35,7 @@ class ParkGoogleMap extends Component {
       isMarkerShown,
       boundsHandler,
       parks,
+      hoverPark
     } = this.props
 
     return (
@@ -46,7 +47,6 @@ class ParkGoogleMap extends Component {
         defaultOptions={{
           mapTypeControl: false,
           fullscreenControl: false,
-          minZoom: 12,
         }}
       >
         {isMarkerShown &&
@@ -60,7 +60,7 @@ class ParkGoogleMap extends Component {
                 return true
               }
             })
-
+          
             return (
               hasAllFilteredAmenities && (
                 <StyledMarker
@@ -68,8 +68,12 @@ class ParkGoogleMap extends Component {
                   position={node.location}
                   parkID={node.id}
                   onClick={() => setActivePark(node.id)}
-                  onMouseOver={() => setHoverPark(node.id)}
+                  onMouseOver={() => {setHoverPark(node.id)}}
                   onMouseOut={() => clearHoverPark()}
+                  icon={{
+                    url: 'https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi2_hdpi.png',
+                    scaledSize:  node.id === hoverPark ? new window.google.maps.Size(22,35) : new window.google.maps.Size(20,32)
+                  }}
                 />
               )
             )
