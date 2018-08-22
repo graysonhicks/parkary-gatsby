@@ -92,6 +92,7 @@ exports.createPages = ({ graphql, actions }) => {
             // in page queries as GraphQL variables.
             park_id: node.id,
             slug: node.fields.slug,
+            view: 'park',
           },
         })
       })

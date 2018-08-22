@@ -12,7 +12,7 @@ import Nav from './nav'
 
 class Layout extends Component {
   render() {
-    const { children, currentPage } = this.props
+    const { children, pageContext } = this.props
     return (
       <StaticQuery
         query={graphql`
@@ -43,7 +43,7 @@ class Layout extends Component {
               value={{
                 siteTitle: data.site.siteMetadata.title,
                 logo: data.logo.edges[0].node,
-                currentPage: currentPage,
+                currentPage: pageContext.view,
               }}
             >
               <Helmet
@@ -53,7 +53,7 @@ class Layout extends Component {
                   { name: 'keywords', content: 'sample, something' },
                 ]}
               />
-              <Background currentPage={currentPage}>
+              <Background currentPage={pageContext.view}>
                 <Nav />
                 <MainContent>{children}</MainContent>
               </Background>

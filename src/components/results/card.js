@@ -13,7 +13,7 @@ const ParkCard = ({
 }) => {
   return (
     <Item>
-      <ParkLink to={fields.slug} state={{ referrer: 'grid' }}>
+      <ParkLink to={fields.slug} state={{ referrer: 'results' }}>
         <Thumbnail>
           <Img fluid={thumbnail.fluid} />
         </Thumbnail>

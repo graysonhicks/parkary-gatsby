@@ -55,9 +55,7 @@ class Results extends Component {
       () => {
         // The filtering is handled in the actual render, but sort is handled
         // by setting state and mutating the parks array
-
         this.handleSort(this.state.sort)
-        this.filterParks()
       }
     )
   }
@@ -136,10 +134,13 @@ class Results extends Component {
 
     sessionStorage.setItem('sort', type)
 
-    this.setState({
-      sort: type,
-      filteredParks: sortedArray,
-    })
+    this.setState(
+      {
+        sort: type,
+        parks: sortedArray,
+      },
+      () => this.filterParks()
+    )
   }
 
   handleClickSort = type => {

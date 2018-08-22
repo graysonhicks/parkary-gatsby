@@ -39,7 +39,6 @@ class ParkGoogleMap extends Component {
       hoverPark,
       activePark,
     } = this.props
-    console.log(filteredParks)
 
     return (
       <GoogleMap

@@ -35,7 +35,7 @@ class MainPark extends Component {
   }
   parseReferrer(referrer, cityState) {
     let slug
-    if (!referrer || referrer === 'grid') {
+    if (!referrer || referrer === 'results') {
       slug = cityState
     } else {
       slug = `${cityState}/map`

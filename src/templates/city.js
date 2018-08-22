@@ -12,27 +12,21 @@ class CityPage extends Component {
     const { pageContext, data } = this.props
 
     return (
-   <>
-    <ResultsContext.Provider
-      value={{
-        view: 'grid',
-        cityState: pageContext.cityState,
-      }}
-    >
-      <Results parks={data.allContentfulPark.edges}/>
-    </ResultsContext.Provider>
-   </>
+      <>
+        <ResultsContext.Provider
+          value={{
+            view: 'grid',
+            cityState: pageContext.cityState,
+          }}
+        >
+          <Results parks={data.allContentfulPark.edges} />
+        </ResultsContext.Provider>
+      </>
     )
   }
 }
 
 export default CityPage
-
-const ResultsLayout = styled(Layout)`
-  height: auto;
-  min-height: 100vh;
-  overflow: scroll;
-`
 
 export const cityQuery = graphql`
   query($cityState: String!) {
