@@ -19,6 +19,7 @@
     "gatsby-transformer-sharp": "next",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
+    "react-firebaseui": "^3.0.6",
     "react-google-maps": "^9.4.5",
     "react-helmet": "^5.2.0",
     "react-icons": "^3.0.5",

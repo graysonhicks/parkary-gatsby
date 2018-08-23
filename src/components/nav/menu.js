@@ -3,6 +3,8 @@ import styled, { css } from 'styled-components'
 import Link from 'gatsby-link'
 
 import { Button, Card, BlockLink, Arrow } from 'rebass'
+import LogoutButton from '../logout/link'
+import { LoginButton } from '../login/link'
 
 class Menu extends Component {
   constructor(props) {
@@ -17,12 +19,15 @@ class Menu extends Component {
   }
 
   closeMenu = () => {
+    console.log('gi')
+
     this.setState({
       isOpen: false,
     })
   }
 
   render() {
+    const { isLoggedIn } = this.props
     return (
       <>
         {this.state.isOpen ? (
@@ -38,16 +43,12 @@ class Menu extends Component {
         )}
 
         {this.state.isOpen && (
-          <MenuDropdown>
-            <MenuLink to="/login" onClick={this.closeMenu}>
-              Login
-            </MenuLink>
-            <MenuLink to="/sign-up" onClick={this.closeMenu}>
-              Sign Up
-            </MenuLink>
-            <MenuLink to="/contact" onClick={this.closeMenu}>
+          <MenuDropdown onClick={this.closeMenu}>
+            {/* <MenuLink to="/contact" onClick={this.closeMenu}>
               Contact
-            </MenuLink>
+            </MenuLink> */}
+            {isLoggedIn && <LogoutButton />}
+            {!isLoggedIn && <LoginButton />}
           </MenuDropdown>
         )}
       </>

@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { Provider } from 'rebass'
+import firebase from 'firebase'
 
 import styled, { css } from 'styled-components'
 import { AppContext } from './context'
@@ -11,6 +12,23 @@ import { withPrefix } from 'gatsby-link'
 import Nav from './nav'
 
 class Layout extends Component {
+  state = {
+    isLoggedIn: false, // Local signed-in state.
+  }
+  // Listen to the Firebase Auth state and set the local state.
+  componentDidMount() {
+    this.unregisterAuthObserver = firebase
+      .auth()
+      .onAuthStateChanged(user =>
+        this.setState({ isLoggedIn: !!user, user: user })
+      )
+  }
+
+  // Make sure we un-register Firebase observers when the component unmounts.
+  componentWillUnmount() {
+    this.unregisterAuthObserver()
+  }
+
   render() {
     const { children } = this.props
 
@@ -30,7 +48,7 @@ class Layout extends Component {
                   ]}
                 />
                 <Background currentPage={data.currentPage}>
-                  <Nav />
+                  <Nav isLoggedIn={this.state.isLoggedIn} />
                   <MainContent>{children}</MainContent>
                 </Background>
               </>

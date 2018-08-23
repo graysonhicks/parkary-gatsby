@@ -1,77 +1,37 @@
 import React, { Component } from 'react'
-import { auth } from '../../firebase'
-import { navigate } from 'gatsby'
-import styled from 'styled-components'
-import Link from 'gatsby-link'
+import firebase from 'firebase/app'
 
-import { Card, Heading, Input, Button, Text } from 'rebass'
-import SignUpLink from '../signup/link'
+import styled from 'styled-components'
+import StyledFirebaseAuth from 'react-firebaseui/StyledFirebaseAuth'
+
+import { Card, Heading } from 'rebass'
+
 import ForgotPasswordLink from '../forgotpassword/link'
 
+// Configure FirebaseUI.
+const uiConfig = {
+  // Popup signin flow rather than redirect flow.
+  signInFlow: 'popup',
+  // Redirect to /signedIn after sign in is successful. Alternatively you can provide a callbacks.signInSuccess function.
+  signInSuccessUrl: '/',
+  // We will display Google and Facebook as auth providers.
+  signInOptions: [
+    firebase.auth.EmailAuthProvider.PROVIDER_ID,
+    firebase.auth.GoogleAuthProvider.PROVIDER_ID,
+  ],
+  credentialHelper: 'none',
+}
+
 class LoginForm extends Component {
-  constructor(props) {
-    super(props)
-
-    this.state = {
-      email: '',
-      password: '',
-      error: null,
-    }
-  }
-
-  onSubmit = event => {
-    const { email, password } = this.state
-
-    auth
-      .doSignInWithEmailAndPassword(email, password)
-      .then(() => {
-        this.setState(
-          {
-            email: '',
-            password: '',
-            error: null,
-          },
-          () => {
-            navigate(`/`)
-          }
-        )
-      })
-      .catch(error => {
-        this.setState({ error: error })
-      })
-
-    event.preventDefault()
-  }
-
   render() {
-    const { email, password, error } = this.state
-
-    const isInvalid = password === '' || email === ''
-
     return (
       <LoginFormContainer>
         <LoginFormHeading>Login</LoginFormHeading>
-        <LoginFormForm onSubmit={this.onSubmit}>
-          <LoginFormInput
-            value={email}
-            onChange={event => this.setState({ email: event.target.value })}
-            type="text"
-            placeholder="Email Address"
-          />
-          <LoginFormInput
-            value={password}
-            onChange={event => this.setState({ password: event.target.value })}
-            type="password"
-            placeholder="Password"
-          />
-          <LoginFormLoginButton disabled={isInvalid} type="submit">
-            Sign In
-          </LoginFormLoginButton>
-
-          {error && <p>{error.message}</p>}
-        </LoginFormForm>
+        <StyledFirebaseAuth
+          uiConfig={uiConfig}
+          firebaseAuth={firebase.auth()}
+        />
         <ForgotPasswordLink />
-        <SignUpLink />
       </LoginFormContainer>
     )
   }
@@ -87,21 +47,4 @@ const LoginFormContainer = styled(Card)`
 
 const LoginFormHeading = styled(Heading)`
   margin-bottom: 15px;
-`
-
-const LoginFormForm = styled.form`
-  display: flex;
-  flex-direction: column;
-  margin-bottom: 15px;
-`
-
-const LoginFormInput = styled(Input)`
-  margin-bottom: 7.5px;
-`
-
-const LoginFormLoginButton = styled(Button)``
-
-const LoginFormText = styled(Text)`
-  margin-bottom: 7.5px;
-  font-size: 12px;
 `

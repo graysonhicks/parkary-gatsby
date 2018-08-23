@@ -15,6 +15,7 @@ const ForgotPasswordLink = () => {
 export default ForgotPasswordLink
 
 const ForgotPasswordFormText = styled(Text)`
+  margin-top: 15px;
   margin-bottom: 7.5px;
   font-size: 12px;
 `
