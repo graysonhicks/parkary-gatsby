@@ -10,6 +10,8 @@ import Amenities from './amenities'
 import ShareIcons from './share'
 import ImageCarousel from './image-carousel'
 
+import AppContextConsumer from '../context'
+
 class MainPark extends Component {
   constructor(props) {
     super(props)
@@ -52,40 +54,44 @@ class MainPark extends Component {
     const { description, location, amenities, parkImages } = this.props.park
 
     return (
-      <>
-        {this.state.carouselIsOpen && (
-          <ImageCarousel
-            parkImages={parkImages}
-            toggleCarousel={this.toggleCarousel}
-          />
-        )}
+      <AppContextConsumer>
+        {({ data: context }) => (
+          <>
+            {this.state.carouselIsOpen && (
+              <ImageCarousel
+                parkImages={parkImages}
+                toggleCarousel={this.toggleCarousel}
+              />
+            )}
 
-        <ParkCardContainer>
-          <ParkCardToolbar slug={this.state.slug} />
-          <StyledParkCard>
-            <FeaturedImage
-              park={this.props.park}
-              toggleCarousel={this.toggleCarousel}
-            />
-            <ParkInfo>
-              <BasicInfo>
-                <ParkDescription>{description.description}</ParkDescription>
-                <Amenities amenities={amenities} />
-                <ShareIcons park={this.props.park} />
-              </BasicInfo>
-              <StaticParkMapContainer>
-                <StaticMapWrapper
-                  isMarkerShown
-                  loadingElement={<div style={{ height: `100%` }} />}
-                  containerElement={<MapContainer />}
-                  mapElement={<div style={{ height: `100%` }} />}
-                  location={location}
+            <ParkCardContainer>
+              <ParkCardToolbar slug={this.state.slug} />
+              <StyledParkCard>
+                <FeaturedImage
+                  park={this.props.park}
+                  toggleCarousel={this.toggleCarousel}
                 />
-              </StaticParkMapContainer>
-            </ParkInfo>
-          </StyledParkCard>
-        </ParkCardContainer>
-      </>
+                <ParkInfo>
+                  <BasicInfo>
+                    <ParkDescription>{description.description}</ParkDescription>
+                    <Amenities amenities={amenities} />
+                    <ShareIcons park={this.props.park} />
+                  </BasicInfo>
+                  <StaticParkMapContainer>
+                    <StaticMapWrapper
+                      isMarkerShown
+                      loadingElement={<div style={{ height: `100%` }} />}
+                      containerElement={<MapContainer />}
+                      mapElement={<div style={{ height: `100%` }} />}
+                      location={location}
+                    />
+                  </StaticParkMapContainer>
+                </ParkInfo>
+              </StyledParkCard>
+            </ParkCardContainer>
+          </>
+        )}
+      </AppContextConsumer>
     )
   }
 }

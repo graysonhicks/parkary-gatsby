@@ -22,16 +22,19 @@ const uiConfig = {
   credentialHelper: 'none',
 }
 
+let auth
+
+if (typeof window !== 'undefined') {
+  auth = firebase.auth()
+}
+
 class LoginForm extends Component {
   render() {
     return (
       <LoginFormContainer>
         <LoginFormHeading>Login</LoginFormHeading>
-        <StyledFirebaseAuth
-          uiConfig={uiConfig}
-          firebaseAuth={firebase.auth()}
-        />
-        <ForgotPasswordLink />
+        <StyledFirebaseAuth uiConfig={uiConfig} firebaseAuth={auth} />
+        {/* <ForgotPasswordLink /> */}
       </LoginFormContainer>
     )
   }

@@ -2,7 +2,7 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import Helmet from 'react-helmet'
 import { Provider } from 'rebass'
-import firebase from 'firebase'
+import firebase from 'firebase/app'
 
 import styled, { css } from 'styled-components'
 import { AppContext } from './context'
@@ -11,17 +11,46 @@ import AppContextConsumer from './context'
 import { withPrefix } from 'gatsby-link'
 import Nav from './nav'
 
-class Layout extends Component {
+class App extends Component {
+  render() {
+    // App component that provides initial context values
+    return (
+      // Rebass provider.
+      <Provider>
+        {/* App context provider, passing children for layout */}
+        <AppContext>
+          <Layout children={this.props.children} />
+        </AppContext>
+      </Provider>
+    )
+  }
+}
+
+// Have to wrap the layout content so we can access context in its lifecycle methods.
+const Layout = ({ children }) => (
+  <AppContextConsumer>
+    {({ data, set }) => (
+      <Content context={data} set={set} children={children} />
+    )}
+  </AppContextConsumer>
+)
+
+class Content extends Component {
   state = {
     isLoggedIn: false, // Local signed-in state.
   }
   // Listen to the Firebase Auth state and set the local state.
   componentDidMount() {
-    this.unregisterAuthObserver = firebase
-      .auth()
-      .onAuthStateChanged(user =>
-        this.setState({ isLoggedIn: !!user, user: user })
+    if (typeof window !== 'undefined') {
+      this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(user =>
+        this.setState({ isLoggedIn: !!user, user: user }, () => {
+          this.props.set({
+            isLoggedIn: this.state.isLoggedIn,
+            user: user,
+          })
+        })
       )
+    }
   }
 
   // Make sure we un-register Firebase observers when the component unmounts.
@@ -30,32 +59,22 @@ class Layout extends Component {
   }
 
   render() {
-    const { children } = this.props
+    const { children, data: pageData, context } = this.props
 
     return (
-      // Rebass provider.
-      <Provider>
-        {/* App context provider, followed immediately by consumer */}
-        <AppContext>
-          <AppContextConsumer>
-            {({ data }) => (
-              <>
-                <Helmet
-                  title={data.siteTitle}
-                  meta={[
-                    { name: 'description', content: 'Sample' },
-                    { name: 'keywords', content: 'sample, something' },
-                  ]}
-                />
-                <Background currentPage={data.currentPage}>
-                  <Nav isLoggedIn={this.state.isLoggedIn} />
-                  <MainContent>{children}</MainContent>
-                </Background>
-              </>
-            )}
-          </AppContextConsumer>
-        </AppContext>
-      </Provider>
+      <>
+        <Helmet
+          title={context.siteTitle}
+          meta={[
+            { name: 'description', content: 'Sample' },
+            { name: 'keywords', content: 'sample, something' },
+          ]}
+        />
+        <Background currentPage={context.currentPage}>
+          <Nav />
+          <MainContent>{children}</MainContent>
+        </Background>
+      </>
     )
   }
 }
@@ -64,7 +83,7 @@ Layout.propTypes = {
   children: PropTypes.node.isRequired,
 }
 
-export default Layout
+export default App
 
 const Background = styled.div`
   position: absolute;

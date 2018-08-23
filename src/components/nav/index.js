@@ -7,7 +7,7 @@ import Brand from './../brand'
 import CurrentPage from './current-page'
 import Menu from './menu'
 
-const Nav = ({ logo, isLoggedIn }) => {
+const Nav = ({ logo }) => {
   return (
     <StyledNav>
       <NavHomeLink to="/">
@@ -15,7 +15,7 @@ const Nav = ({ logo, isLoggedIn }) => {
       </NavHomeLink>
       <CurrentPage />
       <RightContainer>
-        <Menu isLoggedIn={isLoggedIn} />
+        <Menu />
       </RightContainer>
     </StyledNav>
   )

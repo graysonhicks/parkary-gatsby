@@ -6,6 +6,8 @@ import { Button, Card, BlockLink, Arrow } from 'rebass'
 import LogoutButton from '../logout/link'
 import { LoginButton } from '../login/link'
 
+import AppContextConsumer from '../context'
+
 class Menu extends Component {
   constructor(props) {
     super(props)
@@ -19,39 +21,40 @@ class Menu extends Component {
   }
 
   closeMenu = () => {
-    console.log('gi')
-
     this.setState({
       isOpen: false,
     })
   }
 
   render() {
-    const { isLoggedIn } = this.props
     return (
-      <>
-        {this.state.isOpen ? (
-          <MenuButton onClick={this.handleLoginDropdown} open>
-            menu
-            <Arrow direction="down" />
-          </MenuButton>
-        ) : (
-          <MenuButton onClick={this.handleLoginDropdown}>
-            menu
-            <Arrow direction="down" />
-          </MenuButton>
-        )}
+      <AppContextConsumer>
+        {({ data: context }) => (
+          <>
+            {this.state.isOpen ? (
+              <MenuButton onClick={this.handleLoginDropdown} open>
+                menu
+                <Arrow direction="down" />
+              </MenuButton>
+            ) : (
+              <MenuButton onClick={this.handleLoginDropdown}>
+                menu
+                <Arrow direction="down" />
+              </MenuButton>
+            )}
 
-        {this.state.isOpen && (
-          <MenuDropdown onClick={this.closeMenu}>
-            {/* <MenuLink to="/contact" onClick={this.closeMenu}>
+            {this.state.isOpen && (
+              <MenuDropdown onClick={this.closeMenu}>
+                {/* <MenuLink to="/contact" onClick={this.closeMenu}>
               Contact
             </MenuLink> */}
-            {isLoggedIn && <LogoutButton />}
-            {!isLoggedIn && <LoginButton />}
-          </MenuDropdown>
+                {context.isLoggedIn && <LogoutButton />}
+                {!context.isLoggedIn && <LoginButton />}
+              </MenuDropdown>
+            )}
+          </>
         )}
-      </>
+      </AppContextConsumer>
     )
   }
 }
