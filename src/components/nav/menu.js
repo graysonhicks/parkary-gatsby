@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import styled, { css } from 'styled-components'
+import Link from 'gatsby-link'
 
 import { Button, Card, BlockLink, Arrow } from 'rebass'
 
@@ -32,8 +33,8 @@ class Menu extends Component {
 
         {this.state.isOpen && (
           <MenuDropdown>
-            <MenuLink href="/login">Login</MenuLink>
-            <MenuLink href="/contact">Contact</MenuLink>
+            <MenuLink to="/login">Login</MenuLink>
+            <MenuLink to="/contact">Contact</MenuLink>
           </MenuDropdown>
         )}
       </>
@@ -56,7 +57,7 @@ const MenuButton = styled(Button)`
   }
 `
 
-const MenuLink = styled(BlockLink)`
+const MenuLink = styled(Link)`
   display: flex;
   justify-content: flex-start;
   text-decoration: none;

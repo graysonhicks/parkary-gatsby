@@ -6,6 +6,7 @@
   "dependencies": {
     "babel-plugin-styled-components": "^1.5.1",
     "contentful": "^7.0.0",
+    "firebase": "^5.4.0",
     "gatsby": "^2.0.0-rc.0",
     "gatsby-image": "next",
     "gatsby-plugin-layout": "^1.0.0-rc.0",
