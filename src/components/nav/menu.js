@@ -16,6 +16,12 @@ class Menu extends Component {
     })
   }
 
+  closeMenu = () => {
+    this.setState({
+      isOpen: false,
+    })
+  }
+
   render() {
     return (
       <>
@@ -33,8 +39,15 @@ class Menu extends Component {
 
         {this.state.isOpen && (
           <MenuDropdown>
-            <MenuLink to="/login">Login</MenuLink>
-            <MenuLink to="/contact">Contact</MenuLink>
+            <MenuLink to="/login" onClick={this.closeMenu}>
+              Login
+            </MenuLink>
+            <MenuLink to="/sign-up" onClick={this.closeMenu}>
+              Sign Up
+            </MenuLink>
+            <MenuLink to="/contact" onClick={this.closeMenu}>
+              Contact
+            </MenuLink>
           </MenuDropdown>
         )}
       </>

@@ -43,10 +43,14 @@ class SignUpForm extends Component {
             )
           })
           .catch(error => {
+            console.log('my db')
+
             this.setState({ error: error })
           })
       })
       .catch(error => {
+        console.log('create')
+
         this.setState({ error: error })
       })
 
