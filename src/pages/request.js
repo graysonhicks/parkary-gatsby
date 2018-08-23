@@ -10,27 +10,30 @@ import {
   Select,
   Button,
 } from 'rebass'
+import PageContextWrapper from '../components/pagewrapper'
 
 class RequestPage extends Component {
   render() {
     return (
-      <RequestCardContainer>
-        <RequestCard>
-          <RequestHeading>Request a park</RequestHeading>
-          <RequestLead>
-            We want to catalogue as many parks as we can. Tell us about yours!
-          </RequestLead>
-          <Label>Park Name</Label>
-          <RequestInput />
-          <Label>Park City</Label>
-          <RequestInput />
-          <Label>Park State</Label>
-          <StateSelect>
-            <option value="">State</option>
-          </StateSelect>
-          <Button>Submit</Button>
-        </RequestCard>
-      </RequestCardContainer>
+      <PageContextWrapper page="request">
+        <RequestCardContainer>
+          <RequestCard>
+            <RequestHeading>Request a park</RequestHeading>
+            <RequestLead>
+              We want to catalogue as many parks as we can. Tell us about yours!
+            </RequestLead>
+            <Label>Park Name</Label>
+            <RequestInput />
+            <Label>Park City</Label>
+            <RequestInput />
+            <Label>Park State</Label>
+            <StateSelect>
+              <option value="">State</option>
+            </StateSelect>
+            <Button>Submit</Button>
+          </RequestCard>
+        </RequestCardContainer>
+      </PageContextWrapper>
     )
   }
 }

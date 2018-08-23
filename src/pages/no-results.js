@@ -3,23 +3,25 @@ import { graphql } from 'gatsby'
 import styled from 'styled-components'
 import Link from 'gatsby-link'
 import { Container, Card, Heading, Text } from 'rebass'
-
+import PageContextWrapper from '../components/pagewrapper'
 class NoResultsPage extends Component {
   render() {
     return (
-      <NoResultsCardContainer>
-        <NoResultsCard>
-          <NoResultsHeading>Sorry! No results found.</NoResultsHeading>
-          <TryAgainText>
-            Try <Link to="/">searching</Link> a nearby area.
-          </TryAgainText>
-          <Text>
-            Still can't find your favorite or neighborhood park? Go{' '}
-            <Link to="/request">here</Link> to submit that it be added to the
-            site!
-          </Text>
-        </NoResultsCard>
-      </NoResultsCardContainer>
+      <PageContextWrapper page="no results">
+        <NoResultsCardContainer>
+          <NoResultsCard>
+            <NoResultsHeading>Sorry! No results found.</NoResultsHeading>
+            <TryAgainText>
+              Try <Link to="/">searching</Link> a nearby area.
+            </TryAgainText>
+            <Text>
+              Still can't find your favorite or neighborhood park? Go{' '}
+              <Link to="/request">here</Link> to submit that it be added to the
+              site!
+            </Text>
+          </NoResultsCard>
+        </NoResultsCardContainer>
+      </PageContextWrapper>
     )
   }
 }
