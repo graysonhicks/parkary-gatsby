@@ -5,6 +5,8 @@ import styled from 'styled-components'
 import Link from 'gatsby-link'
 
 import { Card, Heading, Input, Button, Text } from 'rebass'
+import SignUpLink from '../signup/link'
+import ForgotPasswordLink from '../forgotpassword/link'
 
 class LoginForm extends Component {
   constructor(props) {
@@ -23,12 +25,16 @@ class LoginForm extends Component {
     auth
       .doSignInWithEmailAndPassword(email, password)
       .then(() => {
-        this.setState(() => ({
-          email: '',
-          password: '',
-          error: null,
-        }))
-        navigate(`/`)
+        this.setState(
+          {
+            email: '',
+            password: '',
+            error: null,
+          },
+          () => {
+            navigate(`/`)
+          }
+        )
       })
       .catch(error => {
         this.setState({ error: error })
@@ -64,12 +70,8 @@ class LoginForm extends Component {
 
           {error && <p>{error.message}</p>}
         </LoginFormForm>
-        <LoginFormText>
-          Forgot password? <Link to={`/forgot-password`}>Click here.</Link>
-        </LoginFormText>
-        <LoginFormText>
-          Don't have an account? <Link to={`/sign-up`}>Sign Up</Link>
-        </LoginFormText>
+        <ForgotPasswordLink />
+        <SignUpLink />
       </LoginFormContainer>
     )
   }
