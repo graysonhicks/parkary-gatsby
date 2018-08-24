@@ -5,13 +5,13 @@ import { auth } from '../../firebase'
 
 import { Button } from 'rebass'
 
-const signOutAndRedirect = () => {
-  auth.doSignOut()
-  navigate(`/`)
-}
-
 const LogoutButton = () => (
-  <StyledLogoutButton type="button" onClick={auth.doSignOut}>
+  <StyledLogoutButton
+    type="button"
+    onClick={() => {
+      auth.doSignOut().then(() => navigate(`/`))
+    }}
+  >
     Sign Out
   </StyledLogoutButton>
 )

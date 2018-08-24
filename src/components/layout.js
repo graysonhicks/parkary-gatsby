@@ -42,14 +42,17 @@ class Content extends Component {
   // Listen to the Firebase Auth state and set the local state.
   componentDidMount() {
     if (typeof window !== 'undefined') {
-      this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(user =>
+      this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(user => {
+        sessionStorage.setItem('user', JSON.stringify(user))
+        sessionStorage.setItem('isLoggedIn', !!user)
+
         this.setState({ isLoggedIn: !!user, user: user }, () => {
           this.props.set({
             isLoggedIn: this.state.isLoggedIn,
             user: user,
           })
         })
-      )
+      })
     }
   }
 
@@ -60,6 +63,7 @@ class Content extends Component {
 
   render() {
     const { children, data: pageData, context } = this.props
+    console.log(sessionStorage)
 
     return (
       <>

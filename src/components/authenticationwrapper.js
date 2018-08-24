@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-
+import { navigate } from 'gatsby'
 import AppContextConsumer from '../components/context'
 
 // Created this so not having to create same markup for each page.
@@ -7,15 +7,11 @@ import AppContextConsumer from '../components/context'
 // title in AppContext.  Using context in lifecycle methods means
 // passing the context in as a prop, so this does that.
 
-const PageContextWrapper = ({ page, children }) => {
+const AuthenticationWrapper = ({ children }) => {
   return (
     <AppContextConsumer>
-      {({ set }) => {
-        return (
-          <ContextSetter set={set} page={page}>
-            {children}
-          </ContextSetter>
-        )
+      {({ data }) => {
+        return <ContextSetter data={data}>{children}</ContextSetter>
       }}
     </AppContextConsumer>
   )
@@ -23,14 +19,13 @@ const PageContextWrapper = ({ page, children }) => {
 
 class ContextSetter extends Component {
   componentDidMount() {
-    this.props.set({
-      currentPage: this.props.page,
-      siteTitle: `Parkary - ${this.props.page}`,
-    })
+    if (!sessionStorage.getItem('isLoggedIn')) {
+      navigate(`/`)
+    }
   }
   render() {
     return <>{this.props.children}</>
   }
 }
 
-export default PageContextWrapper
+export default AuthenticationWrapper
