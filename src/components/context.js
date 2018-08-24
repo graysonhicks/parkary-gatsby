@@ -6,6 +6,8 @@ const defaultContextValue = {
     siteTitle: 'Parkary',
     logo: null,
     currentPage: '',
+    isLoggedIn: null,
+    user: null,
   },
   set: () => {},
 }

@@ -52,6 +52,7 @@ class ParkGoogleMap extends Component {
           zoomControl: searchOnChange,
           scrollwheel: searchOnChange,
           disableDoubleClickZoom: !searchOnChange,
+          minZoom: 12,
         }}
       >
         {isMarkerShown &&
