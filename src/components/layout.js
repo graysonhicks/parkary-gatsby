@@ -63,7 +63,6 @@ class Content extends Component {
 
   render() {
     const { children, data: pageData, context } = this.props
-    console.log(sessionStorage)
 
     return (
       <>
