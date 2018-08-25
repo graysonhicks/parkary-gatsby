@@ -9,6 +9,7 @@ import StaticMapWrapper from './staticmap'
 import Amenities from './amenities'
 import ShareIcons from './share'
 import ImageCarousel from './image-carousel'
+import Reviews from './reviews'
 
 import AppContextConsumer from '../context'
 
@@ -51,7 +52,14 @@ class MainPark extends Component {
     })
   }
   render() {
-    const { description, location, amenities, parkImages } = this.props.park
+    const {
+      description,
+      location,
+      amenities,
+      parkImages,
+      review,
+    } = this.props.park
+    console.log(this.props.park)
 
     return (
       <AppContextConsumer>
@@ -87,6 +95,9 @@ class MainPark extends Component {
                     />
                   </StaticParkMapContainer>
                 </ParkInfo>
+                <ReviewsContainer>
+                  <Reviews reviews={review} />
+                </ReviewsContainer>
               </StyledParkCard>
             </ParkCardContainer>
           </>
@@ -135,4 +146,9 @@ const StaticParkMapContainer = styled.div`
 const MapContainer = styled.div`
   height: 400px;
   width: 100%;
+`
+
+const ReviewsContainer = styled.div`
+  width: 100%;
+  padding: 20px;
 `

@@ -33,5 +33,14 @@ export const parksInfoFragment = graphql`
       slug
       cityState
     }
+    review {
+      title
+      rating
+      reviewText {
+        reviewText
+      }
+      userId
+      createdAt(fromNow: true)
+    }
   }
 `
