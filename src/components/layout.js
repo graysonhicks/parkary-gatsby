@@ -43,8 +43,8 @@ class Content extends Component {
   componentDidMount() {
     if (typeof window !== 'undefined') {
       this.unregisterAuthObserver = firebase.auth().onAuthStateChanged(user => {
-        sessionStorage.setItem('user', JSON.stringify(user))
-        sessionStorage.setItem('isLoggedIn', !!user)
+        // sessionStorage.setItem('user', JSON.stringify(user))
+        // sessionStorage.setItem('isLoggedIn', !!user)
 
         this.setState({ isLoggedIn: !!user, user: user }, () => {
           this.props.set({
