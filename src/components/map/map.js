@@ -59,19 +59,19 @@ class ParkGoogleMap extends Component {
           filteredParks.map(({ node }) => {
             return (
               <StyledMarker
-                key={node.id}
+                key={node.contentful_id}
                 position={node.location}
-                parkID={node.id}
-                onClick={() => setActivePark(node.id)}
+                parkID={node.contentful_id}
+                onClick={() => setActivePark(node.contentful_id)}
                 onMouseOver={() => {
-                  setHoverPark(node.id)
+                  setHoverPark(node.contentful_id)
                 }}
                 onMouseOut={() => clearHoverPark()}
                 icon={{
                   url:
                     'https://maps.gstatic.com/mapfiles/api-3/images/spotlight-poi2_hdpi.png',
                   scaledSize:
-                    node.id === (hoverPark || activePark)
+                    node.contentful_id === (hoverPark || activePark)
                       ? new window.google.maps.Size(22, 35)
                       : new window.google.maps.Size(20, 32),
                 }}

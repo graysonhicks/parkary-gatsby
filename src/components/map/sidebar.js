@@ -10,7 +10,7 @@ const Sidebar = ({ selectedAmenities, filteredParks, ...rest }) => {
     return (
       // Map over all of the parks.
       filteredParks.map(({ node }) => {
-        return <SidebarItem key={node.id} {...rest} {...node} />
+        return <SidebarItem key={node.contentful_id} {...rest} {...node} />
       })
     )
   } else {

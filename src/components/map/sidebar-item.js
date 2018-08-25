@@ -8,7 +8,7 @@ import { Subhead, Label } from 'rebass'
 import Rating from './../rating'
 
 const SidebarItem = ({
-  id,
+  contentful_id,
   title,
   thumbnail,
   fields,
@@ -20,13 +20,13 @@ const SidebarItem = ({
   clearHoverPark,
 }) => {
   const isActive = {}
-  if (id === activePark) {
+  if (contentful_id === activePark) {
     isActive.active = 1
   } else {
     isActive.active = 0
   }
   const isHover = {}
-  if (id === hoverPark) {
+  if (contentful_id === hoverPark) {
     isHover.hover = 1
   } else {
     isHover.hover = 0
@@ -38,8 +38,8 @@ const SidebarItem = ({
       state={{ referrer: 'map' }}
       {...isActive}
       {...isHover}
-      onMouseEnter={() => setHoverPark(id)}
-      onMouseLeave={() => clearHoverPark(id)}
+      onMouseEnter={() => setHoverPark(contentful_id)}
+      onMouseLeave={() => clearHoverPark(contentful_id)}
     >
       <Thumbnail>
         <Img fluid={thumbnail.fluid} />
@@ -47,7 +47,7 @@ const SidebarItem = ({
       <Info>
         <SidebarHeading>{title}</SidebarHeading>
         <RatingContainer>
-          <Rating id={id} rating={rating} />
+          <Rating id={contentful_id} rating={rating} />
         </RatingContainer>
       </Info>
 

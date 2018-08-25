@@ -7,7 +7,7 @@ const parseParksFromContentfulJS = ({ items }) => {
 
   for (let i = 0; i < unParsedParks.length; i++) {
     let newPark = {}
-    const id = unParsedParks[i].sys.id
+    const contentful_id = unParsedParks[i].sys.id
     const currentPark = unParsedParks[i].fields
 
     const {
@@ -64,7 +64,7 @@ const parseParksFromContentfulJS = ({ items }) => {
     }
 
     newPark.node = {
-      id,
+      contentful_id,
       rating,
       title,
       amenities: {

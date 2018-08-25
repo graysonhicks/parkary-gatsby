@@ -168,7 +168,7 @@ class Results extends Component {
         content_type: 'park',
         'fields.location[within]': boundsString,
       })
-      .then(function(entries) {
+      .then(entries => {
         const parsedParks = parseParksFromContentfulJS(entries)
         this.setState({ parks: parsedParks }, () =>
           this.handleSort(this.state.sort)
@@ -198,7 +198,7 @@ class Results extends Component {
                 (view === 'results' && (
                   <CardContainer>
                     {this.state.filteredParks.map(({ node }) => {
-                      return <ParkCard key={node.id} park={node} />
+                      return <ParkCard key={node.contentful_id} park={node} />
                     })}
                   </CardContainer>
                 )) ||

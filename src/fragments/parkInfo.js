@@ -3,6 +3,7 @@ import { graphql } from 'gatsby'
 export const parksInfoFragment = graphql`
   fragment ParkInfo on ContentfulPark {
     id
+    contentful_id
     title
     ...Amenities
     description {
