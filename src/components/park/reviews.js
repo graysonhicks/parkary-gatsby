@@ -21,9 +21,7 @@ class ParkCardReviews extends Component {
     return (
       <>
         <ReviewsHeading>Reviews</ReviewsHeading>
-        {reviews.map(review => (
-          <Review {...review} />
-        ))}
+        {reviews && reviews.map(review => <Review {...review} />)}
       </>
     )
   }
