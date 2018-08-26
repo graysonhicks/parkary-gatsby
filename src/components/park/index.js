@@ -9,6 +9,8 @@ import StaticMapWrapper from './staticmap'
 import Amenities from './amenities'
 import ShareIcons from './share'
 import ImageCarousel from './image-carousel'
+import AddReviewModal from './add-review-modal'
+
 import Reviews from './reviews'
 
 import AppContextConsumer from '../context'
@@ -20,6 +22,7 @@ class MainPark extends Component {
     this.state = {
       slug: '',
       carouselIsOpen: false,
+      addReviewModalIsOpen: false,
     }
   }
   componentDidMount() {
@@ -51,6 +54,11 @@ class MainPark extends Component {
       carouselIsOpen: !this.state.carouselIsOpen,
     })
   }
+  toggleAddReview = () => {
+    this.setState({
+      addReviewModalIsOpen: !this.state.addReviewModalIsOpen,
+    })
+  }
   render() {
     const {
       description,
@@ -59,7 +67,6 @@ class MainPark extends Component {
       parkImages,
       review,
     } = this.props.park
-    console.log(this.props.park)
 
     return (
       <AppContextConsumer>
@@ -69,6 +76,14 @@ class MainPark extends Component {
               <ImageCarousel
                 parkImages={parkImages}
                 toggleCarousel={this.toggleCarousel}
+              />
+            )}
+
+            {this.state.addReviewModalIsOpen && (
+              <AddReviewModal
+                user={context.user}
+                park={this.props.park}
+                toggleAddReview={this.toggleAddReview}
               />
             )}
 
@@ -96,7 +111,11 @@ class MainPark extends Component {
                   </StaticParkMapContainer>
                 </ParkInfo>
                 <ReviewsContainer>
-                  <Reviews reviews={review} />
+                  <Reviews
+                    reviews={review}
+                    user={context.user}
+                    toggleAddReview={this.toggleAddReview}
+                  />
                 </ReviewsContainer>
               </StyledParkCard>
             </ParkCardContainer>

@@ -3,6 +3,16 @@ import styled from 'styled-components'
 
 import StarRatingComponent from 'react-star-rating-component'
 
+const EditableRating = ({ id, rating }) => {
+  return (
+    <RatingContainer>
+      <StarRatingComponent name={`rating-${id}`} starCount={5} editing={true} />
+    </RatingContainer>
+  )
+}
+
+export { EditableRating }
+
 const Rating = ({ id, rating }) => {
   return (
     <RatingContainer>
