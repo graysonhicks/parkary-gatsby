@@ -21,8 +21,8 @@ class AddReviewModal extends Component {
       <AddReviewContainer>
         <FormModal>
           <StyledClose onClick={toggleAddReview} />
-          <Heading>Add Review</Heading>
-          <Lead>Review for {park.title}</Lead>
+          <AddReviewHeading>Add Review</AddReviewHeading>
+          <AddReviewLead>Review for {park.title}</AddReviewLead>
           <Input value={park.contentful_id} disabled type="hidden" />
           <Label>Your review:</Label>
           <Textarea />
@@ -64,4 +64,12 @@ const StyledClose = styled(Close)`
   &:hover {
     transform: scale(1.1);
   }
+`
+
+const AddReviewHeading = styled(Heading)`
+  margin-bottom: 15px;
+`
+
+const AddReviewLead = styled(Lead)`
+  margin-bottom: 15px;
 `

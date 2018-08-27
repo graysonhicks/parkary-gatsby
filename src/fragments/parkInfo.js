@@ -34,6 +34,7 @@ export const parksInfoFragment = graphql`
       cityState
     }
     review {
+      contentful_id
       title
       rating
       reviewText {

@@ -10,6 +10,7 @@ import Amenities from './amenities'
 import ShareIcons from './share'
 import ImageCarousel from './image-carousel'
 import AddReviewModal from './add-review-modal'
+import { LoginFormModal } from '../login'
 
 import Reviews from './reviews'
 
@@ -23,6 +24,7 @@ class MainPark extends Component {
       slug: '',
       carouselIsOpen: false,
       addReviewModalIsOpen: false,
+      loginModalIsOpen: false,
     }
   }
   componentDidMount() {
@@ -59,6 +61,11 @@ class MainPark extends Component {
       addReviewModalIsOpen: !this.state.addReviewModalIsOpen,
     })
   }
+  toggleLoginModal = () => {
+    this.setState({
+      loginModalIsOpen: !this.state.loginModalIsOpen,
+    })
+  }
   render() {
     const {
       description,
@@ -77,6 +84,10 @@ class MainPark extends Component {
                 parkImages={parkImages}
                 toggleCarousel={this.toggleCarousel}
               />
+            )}
+
+            {this.state.loginModalIsOpen && (
+              <LoginFormModal toggleLoginModal={this.toggleLoginModal} />
             )}
 
             {this.state.addReviewModalIsOpen && (
@@ -115,6 +126,7 @@ class MainPark extends Component {
                     reviews={review}
                     user={context.user}
                     toggleAddReview={this.toggleAddReview}
+                    toggleLoginModal={this.toggleLoginModal}
                   />
                 </ReviewsContainer>
               </StyledParkCard>

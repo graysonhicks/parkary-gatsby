@@ -31,7 +31,6 @@ class Menu extends Component {
       <AppContextConsumer>
         {({ data: context }) => (
           <>
-            {console.log(context)}
             {this.state.isOpen ? (
               <MenuButton onClick={this.handleLoginDropdown} open>
                 menu
