@@ -3,17 +3,22 @@ import styled from 'styled-components'
 
 import StarRatingComponent from 'react-star-rating-component'
 
-const EditableRating = ({ id, rating }) => {
+const EditableRating = ({ id, rating, ...rest }) => {
   return (
     <RatingContainer>
-      <StarRatingComponent name={`rating-${id}`} starCount={5} editing={true} />
+      <StarRatingComponent
+        name={`rating-${id}`}
+        starCount={5}
+        editing={true}
+        {...rest}
+      />
     </RatingContainer>
   )
 }
 
 export { EditableRating }
 
-const Rating = ({ id, rating }) => {
+const Rating = ({ id, rating, ...rest }) => {
   return (
     <RatingContainer>
       <StarRatingComponent
@@ -21,6 +26,7 @@ const Rating = ({ id, rating }) => {
         starCount={5}
         value={rating}
         editing={false}
+        {...rest}
       />
     </RatingContainer>
   )

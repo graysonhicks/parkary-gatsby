@@ -19,7 +19,7 @@ const AuthenticationWrapper = ({ children }) => {
 
 class ContextSetter extends Component {
   componentDidMount() {
-    if (!sessionStorage.getItem('isLoggedIn')) {
+    if (!this.props.data.isLoggedIn) {
       navigate(`/`)
     }
   }
