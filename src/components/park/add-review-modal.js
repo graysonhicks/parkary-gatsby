@@ -1,12 +1,13 @@
 import React, { Component } from 'react'
 import styled from 'styled-components'
+import { createClient } from 'contentful-management'
 import {
   Modal,
   Close,
   Lead,
   Heading,
-  Input,
   Label,
+  Input,
   Button,
   Textarea,
 } from 'rebass'
@@ -19,6 +20,7 @@ class AddReviewModal extends Component {
     this.state = {
       userId: props.user.uid,
       parkContentfulId: props.park.contentful_id,
+      title: null,
       reviewText: null,
       rating: null,
     }
@@ -38,6 +40,36 @@ class AddReviewModal extends Component {
   handleSubmit = e => {
     e.preventDefault()
     console.log('submit')
+
+    const client = createClient({
+      accessToken:
+        'CFPAT-d0c50c2e498bb9776c4839d8a4ce950e22cbb496a17b6560d170995c3a20edf7',
+    })
+    client
+      .getSpace('00xgplm2tq8k')
+      .then(space => space.getEnvironment('master'))
+      .then(environment =>
+        environment.createEntry('review', {
+          fields: {
+            title: { 'en-US': this.state.title },
+            userId: { 'en-US': this.state.userId },
+            reviewText: { 'en-US': this.state.reviewText },
+            park: {
+              'en-US': {
+                sys: {
+                  id: this.state.parkContentfulId,
+                  type: 'Link',
+                  linkType: 'Entry',
+                },
+              },
+            },
+            rating: { 'en-US': this.state.rating },
+          },
+        })
+      )
+      .then(entry => entry.publish())
+      .then(res => this.props.toggleAddReview())
+      .catch(console.error)
     return
   }
 
@@ -52,6 +84,8 @@ class AddReviewModal extends Component {
           <AddReviewHeading>Add Review</AddReviewHeading>
           <AddReviewLead>Review for {park.title}</AddReviewLead>
           <AddReviewForm onSubmit={this.handleSubmit}>
+            <Label>Title:</Label>
+            <Input name="title" onChange={this.handleInputChange} required />
             <Label>Your review:</Label>
             <AddReviewTextArea
               onChange={this.handleInputChange}
